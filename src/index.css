@@ -32,12 +32,26 @@ html {
   scroll-behavior: smooth;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   background-color: var(--bg-sand);
   color: var(--color-ink);
+  max-width: 100%;
   overflow-x: hidden;
+  position: relative;
+}
+
+#root {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img, svg, video, canvas, audio, iframe, embed, object {
+  max-width: 100%;
+  height: auto;
 }
 
 /* Lenis Recommended CSS */

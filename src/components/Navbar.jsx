@@ -118,7 +118,7 @@ export default function Navbar() {
 
       {/* Mobile Drawer Styled Like a Retro Sticky Notepad */}
       {mobileMenuOpen && (
-        <div className="md:hidden mt-2 mx-auto max-w-sm bg-[#FBF8EF] border-2 border-[#1E1B18] rounded-2xl p-5 shadow-retro-lg pointer-events-auto relative">
+        <div className="md:hidden mt-2 mx-auto w-[calc(100vw-24px)] max-w-sm bg-[#FBF8EF] border-2 border-[#1E1B18] rounded-2xl p-4 sm:p-5 shadow-retro-sm sm:shadow-retro-lg pointer-events-auto relative">
           <div className="washi-tape washi-tape-gingham -top-3 left-1/2 -translate-x-1/2 w-28 -rotate-1" />
           <div className="flex items-center justify-between border-b border-[#1E1B18]/10 pb-2 mb-3">
             <span className="font-pixel text-[10px] text-[#8A9A2B]">NAVIGATION.EXE</span>
