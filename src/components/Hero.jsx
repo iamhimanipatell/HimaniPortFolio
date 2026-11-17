@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import { ArrowDown, ArrowUpRight, FileText, Mail, MapPin, Sparkles, Terminal } from 'lucide-react';
+import { ArrowUpRight, FileText, Mail, MapPin, Sparkles, Heart, Star, Compass } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
-import MagneticButton from './MagneticButton';
 
 export default function Hero() {
   const heroRef = useRef(null);
@@ -27,7 +26,7 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, []);
 
-  // Split-text animation using GSAP
+  // Floating stickers parallax and text reveal
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
@@ -35,41 +34,66 @@ export default function Hero() {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ delay: 0.2 });
 
-      tl.from('.hero-badge', {
-        y: -20,
+      tl.from('.hero-badge-tag', {
+        scale: 0.8,
         opacity: 0,
-        duration: 0.7,
-        ease: 'power3.out',
+        duration: 0.6,
+        ease: 'back.out(1.7)',
       });
 
-      tl.from('.hero-word', {
-        y: 80,
+      tl.from('.hero-headline-name', {
+        y: 40,
         opacity: 0,
-        rotateX: -30,
-        stagger: 0.08,
-        duration: 1.0,
-        ease: 'power4.out',
-      }, '-=0.4');
+        duration: 0.9,
+        ease: 'power3.out',
+      }, '-=0.3');
 
-      tl.from('.hero-pitch', {
-        y: 30,
+      tl.from('.hero-script-overlay', {
+        scale: 0.7,
+        rotation: -5,
         opacity: 0,
         duration: 0.8,
-        ease: 'power3.out',
-      }, '-=0.6');
-
-      tl.from('.hero-actions', {
-        y: 20,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power3.out',
+        ease: 'back.out(2)',
       }, '-=0.5');
 
-      tl.from('.hero-meta', {
+      tl.from('.hero-polaroid', {
+        y: 60,
+        rotation: 8,
         opacity: 0,
-        duration: 0.8,
-        ease: 'power2.out',
+        duration: 0.9,
+        ease: 'back.out(1.5)',
+      }, '-=0.6');
+
+      tl.from('.hero-sticker', {
+        scale: 0,
+        opacity: 0,
+        stagger: 0.08,
+        duration: 0.5,
+        ease: 'back.out(2)',
       }, '-=0.4');
+
+      tl.from('.hero-doodle-arrow', {
+        opacity: 0,
+        duration: 0.6,
+        ease: 'power2.out',
+      }, '-=0.2');
+
+      // Mouse parallax on stickers
+      const handleMouseMove = (e) => {
+        const { clientX, clientY } = e;
+        const x = (clientX / window.innerWidth - 0.5) * 20;
+        const y = (clientY / window.innerHeight - 0.5) * 20;
+
+        gsap.to('.hero-sticker-float', {
+          x: (i) => (i % 2 === 0 ? x * 1.4 : -x * 1.4),
+          y: (i) => (i % 2 === 0 ? y * 1.4 : -y * 1.4),
+          duration: 0.8,
+          ease: 'power1.out',
+        });
+      };
+
+      window.addEventListener('mousemove', handleMouseMove, { passive: true });
+      return () => window.removeEventListener('mousemove', handleMouseMove);
     }, heroRef);
 
     return () => ctx.revert();
@@ -77,13 +101,9 @@ export default function Hero() {
 
   const handleScrollTo = (e, targetId) => {
     e.preventDefault();
-    if (window.__lenis) {
-      window.__lenis.scrollTo(targetId, { offset: -40, duration: 1.2 });
-    } else {
-      const el = document.querySelector(targetId);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      }
+    const el = document.querySelector(targetId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -93,121 +113,154 @@ export default function Hero() {
       ref={heroRef}
       className="relative min-h-screen flex flex-col justify-center items-center pt-28 pb-16 px-4 sm:px-8 overflow-hidden z-10"
     >
-      {/* Subtle ambient radiant glow behind the hero */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[650px] h-[350px] sm:h-[650px] bg-gradient-to-tr from-[#00f5a0]/10 via-[#00d8f6]/5 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
+      {/* Decorative Scrapbook Stickers & Doodles */}
+      <div className="hero-sticker hero-sticker-float absolute top-24 left-6 sm:left-16 text-3xl sm:text-4xl select-none animate-float-slow">
+        🌸
+      </div>
+      <div className="hero-sticker hero-sticker-float absolute top-36 right-8 sm:right-24 text-3xl sm:text-4xl select-none animate-float-gentle">
+        💖
+      </div>
+      <div className="hero-sticker hero-sticker-float absolute bottom-28 left-8 sm:left-24 text-2xl sm:text-3xl select-none animate-float-gentle">
+        ✨
+      </div>
+      <div className="hero-sticker hero-sticker-float absolute bottom-32 right-12 sm:right-28 text-3xl select-none animate-float-slow">
+        ⭐
+      </div>
 
-      <div className="max-w-5xl mx-auto w-full text-center flex flex-col items-center">
-        {/* Availability & Location Pill */}
-        <div className="hero-badge inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#12151e]/80 border border-white/10 backdrop-blur-md mb-8 hover:border-[#00f5a0]/40 transition-all shadow-lg shadow-black/40">
-          <span className="relative flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00f5a0] opacity-75" />
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#00f5a0]" />
-          </span>
-          <span className="text-xs font-mono text-slate-300 font-medium tracking-wide">
-            {personalInfo.availability}
-          </span>
-          <span className="hidden sm:inline text-white/20">&bull;</span>
-          <span className="hidden sm:flex items-center gap-1 text-xs font-mono text-slate-400">
-            <MapPin className="w-3 h-3 text-[#00f5a0]" />
-            {personalInfo.location}
-          </span>
-        </div>
-
-        {/* Big Expressive Title with Split Words */}
-        <div className="overflow-hidden mb-4">
-          <h1 className="font-display font-extrabold text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight leading-[1.05] text-white">
-            <span className="hero-word inline-block mr-3 sm:mr-4">Himani</span>
-            <span className="hero-word inline-block bg-gradient-to-r from-[#00f5a0] via-[#00f5d4] to-[#00d8f6] bg-clip-text text-transparent">
-              Patel
+      <div className="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        {/* Left Column: Scrapbook Typography & Badges */}
+        <div className="lg:col-span-7 flex flex-col items-start text-left">
+          {/* Retro OS Status Badge */}
+          <div className="hero-badge-tag inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#D9C7A0] border-2 border-[#1E1B18] shadow-retro-sm mb-6">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#8A9A2B] animate-pulse" />
+            <span className="font-pixel text-[10px] sm:text-xs text-[#1E1B18] uppercase tracking-wider font-bold">
+              SYSTEM ONLINE &bull; HYDERABAD, IN
             </span>
-          </h1>
-        </div>
+            <span className="hidden sm:inline font-mono text-[11px] text-[#5A0B16] font-semibold">
+              [{currentTime || 'IST'}]
+            </span>
+          </div>
 
-        {/* Role Subheading */}
-        <div className="overflow-hidden mb-6">
-          <p className="hero-word text-xl sm:text-2xl md:text-3xl font-display font-medium text-slate-300 flex items-center justify-center gap-2">
-            <span className="text-[#00f5a0] font-mono text-base sm:text-xl">&lt;</span>
-            <span className="tracking-wide">Software Engineer</span>
-            <span className="text-[#00f5a0] font-mono text-base sm:text-xl">/&gt;</span>
-          </p>
-        </div>
+          {/* Headline Container with Overlapping Script */}
+          <div className="relative mb-6">
+            <h1 className="hero-headline-name font-serif font-black text-5xl sm:text-7xl lg:text-8xl text-[#5A0B16] tracking-tight leading-[0.95]">
+              Himani <br />
+              <span className="text-[#1E1B18]">Patel</span>
+            </h1>
 
-        {/* One-Line Pitch */}
-        <div className="hero-pitch max-w-2xl mx-auto mb-10">
-          <p className="text-base sm:text-lg md:text-xl text-slate-300/90 leading-relaxed font-normal">
-            {personalInfo.pitch}
-          </p>
-        </div>
+            {/* Overlapping Cursive Script */}
+            <span className="hero-script-overlay absolute -top-4 sm:-top-6 left-28 sm:left-48 font-script text-4xl sm:text-6xl lg:text-7xl text-[#E0147E] -rotate-6 select-none pointer-events-none drop-shadow-[2px_2px_0px_#FBF8EF]">
+              Software Engineer
+            </span>
 
-        {/* Hero Actions / Buttons */}
-        <div className="hero-actions flex flex-wrap items-center justify-center gap-4 sm:gap-5 mb-14">
-          {/* 1. View Projects Button */}
-          <MagneticButton strength={0.35}>
+            {/* Handwritten Doodle Annotation */}
+            <div className="hidden sm:flex items-center gap-2 absolute -right-16 top-1/2 translate-y-2 hero-doodle-arrow">
+              <svg width="45" height="35" viewBox="0 0 45 35" fill="none" className="rotate-12">
+                <path d="M5 25C15 10 30 12 38 18M38 18L32 10M38 18L30 22" stroke="#E0147E" strokeWidth="2" strokeLinecap="round" />
+              </svg>
+              <span className="font-hand text-lg text-[#E0147E] font-bold">
+                full-stack &amp; IoT!
+              </span>
+            </div>
+          </div>
+
+          {/* One-Line Pitch */}
+          <div className="p-4 sm:p-5 rounded-2xl bg-[#D9C7A0]/70 border-2 border-[#1E1B18] shadow-retro-sm max-w-xl mb-8">
+            <p className="font-mono text-sm sm:text-base text-[#1E1B18] leading-relaxed">
+              {personalInfo.pitch}
+            </p>
+          </div>
+
+          {/* Retro CTAs: View Projects, Resume, Contact */}
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-8">
+            {/* View Projects */}
             <a
               href="#projects"
               onClick={(e) => handleScrollTo(e, '#projects')}
-              className="group relative inline-flex items-center gap-2.5 px-6 sm:px-8 py-3.5 rounded-xl bg-[#00f5a0] text-[#07080b] font-display font-bold text-sm sm:text-base tracking-wide transition-all duration-300 hover:bg-[#00e290] hover:shadow-[0_0_30px_rgba(0,245,160,0.45)] hover:-translate-y-0.5 active:translate-y-0"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#E0147E] text-white font-pixel text-xs sm:text-sm border-2 border-[#1E1B18] shadow-retro hover:bg-[#F06EAF] hover:text-[#1E1B18] active:translate-x-1 active:translate-y-1 transition-all"
             >
-              <span>View Projects</span>
-              <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <span>VIEW PROJECTS</span>
+              <ArrowUpRight className="w-4 h-4" />
             </a>
-          </MagneticButton>
 
-          {/* 2. Download Resume Button */}
-          <MagneticButton strength={0.25}>
+            {/* Download Resume / Background */}
             <a
               href="#contact"
               onClick={(e) => handleScrollTo(e, '#contact')}
-              className="group inline-flex items-center gap-2.5 px-6 sm:px-8 py-3.5 rounded-xl bg-surface-2/90 text-white font-display font-medium text-sm sm:text-base border border-white/10 hover:border-[#00f5a0]/50 hover:bg-surface-3 transition-all duration-300 hover:-translate-y-0.5 shadow-lg shadow-black/40"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#8A9A2B] text-white font-pixel text-xs sm:text-sm border-2 border-[#1E1B18] shadow-retro hover:bg-[#A4B634] hover:text-[#1E1B18] active:translate-x-1 active:translate-y-1 transition-all"
             >
-              <FileText className="w-4 h-4 text-[#00f5a0]" />
-              <span>Resume &amp; Background</span>
+              <FileText className="w-4 h-4" />
+              <span>RESUME &bull; CV</span>
             </a>
-          </MagneticButton>
 
-          {/* 3. Contact Button */}
-          <MagneticButton strength={0.25}>
+            {/* Contact Pill */}
             <a
               href="#contact"
               onClick={(e) => handleScrollTo(e, '#contact')}
-              className="group inline-flex items-center gap-2 px-5 sm:px-6 py-3.5 rounded-xl bg-transparent text-slate-300 hover:text-white font-display font-medium text-sm sm:text-base border border-transparent hover:border-white/10 transition-all duration-300"
+              className="inline-flex items-center gap-2 px-4 py-3 rounded-full bg-[#FBF8EF] text-[#5A0B16] font-mono text-xs sm:text-sm font-bold border-2 border-[#1E1B18] shadow-retro-sm hover:bg-[#E9E7CB] active:translate-x-0.5 active:translate-y-0.5 transition-all"
             >
-              <Mail className="w-4 h-4 text-slate-400 group-hover:text-[#00f5a0] transition-colors" />
+              <Mail className="w-4 h-4 text-[#E0147E]" />
               <span>Contact Me</span>
             </a>
-          </MagneticButton>
-        </div>
-
-        {/* Live Status Indicators (City Time, Core Frameworks) */}
-        <div className="hero-meta w-full pt-8 border-t border-white/5 flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-slate-400 max-w-4xl mx-auto">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#00d8f6]" />
-            <span>HYDERABAD, IN:</span>
-            <span className="text-white font-medium">{currentTime || 'IST (UTC+5:30)'}</span>
           </div>
 
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-slate-500">CORE FOCUS:</span>
-            <span className="px-2 py-0.5 rounded bg-white/5 text-slate-300 border border-white/5">.NET Core</span>
-            <span className="px-2 py-0.5 rounded bg-white/5 text-slate-300 border border-white/5">React.js</span>
-            <span className="px-2 py-0.5 rounded bg-white/5 text-slate-300 border border-white/5">Node.js</span>
-            <span className="px-2 py-0.5 rounded bg-white/5 text-slate-300 border border-white/5">SQL &amp; MongoDB</span>
-            <span className="px-2 py-0.5 rounded bg-[#00f5a0]/10 text-[#00f5a0] border border-[#00f5a0]/30 font-semibold">IoT Systems</span>
+          {/* Quick Core Stack Tags */}
+          <div className="flex items-center gap-2 flex-wrap font-mono text-xs text-[#1E1B18]">
+            <span className="font-pixel text-[10px] text-[#5A0B16] font-bold">FAVORITE TOOLS:</span>
+            <span className="px-2 py-0.5 rounded bg-[#FBF8EF] border border-[#1E1B18] shadow-[1px_1px_0px_#1E1B18]">.NET Core</span>
+            <span className="px-2 py-0.5 rounded bg-[#FBF8EF] border border-[#1E1B18] shadow-[1px_1px_0px_#1E1B18]">React.js</span>
+            <span className="px-2 py-0.5 rounded bg-[#FBF8EF] border border-[#1E1B18] shadow-[1px_1px_0px_#1E1B18]">Node.js</span>
+            <span className="px-2 py-0.5 rounded bg-[#FBF8EF] border border-[#1E1B18] shadow-[1px_1px_0px_#1E1B18]">SQL &amp; MongoDB</span>
+            <span className="px-2 py-0.5 rounded bg-[#F06EAF] text-white font-bold border border-[#1E1B18] shadow-[1px_1px_0px_#1E1B18]">IoT Systems</span>
           </div>
         </div>
-      </div>
 
-      {/* Subtle Scroll Down Indicator */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 opacity-60 hover:opacity-100 transition-opacity">
-        <a
-          href="#about"
-          onClick={(e) => handleScrollTo(e, '#about')}
-          className="text-[11px] font-mono tracking-widest uppercase text-slate-400 flex flex-col items-center gap-1"
-          aria-label="Scroll to About section"
-        >
-          <span>EXPLORE</span>
-          <ArrowDown className="w-3.5 h-3.5 text-[#00f5a0] animate-bounce" />
-        </a>
+        {/* Right Column: Retro Polaroid Portrait Collage */}
+        <div className="lg:col-span-5 flex justify-center lg:justify-end relative">
+          <div className="hero-polaroid relative w-full max-w-xs sm:max-w-sm rotate-2 hover:rotate-0 transition-transform duration-500">
+            {/* Washi tape on top */}
+            <div className="washi-tape washi-tape-gingham -top-3 left-1/2 -translate-x-1/2 w-36 -rotate-3" />
+
+            {/* Main Polaroid Frame */}
+            <div className="polaroid-card p-4 sm:p-5 rounded-2xl relative">
+              {/* Photo Area */}
+              <div className="relative w-full h-72 sm:h-80 rounded-xl overflow-hidden border-2 border-[#1E1B18] bg-[#D9C7A0]">
+                <img
+                  src={personalInfo.avatar}
+                  alt={personalInfo.name}
+                  className="w-full h-full object-cover object-top filter contrast-105"
+                />
+                {/* Stamp overlay */}
+                <div className="absolute bottom-3 right-3 px-2 py-1 bg-[#FBF8EF]/90 border border-[#1E1B18] rounded font-pixel text-[9px] text-[#5A0B16] rotate-6 shadow-sm">
+                  VERIFIED // HP
+                </div>
+              </div>
+
+              {/* Polaroid Footer with Handwritten Note */}
+              <div className="pt-4 pb-1 text-center">
+                <p className="font-hand text-2xl text-[#5A0B16] font-bold">
+                  Himani Patel &hearts;
+                </p>
+                <p className="font-mono text-xs text-[#8A9A2B] font-semibold">
+                  Software Engineer &bull; Hyderabad
+                </p>
+              </div>
+            </div>
+
+            {/* Handwritten sticky tag pointing to photo */}
+            <div className="absolute -bottom-6 -left-8 sm:-left-12 bg-[#FBF8EF] border-2 border-[#1E1B18] rounded-xl px-3 py-1.5 shadow-retro -rotate-6 select-none">
+              <span className="font-hand text-base text-[#E0147E] font-bold">
+                that's me! 🌸
+              </span>
+            </div>
+
+            {/* Retro Windows 98 Floppy Disk Sticker */}
+            <div className="absolute -top-6 -right-6 bg-[#D9C7A0] border-2 border-[#1E1B18] rounded-xl px-2.5 py-1.5 shadow-retro rotate-12 flex items-center gap-1">
+              <span className="text-sm">💾</span>
+              <span className="font-pixel text-[9px] text-[#1E1B18] font-bold">1.44MB</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

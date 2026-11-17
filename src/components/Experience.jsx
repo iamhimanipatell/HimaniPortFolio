@@ -1,63 +1,47 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Briefcase, Calendar, MapPin, CheckCircle2, ChevronRight, Award } from 'lucide-react';
+import { Calendar, MapPin, Folder, ChevronRight, CheckCircle2, FileText } from 'lucide-react';
+import RetroWindow from './RetroWindow';
 import { experienceData } from '../data/portfolioData';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Experience() {
   const sectionRef = useRef(null);
-  const timelineLineRef = useRef(null);
+  const timelineSvgRef = useRef(null);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 
     const ctx = gsap.context(() => {
-      // Header animation
-      gsap.from('.exp-header', {
+      // Timeline scroll progress animation
+      gsap.fromTo(
+        '.timeline-draw-line',
+        { scaleY: 0 },
+        {
+          scaleY: 1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '.retro-timeline-wrapper',
+            start: 'top 75%',
+            end: 'bottom 80%',
+            scrub: 0.5,
+          },
+        }
+      );
+
+      gsap.from('.retro-exp-card', {
         scrollTrigger: {
-          trigger: '.exp-header',
-          start: 'top 85%',
+          trigger: '.retro-timeline-wrapper',
+          start: 'top 80%',
         },
         y: 40,
         opacity: 0,
+        stagger: 0.2,
         duration: 0.8,
         ease: 'power3.out',
-      });
-
-      // Animate vertical timeline progress line
-      if (timelineLineRef.current) {
-        gsap.fromTo(
-          timelineLineRef.current,
-          { scaleY: 0 },
-          {
-            scaleY: 1,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: '.timeline-container',
-              start: 'top 75%',
-              end: 'bottom 85%',
-              scrub: 0.5,
-            },
-          }
-        );
-      }
-
-      // Animate individual timeline items
-      const items = gsap.utils.toArray('.timeline-item');
-      items.forEach((item, index) => {
-        gsap.from(item, {
-          scrollTrigger: {
-            trigger: item,
-            start: 'top 80%',
-          },
-          x: index % 2 === 0 ? -40 : 40,
-          opacity: 0,
-          duration: 0.9,
-          ease: 'power3.out',
-        });
       });
     }, sectionRef);
 
@@ -68,109 +52,109 @@ export default function Experience() {
     <section
       id="experience"
       ref={sectionRef}
-      className="relative py-24 sm:py-32 px-4 sm:px-8 max-w-7xl mx-auto z-10"
+      className="relative py-16 sm:py-24 px-4 sm:px-8 max-w-7xl mx-auto z-10"
     >
-      {/* Section Header */}
-      <div className="exp-header flex flex-col items-start mb-20">
-        <div className="inline-flex items-center gap-2 font-mono text-xs text-[#00f5a0] tracking-widest uppercase mb-3">
-          <span className="w-2 h-2 rounded-full bg-[#00f5a0]" />
-          <span>02 / WORK HISTORY</span>
-        </div>
-        <h2 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl text-white tracking-tight">
-          Professional Journey. <br />
-          <span className="text-slate-400 font-semibold">Roles, Milestones &amp; Leadership.</span>
-        </h2>
+      {/* Decorative Scrapbook Sticky Tag */}
+      <div className="flex items-center gap-3 mb-6">
+        <span className="font-pixel text-xs text-[#E0147E] bg-[#D9C7A0] px-3 py-1 rounded-full border-2 border-[#1E1B18] shadow-retro-sm">
+          // SECTION 04
+        </span>
+        <span className="font-hand text-2xl text-[#5A0B16] font-bold">
+          career logs &bull; leadership milestones 📂
+        </span>
       </div>
 
-      {/* Timeline Container */}
-      <div className="timeline-container relative max-w-4xl mx-auto">
-        {/* Animated Central Timeline Line */}
-        <div className="absolute left-4 sm:left-1/2 top-4 bottom-4 w-[2px] bg-white/10 -translate-x-1/2">
-          <div
-            ref={timelineLineRef}
-            className="w-full h-full bg-gradient-to-b from-[#00f5a0] via-[#00d8f6] to-[#00f5a0] origin-top"
-          />
+      <RetroWindow
+        title="career_timeline.log - File Explorer"
+        icon="📁"
+        showToolbar={true}
+        initialRotation={0.3}
+      >
+        <div className="mb-8 pb-4 border-b-2 border-[#1E1B18]/15">
+          <h3 className="font-serif font-black text-2xl sm:text-4xl text-[#5A0B16]">
+            Work Experience &amp; Internships
+          </h3>
+          <p className="font-mono text-xs text-[#1E1B18]/70 mt-1">
+            Tracking enterprise contributions, team leadership, and performance optimizations.
+          </p>
         </div>
 
-        {/* Timeline Items */}
-        <div className="space-y-12 sm:space-y-16">
-          {experienceData.map((item, idx) => {
-            const isEven = idx % 2 === 0;
+        {/* Timeline Explorer */}
+        <div className="retro-timeline-wrapper relative max-w-4xl mx-auto pl-6 sm:pl-10">
+          {/* Animated Retro SVG Central Line */}
+          <div className="absolute left-2 sm:left-4 top-2 bottom-2 w-1 bg-[#D9C7A0] border-l-2 border-[#1E1B18]">
+            <div className="timeline-draw-line w-full h-full bg-[#E0147E] origin-top" />
+          </div>
 
-            return (
-              <div
-                key={item.id}
-                className="timeline-item relative flex flex-col sm:flex-row items-start sm:items-center w-full"
-              >
-                {/* Milestone Node on Line */}
-                <div className="absolute left-4 sm:left-1/2 top-6 -translate-x-1/2 z-20 flex items-center justify-center">
-                  <div className="relative w-8 h-8 rounded-full bg-[#07080b] border-2 border-[#00f5a0] flex items-center justify-center shadow-lg shadow-[#00f5a0]/40">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#00f5a0] animate-pulse" />
+          <div className="space-y-10 sm:space-y-12">
+            {experienceData.map((item, idx) => {
+              const rotation = idx % 2 === 0 ? '-1deg' : '1deg';
+
+              return (
+                <div key={item.id} className="relative">
+                  {/* Milestone Folder Node */}
+                  <div className="absolute -left-[35px] sm:-left-[43px] top-4 w-8 h-8 rounded-full bg-[#E9E7CB] border-2 border-[#1E1B18] shadow-retro-sm flex items-center justify-center z-20">
+                    <span className="text-xs">📁</span>
                   </div>
-                </div>
 
-                {/* Content Card Layout */}
-                <div
-                  className={`w-full sm:w-1/2 pl-12 sm:pl-0 ${
-                    isEven ? 'sm:pr-12 sm:text-right' : 'sm:pl-12 sm:ml-auto text-left'
-                  }`}
-                >
-                  <div className="group relative p-6 sm:p-7 rounded-2xl bg-surface-1/90 border border-white/5 hover:border-[#00f5a0]/30 transition-all duration-300 hover:-translate-y-1 shadow-xl shadow-black/40">
-                    {/* Role & Company Header */}
-                    <div className="flex flex-col gap-1 mb-3">
-                      <div className={`flex items-center gap-2 flex-wrap ${isEven ? 'sm:justify-end' : 'justify-start'}`}>
-                        {item.current && (
-                          <span className="px-2.5 py-0.5 rounded-full bg-[#00f5a0]/15 text-[#00f5a0] font-mono text-[11px] font-semibold border border-[#00f5a0]/30">
-                            Present Role
+                  {/* Card Styled as a Retro Folder Memo */}
+                  <div
+                    className="retro-exp-card p-6 sm:p-7 rounded-2xl bg-[#FBF8EF] border-2 border-[#1E1B18] shadow-retro-sm relative"
+                    style={{ transform: `rotate(${rotation})` }}
+                  >
+                    {/* Washi tape strip */}
+                    <div className="washi-tape washi-tape-olive -top-3 right-8 w-28 rotate-1" />
+
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                      <div>
+                        <div className="flex items-center gap-2 flex-wrap mb-1">
+                          <h4 className="font-serif font-bold text-xl sm:text-2xl text-[#5A0B16]">
+                            {item.role}
+                          </h4>
+                          {item.current && (
+                            <span className="px-2 py-0.5 rounded bg-[#8A9A2B] text-white font-pixel text-[9px] border border-[#1E1B18]">
+                              PRESENT
+                            </span>
+                          )}
+                        </div>
+                        <div className="flex items-center gap-2 font-mono text-xs text-[#8A9A2B] font-bold">
+                          <span>{item.company}</span>
+                          <span>&bull;</span>
+                          <span className="text-[#1E1B18]/70 inline-flex items-center gap-1">
+                            <MapPin className="w-3 h-3" />
+                            {item.location}
                           </span>
-                        )}
-                        <span className="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-300 font-mono text-[11px] border border-white/5">
-                          {item.type}
-                        </span>
+                        </div>
                       </div>
 
-                      <h3 className="font-display font-extrabold text-xl sm:text-2xl text-white group-hover:text-[#00f5a0] transition-colors">
-                        {item.role}
-                      </h3>
-
-                      <div className={`flex items-center gap-2 text-sm text-slate-300 font-medium ${isEven ? 'sm:justify-end' : 'justify-start'}`}>
-                        <span className="text-[#00f5a0] font-semibold">{item.company}</span>
-                        <span>&bull;</span>
-                        <span className="inline-flex items-center gap-1 text-slate-400 text-xs font-mono">
-                          <MapPin className="w-3 h-3 text-slate-400" />
-                          {item.location}
-                        </span>
-                      </div>
-
-                      <div className={`inline-flex items-center gap-1.5 text-xs font-mono text-slate-400 mt-0.5 ${isEven ? 'sm:justify-end' : 'justify-start'}`}>
-                        <Calendar className="w-3.5 h-3.5 text-[#00d8f6]" />
+                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#E9E7CB] border border-[#1E1B18] font-mono text-xs font-semibold text-[#5A0B16] self-start sm:self-auto">
+                        <Calendar className="w-3.5 h-3.5 text-[#E0147E]" />
                         <span>{item.period}</span>
                       </div>
                     </div>
 
-                    {/* Summary */}
-                    <p className="text-sm text-slate-300/90 leading-relaxed mb-4 text-left">
+                    <p className="font-mono text-xs sm:text-sm text-[#1E1B18]/90 leading-relaxed mb-4">
                       {item.summary}
                     </p>
 
-                    {/* Key Accomplishments Checklist */}
+                    {/* Highlights bullet checklist */}
                     {item.responsibilities && (
-                      <ul className="space-y-2 mb-5 text-left border-t border-white/5 pt-3">
+                      <ul className="space-y-1.5 mb-5 pt-3 border-t-2 border-dashed border-[#1E1B18]/15">
                         {item.responsibilities.map((resp, rIdx) => (
-                          <li key={rIdx} className="flex items-start gap-2 text-xs sm:text-[13px] text-slate-400">
-                            <ChevronRight className="w-4 h-4 text-[#00f5a0] shrink-0 mt-0.5" />
+                          <li key={rIdx} className="flex items-start gap-2 font-mono text-xs text-[#1E1B18]/80">
+                            <span className="text-[#E0147E] font-bold mt-0.5">&gt;</span>
                             <span>{resp}</span>
                           </li>
                         ))}
                       </ul>
                     )}
 
-                    {/* Tech Tags */}
-                    <div className={`flex flex-wrap gap-1.5 pt-2 border-t border-white/5 ${isEven ? 'sm:justify-end' : 'justify-start'}`}>
+                    {/* Tech Badges */}
+                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-[#1E1B18]/15">
                       {item.tech.map((t) => (
                         <span
                           key={t}
-                          className="px-2.5 py-1 rounded-md bg-white/5 text-slate-300 font-mono text-[11px] border border-white/5 hover:border-[#00f5a0]/40 transition-colors"
+                          className="px-2 py-0.5 rounded bg-[#D9C7A0]/70 border border-[#1E1B18] font-mono text-[10px] text-[#1E1B18]"
                         >
                           {t}
                         </span>
@@ -178,11 +162,11 @@ export default function Experience() {
                     </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
-      </div>
+      </RetroWindow>
     </section>
   );
 }

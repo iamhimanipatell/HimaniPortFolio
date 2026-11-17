@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { GraduationCap, Award, Calendar, MapPin, ExternalLink, X, CheckCircle2 } from 'lucide-react';
+import { GraduationCap, Award, Calendar, MapPin, X, ExternalLink } from 'lucide-react';
+import RetroWindow from './RetroWindow';
 import { educationData, certificatesData } from '../data/portfolioData';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -15,36 +16,14 @@ export default function Education() {
     if (prefersReducedMotion) return;
 
     const ctx = gsap.context(() => {
-      gsap.from('.edu-header', {
+      gsap.from('.edu-card-scrapbook', {
         scrollTrigger: {
-          trigger: '.edu-header',
+          trigger: '.edu-scrapbook-grid',
           start: 'top 85%',
         },
         y: 40,
         opacity: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-      });
-
-      gsap.from('.edu-card', {
-        scrollTrigger: {
-          trigger: '.edu-card',
-          start: 'top 80%',
-        },
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-      });
-
-      gsap.from('.cert-card', {
-        scrollTrigger: {
-          trigger: '.cert-grid',
-          start: 'top 80%',
-        },
-        y: 30,
-        opacity: 0,
-        stagger: 0.1,
+        stagger: 0.15,
         duration: 0.8,
         ease: 'power3.out',
       });
@@ -57,116 +36,125 @@ export default function Education() {
     <section
       id="education"
       ref={sectionRef}
-      className="relative py-24 sm:py-32 px-4 sm:px-8 max-w-7xl mx-auto z-10"
+      className="relative py-16 sm:py-24 px-4 sm:px-8 max-w-7xl mx-auto z-10"
     >
-      {/* Section Header */}
-      <div className="edu-header flex flex-col items-start mb-16">
-        <div className="inline-flex items-center gap-2 font-mono text-xs text-[#00f5a0] tracking-widest uppercase mb-3">
-          <span className="w-2 h-2 rounded-full bg-[#00f5a0]" />
-          <span>05 / ACADEMICS &amp; CREDENTIALS</span>
-        </div>
-        <h2 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl text-white tracking-tight">
-          Education &amp; Honors. <br />
-          <span className="text-slate-400 font-semibold">Foundational Rigor &amp; Validations.</span>
-        </h2>
+      {/* Decorative Scrapbook Sticky Tag */}
+      <div className="flex items-center gap-3 mb-6">
+        <span className="font-pixel text-xs text-[#E0147E] bg-[#D9C7A0] px-3 py-1 rounded-full border-2 border-[#1E1B18] shadow-retro-sm">
+          // SECTION 05
+        </span>
+        <span className="font-hand text-2xl text-[#5A0B16] font-bold">
+          degrees &amp; verified badges 🎓
+        </span>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-        {/* Education Highlight Card */}
-        <div className="lg:col-span-5 flex flex-col">
-          <div className="edu-card h-full p-8 rounded-3xl bg-surface-1/90 border border-white/10 hover:border-[#00f5a0]/40 transition-all duration-300 shadow-xl shadow-black/40 flex flex-col justify-between">
+      <RetroWindow
+        title="academics_honors.exe - Certificate Viewer"
+        icon="🎓"
+        showToolbar={true}
+        initialRotation={-0.4}
+      >
+        <div className="edu-scrapbook-grid grid grid-cols-1 lg:grid-cols-12 gap-8">
+          {/* Left: Main Degree Diploma Card */}
+          <div className="edu-card-scrapbook lg:col-span-5 p-6 sm:p-7 rounded-3xl bg-[#FBF8EF] border-2 border-[#1E1B18] shadow-retro relative flex flex-col justify-between">
+            <div className="washi-tape washi-tape-gingham -top-3 left-10 w-28 -rotate-2" />
+
             <div>
-              <div className="w-12 h-12 rounded-2xl bg-[#00f5a0]/10 border border-[#00f5a0]/30 flex items-center justify-center mb-6">
-                <GraduationCap className="w-6 h-6 text-[#00f5a0]" />
+              <div className="flex items-center justify-between mb-4">
+                <div className="w-10 h-10 rounded-xl bg-[#E9E7CB] border border-[#1E1B18] flex items-center justify-center">
+                  <GraduationCap className="w-5 h-5 text-[#8A9A2B]" />
+                </div>
+                <span className="font-pixel text-xs px-3 py-1 rounded-full bg-[#8A9A2B] text-white border border-[#1E1B18]">
+                  CGPA: {educationData.cgpa} / 10
+                </span>
               </div>
 
-              <span className="px-3 py-1 rounded-full bg-[#00f5a0]/15 text-[#00f5a0] font-mono text-xs font-semibold border border-[#00f5a0]/30 inline-block mb-3">
-                CGPA: {educationData.cgpa} / 10
-              </span>
-
-              <h3 className="font-display font-extrabold text-2xl sm:text-3xl text-white mb-2">
+              <h4 className="font-serif font-black text-2xl sm:text-3xl text-[#5A0B16] mb-2">
                 {educationData.degree}
-              </h3>
+              </h4>
 
-              <p className="font-display font-semibold text-lg text-[#00d8f6] mb-4">
+              <p className="font-mono text-sm font-bold text-[#E0147E] mb-4">
                 {educationData.institution}
               </p>
 
-              <div className="flex flex-col gap-2 font-mono text-xs text-slate-400 mb-6 border-y border-white/5 py-4">
+              <div className="flex flex-col gap-1.5 font-mono text-xs text-[#1E1B18]/80 mb-5 p-3 rounded-xl bg-[#E9E7CB] border border-[#1E1B18]">
                 <div className="flex items-center gap-2">
-                  <Calendar className="w-3.5 h-3.5 text-slate-400" />
+                  <Calendar className="w-3.5 h-3.5 text-[#8A9A2B]" />
                   <span>{educationData.period}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <MapPin className="w-3.5 h-3.5 text-slate-400" />
+                  <MapPin className="w-3.5 h-3.5 text-[#8A9A2B]" />
                   <span>{educationData.location}</span>
                 </div>
               </div>
 
-              <p className="text-sm text-slate-300/90 leading-relaxed">
+              <p className="font-mono text-xs text-[#1E1B18]/85 leading-relaxed">
                 {educationData.description}
               </p>
             </div>
 
-            <div className="pt-6 mt-6 border-t border-white/5 flex items-center gap-2 text-xs font-mono text-[#00f5a0]">
-              <CheckCircle2 className="w-4 h-4 text-[#00f5a0]" />
-              <span>Accredited Curriculum &bull; Computer Science</span>
+            <div className="pt-4 mt-6 border-t-2 border-dashed border-[#1E1B18]/15 font-hand text-lg text-[#5A0B16] font-bold">
+              Computer Science &bull; Software Engineering Rigor ✨
+            </div>
+          </div>
+
+          {/* Right: Verified Credentials Grid */}
+          <div className="edu-card-scrapbook lg:col-span-7 flex flex-col">
+            <div className="flex items-center justify-between mb-4">
+              <h4 className="font-serif font-bold text-xl text-[#5A0B16] flex items-center gap-2">
+                <Award className="w-5 h-5 text-[#E0147E]" />
+                <span>Verified Credentials &amp; Certifications</span>
+              </h4>
+              <span className="font-hand text-base text-[#8A9A2B] font-bold">
+                click to inspect 🔍
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 flex-grow">
+              {certificatesData.map((cert, cIdx) => {
+                const rotation = cIdx === 1 ? '1deg' : '-1deg';
+
+                return (
+                  <div
+                    key={cert.id}
+                    onClick={() => setSelectedCert(cert)}
+                    className="p-4 rounded-2xl bg-[#FBF8EF] border-2 border-[#1E1B18] shadow-retro-sm hover:shadow-retro hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col justify-between"
+                    style={{ transform: `rotate(${rotation})` }}
+                  >
+                    <div>
+                      {/* Thumbnail frame */}
+                      <div className="relative w-full h-28 rounded-xl overflow-hidden border border-[#1E1B18] mb-3 bg-black/10">
+                        <img
+                          src={cert.image}
+                          alt={cert.title}
+                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+
+                      <span className="px-2 py-0.5 rounded bg-[#D9C7A0] font-pixel text-[8px] text-[#1E1B18] border border-[#1E1B18] inline-block mb-1.5 font-bold">
+                        {cert.issuer}
+                      </span>
+
+                      <h5 className="font-serif font-bold text-sm text-[#5A0B16] mb-1 leading-snug">
+                        {cert.title}
+                      </h5>
+
+                      <p className="font-mono text-[10px] text-[#1E1B18]/70 leading-normal">
+                        {cert.description}
+                      </p>
+                    </div>
+
+                    <div className="pt-2 mt-3 border-t border-[#1E1B18]/15 flex items-center justify-between font-mono text-[10px] text-[#E0147E] font-bold">
+                      <span>VERIFIED</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
-
-        {/* Certifications Showcase */}
-        <div className="lg:col-span-7 flex flex-col">
-          <h3 className="font-display font-bold text-xl text-white mb-6 flex items-center gap-2">
-            <Award className="w-5 h-5 text-[#00d8f6]" />
-            <span>Verified Certifications</span>
-          </h3>
-
-          <div className="cert-grid grid grid-cols-1 sm:grid-cols-2 gap-5 flex-grow">
-            {certificatesData.map((cert) => (
-              <div
-                key={cert.id}
-                onClick={() => setSelectedCert(cert)}
-                className="cert-card group p-5 rounded-2xl bg-surface-1/80 border border-white/5 hover:border-[#00f5a0]/40 transition-all duration-300 hover:-translate-y-1 shadow-lg shadow-black/40 cursor-pointer flex flex-col justify-between"
-              >
-                <div>
-                  {/* Certificate Thumbnail Preview */}
-                  <div className="relative w-full h-36 rounded-xl overflow-hidden mb-4 bg-black/60 border border-white/5">
-                    <img
-                      src={cert.image}
-                      alt={cert.title}
-                      loading="lazy"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                      <span className="opacity-0 group-hover:opacity-100 transition-opacity px-3 py-1.5 rounded-lg bg-[#07080b]/90 text-[#00f5a0] font-mono text-[11px] font-bold border border-[#00f5a0]/40">
-                        View Certificate
-                      </span>
-                    </div>
-                  </div>
-
-                  <span className="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-300 font-mono text-[10px] font-medium border border-white/5 inline-block mb-2">
-                    {cert.issuer}
-                  </span>
-
-                  <h4 className="font-display font-bold text-base text-white group-hover:text-[#00f5a0] transition-colors mb-1.5">
-                    {cert.title}
-                  </h4>
-
-                  <p className="text-xs text-slate-400 leading-normal">
-                    {cert.description}
-                  </p>
-                </div>
-
-                <div className="pt-3 mt-3 border-t border-white/5 flex items-center justify-between text-xs font-mono text-slate-400 group-hover:text-[#00f5a0] transition-colors">
-                  <span>Verified Credential</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      </RetroWindow>
 
       {/* Certificate Modal Lightbox */}
       {selectedCert && (
@@ -174,34 +162,36 @@ export default function Education() {
           role="dialog"
           aria-modal="true"
           aria-label={selectedCert.title}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200"
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
           onClick={() => setSelectedCert(null)}
         >
           <div
-            className="relative max-w-3xl w-full bg-surface-1 border border-white/10 rounded-3xl p-6 shadow-2xl overflow-hidden"
+            className="relative max-w-2xl w-full bg-[#FBF8EF] border-2 border-[#1E1B18] rounded-2xl p-6 shadow-retro-lg"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center justify-between mb-4 border-b pb-3 border-[#1E1B18]/20">
               <div>
-                <h4 className="font-display font-bold text-xl text-white">
+                <h4 className="font-serif font-bold text-xl text-[#5A0B16]">
                   {selectedCert.title}
                 </h4>
-                <p className="font-mono text-xs text-[#00f5a0]">{selectedCert.issuer}</p>
+                <p className="font-mono text-xs text-[#8A9A2B] font-bold">
+                  Platform: {selectedCert.issuer}
+                </p>
               </div>
               <button
                 onClick={() => setSelectedCert(null)}
-                className="p-2 rounded-xl bg-white/5 text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
-                aria-label="Close modal"
+                className="p-1.5 rounded-lg bg-[#E9E7CB] border border-[#1E1B18] hover:bg-[#E0147E] hover:text-white transition-colors"
+                aria-label="Close"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="rounded-2xl overflow-hidden border border-white/10 max-h-[70vh] flex items-center justify-center bg-black">
+            <div className="rounded-xl overflow-hidden border-2 border-[#1E1B18] max-h-[65vh] flex items-center justify-center bg-black/10">
               <img
                 src={selectedCert.image}
                 alt={selectedCert.title}
-                className="max-h-[68vh] w-auto object-contain"
+                className="max-h-[60vh] w-auto object-contain"
               />
             </div>
           </div>

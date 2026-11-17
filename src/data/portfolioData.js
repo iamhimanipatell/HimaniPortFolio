@@ -18,7 +18,6 @@ export const personalInfo = {
     "Proven track record of optimizing page load times by 25%, slashing content upload times by 40%, and spearheading Agile sprints to deliver enterprise-grade systems."
   ],
   email: "himanipatel.riya@gmail.com",
-  phone: "+91 7828315562",
   linkedin: "https://linkedin.com/in/himanipatelll",
   github: "https://github.com/iamhimanipatell",
   avatar: "/finalestphot.JPG",
@@ -349,10 +348,5 @@ export const socialLinks = [
     name: "Email",
     url: "mailto:himanipatel.riya@gmail.com",
     handle: "himanipatel.riya@gmail.com",
-  },
-  {
-    name: "Phone",
-    url: "tel:+917828315562",
-    handle: "+91 7828315562",
   },
 ];

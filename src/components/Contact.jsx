@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Mail, Phone, MapPin, Copy, Check, ArrowUpRight, Github, Linkedin, Send } from 'lucide-react';
-import { personalInfo, socialLinks } from '../data/portfolioData';
+import { Mail, MapPin, Copy, Check, ArrowUpRight, Github, Linkedin, Send, Sparkles } from 'lucide-react';
+import RetroWindow from './RetroWindow';
+import { personalInfo } from '../data/portfolioData';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Contact() {
   const [copied, setCopied] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [submitted, setSubmitted] = useState(false);
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -17,34 +18,12 @@ export default function Contact() {
     if (prefersReducedMotion) return;
 
     const ctx = gsap.context(() => {
-      gsap.from('.contact-header', {
+      gsap.from('.contact-retro-content', {
         scrollTrigger: {
-          trigger: '.contact-header',
+          trigger: '.contact-retro-content',
           start: 'top 85%',
         },
         y: 40,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-      });
-
-      gsap.from('.contact-card-left', {
-        scrollTrigger: {
-          trigger: '.contact-wrapper',
-          start: 'top 80%',
-        },
-        x: -40,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-      });
-
-      gsap.from('.contact-card-right', {
-        scrollTrigger: {
-          trigger: '.contact-wrapper',
-          start: 'top 80%',
-        },
-        x: 40,
         opacity: 0,
         duration: 0.8,
         ease: 'power3.out',
@@ -60,20 +39,19 @@ export default function Contact() {
     setTimeout(() => setCopied(false), 2500);
   };
 
-  const handleFormSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
 
-    // Trigger user's mail client with prefilled details
     const subject = encodeURIComponent(`Portfolio Inquiry from ${formData.name}`);
     const body = encodeURIComponent(
       `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
     );
     window.location.href = `mailto:${personalInfo.email}?subject=${subject}&body=${body}`;
 
-    setFormSubmitted(true);
+    setSubmitted(true);
     setTimeout(() => {
-      setFormSubmitted(false);
+      setSubmitted(false);
       setFormData({ name: '', email: '', message: '' });
     }, 4000);
   };
@@ -82,104 +60,107 @@ export default function Contact() {
     <section
       id="contact"
       ref={sectionRef}
-      className="relative py-24 sm:py-32 px-4 sm:px-8 max-w-7xl mx-auto z-10"
+      className="relative py-16 sm:py-24 px-4 sm:px-8 max-w-7xl mx-auto z-10"
     >
-      {/* Section Header */}
-      <div className="contact-header flex flex-col items-start mb-16">
-        <div className="inline-flex items-center gap-2 font-mono text-xs text-[#00f5a0] tracking-widest uppercase mb-3">
-          <span className="w-2 h-2 rounded-full bg-[#00f5a0]" />
-          <span>06 / GET IN TOUCH</span>
-        </div>
-        <h2 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl text-white tracking-tight">
-          Let's Engineer Something <br />
-          <span className="text-[#00f5a0]">Remarkable Together.</span>
-        </h2>
+      {/* Decorative Scrapbook Sticky Tag */}
+      <div className="flex items-center gap-3 mb-6">
+        <span className="font-pixel text-xs text-[#E0147E] bg-[#D9C7A0] px-3 py-1 rounded-full border-2 border-[#1E1B18] shadow-retro-sm">
+          // SECTION 06
+        </span>
+        <span className="font-hand text-2xl text-[#5A0B16] font-bold">
+          send a postcard or an email 💌
+        </span>
       </div>
 
-      <div className="contact-wrapper grid grid-cols-1 lg:grid-cols-12 gap-10">
-        {/* Left Column: Direct Contact & Socials */}
-        <div className="contact-card-left lg:col-span-5 flex flex-col justify-between p-8 sm:p-10 rounded-3xl bg-surface-1/90 border border-white/10 shadow-2xl">
-          <div>
-            <span className="text-xs font-mono text-[#00d8f6] tracking-wider uppercase block mb-3">
-              Direct Communication
-            </span>
-            <h3 className="font-display font-bold text-2xl sm:text-3xl text-white mb-4">
-              Open for High-Impact Software Engineering Roles.
-            </h3>
-            <p className="text-sm text-slate-300/90 leading-relaxed mb-8">
-              Whether you have an upcoming project, an engineering opening, or want to discuss full-stack &amp; IoT architecture, my inbox is always open.
-            </p>
+      <RetroWindow
+        title="compose_message.exe - Outlook Express '98"
+        icon="✉️"
+        showToolbar={true}
+        initialRotation={-0.2}
+      >
+        <div className="contact-retro-content grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
+          {/* Left Column: Direct Info & Social Profiles */}
+          <div className="lg:col-span-5 p-6 sm:p-7 rounded-2xl bg-[#D9C7A0]/60 border-2 border-[#1E1B18] shadow-retro-sm flex flex-col justify-between">
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <span className="font-pixel text-[10px] text-[#8A9A2B] uppercase font-bold">
+                  DIRECT CHANNELS
+                </span>
+                <span className="text-xs">🌸</span>
+              </div>
 
-            {/* Direct Information Blocks */}
-            <div className="space-y-4 mb-8">
-              {/* Email with copy button */}
-              <div className="p-4 rounded-2xl bg-surface-2/80 border border-white/5 flex items-center justify-between gap-3">
-                <div className="flex items-center gap-3 overflow-hidden">
-                  <div className="w-9 h-9 rounded-xl bg-[#00f5a0]/10 flex items-center justify-center shrink-0">
-                    <Mail className="w-4 h-4 text-[#00f5a0]" />
-                  </div>
+              <h4 className="font-serif font-black text-2xl sm:text-3xl text-[#5A0B16] mb-3">
+                Let's Build Something Memorable.
+              </h4>
+
+              <p className="font-mono text-xs sm:text-sm text-[#1E1B18]/85 leading-relaxed mb-6">
+                I'm actively seeking high-impact full-stack and software engineering opportunities. Drop me a note!
+              </p>
+
+              {/* Direct Info List */}
+              <div className="space-y-3 mb-6">
+                {/* Email with Copy */}
+                <div className="p-3.5 rounded-xl bg-[#FBF8EF] border border-[#1E1B18] shadow-[1px_1px_0px_#1E1B18] flex items-center justify-between gap-2">
                   <div className="truncate">
-                    <p className="text-[10px] font-mono uppercase text-slate-400">Email</p>
+                    <span className="font-pixel text-[9px] text-[#E0147E] block uppercase">
+                      EMAIL ADDRESS
+                    </span>
                     <a
                       href={`mailto:${personalInfo.email}`}
-                      className="text-xs sm:text-sm font-mono text-white hover:text-[#00f5a0] truncate block"
+                      className="font-mono text-xs sm:text-sm text-[#5A0B16] font-bold hover:text-[#E0147E] truncate block"
                     >
                       {personalInfo.email}
                     </a>
                   </div>
-                </div>
-                <button
-                  onClick={copyEmail}
-                  className="p-2 rounded-lg bg-white/5 hover:bg-[#00f5a0]/20 text-slate-300 hover:text-[#00f5a0] transition-colors shrink-0"
-                  aria-label="Copy Email address"
-                  title="Copy email to clipboard"
-                >
-                  {copied ? <Check className="w-4 h-4 text-[#00f5a0]" /> : <Copy className="w-4 h-4" />}
-                </button>
-              </div>
-
-              {/* Phone */}
-              <div className="p-4 rounded-2xl bg-surface-2/80 border border-white/5 flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-[#00d8f6]/10 flex items-center justify-center shrink-0">
-                  <Phone className="w-4 h-4 text-[#00d8f6]" />
-                </div>
-                <div>
-                  <p className="text-[10px] font-mono uppercase text-slate-400">Phone</p>
-                  <a
-                    href={`tel:${personalInfo.phone.replace(/\s+/g, '')}`}
-                    className="text-xs sm:text-sm font-mono text-white hover:text-[#00d8f6]"
+                  <button
+                    onClick={copyEmail}
+                    className="p-1.5 rounded-lg bg-[#E9E7CB] border border-[#1E1B18] hover:bg-[#F06EAF] hover:text-white transition-colors shrink-0"
+                    title="Copy email"
+                    aria-label="Copy email"
                   >
-                    {personalInfo.phone}
-                  </a>
+                    {copied ? <Check className="w-4 h-4 text-[#8A9A2B]" /> : <Copy className="w-4 h-4" />}
+                  </button>
                 </div>
-              </div>
 
-              {/* Location */}
-              <div className="p-4 rounded-2xl bg-surface-2/80 border border-white/5 flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-purple-500/10 flex items-center justify-center shrink-0">
-                  <MapPin className="w-4 h-4 text-purple-400" />
+                {/* Work Mode & Availability */}
+                <div className="p-3.5 rounded-xl bg-[#FBF8EF] border border-[#1E1B18] shadow-[1px_1px_0px_#1E1B18] flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-[#8A9A2B]/20 flex items-center justify-center shrink-0">
+                    <Sparkles className="w-4 h-4 text-[#8A9A2B]" />
+                  </div>
+                  <div>
+                    <span className="font-pixel text-[9px] text-[#8A9A2B] block uppercase">
+                      AVAILABILITY
+                    </span>
+                    <p className="font-mono text-xs sm:text-sm text-[#1E1B18] font-bold">
+                      Open for Full-Stack Roles (Hybrid &bull; Remote)
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-[10px] font-mono uppercase text-slate-400">Location</p>
-                  <p className="text-xs sm:text-sm font-mono text-white">
-                    {personalInfo.location}
-                  </p>
+
+                {/* Location */}
+                <div className="p-3.5 rounded-xl bg-[#FBF8EF] border border-[#1E1B18] shadow-[1px_1px_0px_#1E1B18] flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-[#E0147E]/20 flex items-center justify-center shrink-0">
+                    <MapPin className="w-4 h-4 text-[#E0147E]" />
+                  </div>
+                  <div>
+                    <span className="font-pixel text-[9px] text-[#E0147E] block uppercase">
+                      BASE LOCATION
+                    </span>
+                    <p className="font-mono text-xs sm:text-sm text-[#1E1B18] font-bold">
+                      {personalInfo.location}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Social Links */}
-          <div className="pt-6 border-t border-white/5">
-            <p className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-4">
-              Profiles &amp; Repositories
-            </p>
-            <div className="flex flex-wrap gap-3">
+            {/* Social Links */}
+            <div className="pt-4 border-t-2 border-dashed border-[#1E1B18]/15 flex flex-wrap gap-2">
               <a
                 href={personalInfo.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-[#00f5a0] text-slate-300 hover:text-[#07080b] font-mono text-xs border border-white/5 hover:border-[#00f5a0] transition-all duration-200"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#FBF8EF] text-[#1E1B18] font-mono text-xs font-bold border border-[#1E1B18] shadow-[1px_1px_0px_#1E1B18] hover:bg-[#F06EAF] hover:text-white transition-all"
               >
                 <Linkedin className="w-3.5 h-3.5" />
                 <span>LinkedIn</span>
@@ -190,7 +171,7 @@ export default function Contact() {
                 href={personalInfo.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-[#00f5a0] text-slate-300 hover:text-[#07080b] font-mono text-xs border border-white/5 hover:border-[#00f5a0] transition-all duration-200"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#FBF8EF] text-[#1E1B18] font-mono text-xs font-bold border border-[#1E1B18] shadow-[1px_1px_0px_#1E1B18] hover:bg-[#8A9A2B] hover:text-white transition-all"
               >
                 <Github className="w-3.5 h-3.5" />
                 <span>GitHub</span>
@@ -199,85 +180,89 @@ export default function Contact() {
 
               <a
                 href={`mailto:${personalInfo.email}`}
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#00f5a0]/15 text-[#00f5a0] font-mono text-xs border border-[#00f5a0]/30 hover:bg-[#00f5a0] hover:text-[#07080b] transition-all duration-200"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#E0147E] text-white font-mono text-xs font-bold border border-[#1E1B18] shadow-[1px_1px_0px_#1E1B18] hover:bg-[#F06EAF] transition-all"
               >
                 <Mail className="w-3.5 h-3.5" />
-                <span>Mailto Client</span>
-                <ArrowUpRight className="w-3 h-3" />
+                <span>Open Mail</span>
               </a>
             </div>
           </div>
-        </div>
 
-        {/* Right Column: Interactive Contact Form */}
-        <div className="contact-card-right lg:col-span-7 p-8 sm:p-10 rounded-3xl bg-surface-1/90 border border-white/10 shadow-2xl flex flex-col justify-between">
-          <div>
-            <h3 className="font-display font-bold text-2xl text-white mb-2">
-              Send a Direct Message
-            </h3>
-            <p className="text-sm text-slate-400 mb-8">
-              Fill out the form below to automatically draft a direct communication inquiry.
-            </p>
+          {/* Right Column: Retro Email Form */}
+          <div className="lg:col-span-7 p-6 sm:p-7 rounded-2xl bg-[#FBF8EF] border-2 border-[#1E1B18] shadow-retro-sm">
+            <div className="flex items-center justify-between pb-3 mb-4 border-b-2 border-[#1E1B18]">
+              <span className="font-pixel text-xs text-[#5A0B16] font-bold">
+                NEW_MESSAGE://DRAFT.TXT
+              </span>
+              <span className="font-hand text-base text-[#8A9A2B] font-bold">
+                instant response guaranteed 🌸
+              </span>
+            </div>
 
-            <form onSubmit={handleFormSubmit} className="space-y-5">
-              <div>
-                <label htmlFor="name" className="block text-xs font-mono text-slate-300 uppercase mb-2">
-                  Your Full Name
+            <form onSubmit={handleSubmit} className="space-y-4 font-mono text-xs">
+              <div className="flex items-center gap-2 border-b border-[#1E1B18]/15 pb-2">
+                <span className="w-16 text-[#5A0B16] font-bold">TO:</span>
+                <span className="font-semibold text-[#1E1B18]">{personalInfo.email}</span>
+              </div>
+
+              <div className="flex items-center gap-2 border-b border-[#1E1B18]/15 pb-2">
+                <label htmlFor="contact-name" className="w-16 text-[#5A0B16] font-bold">
+                  FROM:
                 </label>
                 <input
-                  id="name"
+                  id="contact-name"
                   type="text"
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  placeholder="e.g. John Doe / Tech Recruiter"
-                  className="w-full px-4 py-3 rounded-xl bg-surface-2/80 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-[#00f5a0] focus:ring-1 focus:ring-[#00f5a0] transition-all"
+                  placeholder="Your Name / Organization"
+                  className="w-full bg-transparent text-[#1E1B18] placeholder-[#1E1B18]/40 focus:outline-none"
                 />
               </div>
 
-              <div>
-                <label htmlFor="email" className="block text-xs font-mono text-slate-300 uppercase mb-2">
-                  Email Address
+              <div className="flex items-center gap-2 border-b border-[#1E1B18]/15 pb-2">
+                <label htmlFor="contact-email" className="w-16 text-[#5A0B16] font-bold">
+                  REPLY-TO:
                 </label>
                 <input
-                  id="email"
+                  id="contact-email"
                   type="email"
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  placeholder="you@company.com"
-                  className="w-full px-4 py-3 rounded-xl bg-surface-2/80 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-[#00f5a0] focus:ring-1 focus:ring-[#00f5a0] transition-all"
+                  placeholder="your.email@example.com"
+                  className="w-full bg-transparent text-[#1E1B18] placeholder-[#1E1B18]/40 focus:outline-none"
                 />
               </div>
 
-              <div>
-                <label htmlFor="message" className="block text-xs font-mono text-slate-300 uppercase mb-2">
-                  Project / Opportunity Scope
+              <div className="pt-2">
+                <label htmlFor="contact-message" className="block text-[#5A0B16] font-bold mb-1.5">
+                  MESSAGE BODY:
                 </label>
                 <textarea
-                  id="message"
+                  id="contact-message"
                   required
                   rows={5}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  placeholder="Tell me about your team, tech stack, or engineering project..."
-                  className="w-full px-4 py-3 rounded-xl bg-surface-2/80 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-[#00f5a0] focus:ring-1 focus:ring-[#00f5a0] transition-all resize-none"
+                  placeholder="Write a note about an opportunity, tech stack, or collaboration..."
+                  className="w-full p-3 rounded-xl bg-[#E9E7CB]/60 border border-[#1E1B18] text-[#1E1B18] placeholder-[#1E1B18]/40 focus:outline-none focus:border-[#E0147E] resize-none"
                 />
               </div>
 
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full py-4 rounded-xl bg-[#00f5a0] text-[#07080b] font-display font-bold text-sm tracking-wide hover:bg-[#00df90] hover:shadow-[0_0_25px_rgba(0,245,160,0.4)] transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full py-3.5 rounded-full bg-[#E0147E] text-white font-pixel text-xs sm:text-sm border-2 border-[#1E1B18] shadow-retro hover:bg-[#F06EAF] hover:text-[#1E1B18] active:translate-x-1 active:translate-y-1 transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
-                  {formSubmitted ? (
+                  {submitted ? (
                     <>
-                      <Check className="w-4 h-4 text-[#07080b]" />
-                      <span>Opening Mail Client...</span>
+                      <Check className="w-4 h-4 text-white" />
+                      <span>OPENING MAIL CLIENT...</span>
                     </>
                   ) : (
                     <>
-                      <span>Send Message (Mailto)</span>
+                      <span>TRANSMIT MESSAGE (MAILTO)</span>
                       <Send className="w-4 h-4" />
                     </>
                   )}
@@ -285,12 +270,8 @@ export default function Contact() {
               </div>
             </form>
           </div>
-
-          <p className="text-[11px] font-mono text-slate-500 text-center mt-6">
-            Direct response guaranteed within 24 hours.
-          </p>
         </div>
-      </div>
+      </RetroWindow>
     </section>
   );
 }

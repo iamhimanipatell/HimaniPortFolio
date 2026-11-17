@@ -1,164 +1,85 @@
-# Himani Patel — Personal Portfolio Website
+# Himani Patel — Personal Portfolio Website (Y2K Retro-Desktop Scrapbook Edition)
 
-A modern award-style developer portfolio website built for **Himani Patel**, Software Engineer based in Hyderabad, India.
+An aesthetic, playful, feminine-tech personal portfolio website built for **Himani Patel**, Software Engineer based in Hyderabad, India.
 
-Built with **React + Vite**, **Tailwind CSS**, **GSAP with ScrollTrigger**, and **Lenis Smooth Scroll**. Designed with high-performance animations, fluid cursor interactions, and responsive design systems.
+Designed with a **Y2K retro-desktop scrapbook** aesthetic—blending the nostalgia of a retro operating system (Windows 98 / MS Paint windows, draggable title bars, beveled buttons) with an aesthetic collage scrapbook (polaroids, washi tape strips, doodle arrows, handwritten notes, and floating stickers)—while maintaining clean typography and WCAG AA contrast for recruiters.
 
 ---
 
-## ⚡ Tech Stack & Architecture
+## 🎨 Theme & Design System
 
-- **Core Framework**: React 18 + Vite 5
-- **Styling**: Tailwind CSS with custom design system (CSS variables, obsidian/mint color palette)
-- **Animation Engine**: GSAP 3.12 with ScrollTrigger
-- **Smooth Scrolling**: Lenis (synchronized with GSAP ticker)
+- **Color Palette**:
+  - Background cream/sand: `#E9E7CB` (main canvas with subtle paper noise)
+  - Warm beige: `#D9C7A0` (cards & toolbars)
+  - Taupe: `#A08C6E` (accents & gradients)
+  - Olive green: `#8A9A2B` (window titlebars & badges)
+  - Bubblegum pink: `#F06EAF` & Hot magenta: `#E0147E` (CTAs & washi tape)
+  - Deep burgundy: `#5A0B16` & `#7A1020` (floating nav pill & headlines)
+  - Off-white: `#FBF8EF` (polaroids & paper notes)
+  - Ink: `#1E1B18` (high-contrast text passing WCAG AA)
+  - Cyan glow: `#7DF3FF` (subtle glass HUD highlights)
+- **Typography**:
+  - `Silkscreen`: Retro pixel font for window titlebars, tabs, and tags
+  - `Playfair Display`: High-contrast elegant serif for main headlines
+  - `Pinyon Script`: Romantic cursive script for overlapping headline accents
+  - `Caveat`: Handwritten doodle annotations and arrows
+  - `DM Mono`: Clean monospace for technical descriptions and stats
+
+---
+
+## ⚡ Tech Stack
+
+- **Framework**: React 18 + Vite 5
+- **Styling**: Tailwind CSS with custom retro design tokens
+- **Animation**: GSAP 3.12 (ScrollTrigger + Draggable)
+- **Smooth Scroll**: Lenis
 - **Icons**: Lucide React
-- **Typography**: `Syne` (display) + `Plus Jakarta Sans` (body) + `JetBrains Mono` (code & stats)
-- **Hosting & Deployment**: Vercel (static zero-config build)
+- **Deployment**: Vercel CI/CD via GitHub
 
 ---
 
-## ✨ Key Features & Animation Architecture
+## ✨ Scrapbook Components & Features
 
-1. **Cinematic Preloader**: Animated name reveal (`HIMANI PATEL`) with dynamic percentage counter and split curtain reveal.
-2. **Hero Section**:
-   - Split-word reveal animation.
-   - Live Hyderabad time clock (IST, UTC+5:30).
-   - Real-time particle constellation canvas (60fps, mouse-reactive, battery & DPR friendly).
-   - Magnetic CTA buttons ("View Projects", "Resume & Background", "Contact Me").
-3. **About Section**:
-   - Confident narrative and styled portrait.
-   - Animated counter cards for key metrics: **25% Faster Page Loads**, **40% Faster Content Uploads**, **15+ Agents Supported**, and **Agile Team Leadership**.
-4. **Experience Vertical Timeline**:
-   - Custom SVG timeline progress line that draws itself on scroll using ScrollTrigger scrub.
-   - Pulsing milestone nodes.
-   - Highlights roles at **Cognizant (PAT)**, **Cognizant (IoT .NET Full-Stack Intern & Agile Team Leader)**, and **NNIIT (Full-Stack Intern)**.
+1. **Retro Boot Preloader**: Retro dialog (`Himani_OS_v2.0.exe`) with a segmented progress bar and floating bouncy stickers.
+2. **Draggable Windows (`RetroWindow.jsx`)**:
+   - Olive-to-tan gradient titlebars with pixel titles (`about_himani.exe`, `projects_showcase.exe - Paint`, etc.).
+   - Playful close button `✕` that does a cartoon shake instead of closing.
+   - Desktop drag-and-drop powered by **GSAP Draggable** (automatically disabled on mobile).
+3. **Hero Collage**:
+   - Grand serif headline *Himani Patel* with overlapping script *Software Engineer*.
+   - Profile photo framed as a Polaroid with washi tape and verified stamp.
+   - Hand-drawn SVG doodle arrows and handwritten notes (`"hi, that's me! ✨"`, `"full-stack & IoT"`).
+   - Floating stickers (🌸, 💖, ✨, ⭐) with mouse parallax.
+4. **Social Dashboard Bento Grid (About)**:
+   - Profile header card with key metric counters.
+   - Stat cards: **25% faster page loads**, **40% faster content uploads**, **15+ agents supported**, **Agile team leadership**.
 5. **Projects Showcase**:
-   - **Featured Projects at top**:
-     - **Pet-Boarding & Hostel** (ASP.NET Core, SQL Server, React.js, JWT)
-     - **Stitch Noor** (React.js, Node.js, Express.js, MongoDB, JWT, Multer)
-   - **Preserved Existing Projects**:
-     - **Blossom Planner** (https://blossom-planner.vercel.app/)
-     - **Gift Shop React** (https://gift-shoppp.onrender.com/)
-     - **Modern Clothing UX 1** (Figma Prototype)
-     - **Clothing Website Ui/Ux 2** (Figma Prototype)
-   - Category filtering (All, Full Stack, Frontend, UI/UX).
-   - Direct GitHub and Live Demo buttons on every card.
-6. **Skills & Arsenal**:
-   - Continuous 60fps infinite marquee ticker.
-   - Interactive category tabs (Languages, Backend, Frontend, Databases, IoT, Cloud & DevOps, Practices) with proficiency gauges.
-7. **Education & Certifications**:
-   - **B.Tech CSE**, Lovely Professional University (2022-2026), CGPA 7.68.
-   - Verified credential showcase for Coursera, Ebox, and NPTEL certifications with interactive preview lightbox modal.
-8. **Contact & Animated Footer**:
-   - One-click copy email button with instant feedback.
-   - Interactive direct mailto message composer.
-   - Direct phone, LinkedIn, and GitHub links.
-   - Smooth "Back to Top" scroll action.
-9. **Accessibility & Performance**:
-   - Full support for `prefers-reduced-motion` (gracefully disables smooth scroll and heavy motions).
-   - Custom desktop cursor follower (auto-disabled on touch/mobile devices).
-   - Complete SEO meta tags, Open Graph card, Twitter card, and custom SVG favicon.
+   - 8-color theme swatch palette divider.
+   - Polaroid cards with washi tape, hand-drawn demo arrows, and hot pink pill buttons.
+   - Frosted glass HUD variant with thin cyan corner brackets and "now playing" header.
+   - Preserves all projects: **Pet-Boarding**, **Stitch Noor**, **Blossom Planner**, **Gift Shop React**, and **Clothing UX 1 & 2** (Figma).
+6. **Skills & Toolbox**:
+   - Infinite marquee ticker of technologies with retro pixel stars.
+   - Categorized MS Paint toolbar tabs with segmented volume equalizer bars.
+7. **Experience File Explorer**:
+   - File explorer log layout with an animated SVG timeline path drawing on scroll.
+8. **Contact & Footer**:
+   - Retro Outlook Express '98 email composer (`compose_message.exe`) with direct mailto transmitter and copyable email.
+   - Monospace scrapbook footer: `/// @himanipatel — software engineer scrapbook ver 2.0`.
 
 ---
 
-## 🗂 Project Structure
+## 🚀 How to Run & Deploy
 
+```powershell
+# Run locally
+npm run dev
+
+# Build for production
+npm run build
+
+# Push changes (Vercel will auto-deploy)
+git add .
+git commit -m "Redesign portfolio to Y2K retro-desktop scrapbook theme"
+git push origin main
 ```
-├── public/                     # Static assets (images, certificates, favicon)
-│   ├── BlossomPlanner.png
-│   ├── finalestphot.JPG
-│   ├── PetBoardingAndHostel.png
-│   ├── ReactGiftShop.png
-│   ├── Stitch_Noor.png
-│   ├── Uiux.png
-│   ├── uiux2.png
-│   ├── favicon.svg
-│   └── images/                 # Certificate proofs
-│       ├── cloudcomputingcertificate.png
-│       ├── DataStructurescertificate.png
-│       └── Frontendwebdevelopmentcertificate.png
-├── src/
-│   ├── components/
-│   │   ├── About.jsx           # Bio, portrait, key metrics
-│   │   ├── Contact.jsx         # Contact form, direct links, clipboard copy
-│   │   ├── CustomCursor.jsx    # Fluid desktop cursor with magnetic states
-│   │   ├── Education.jsx       # LPU degree and certificate lightbox
-│   │   ├── Experience.jsx      # Animated vertical drawing timeline
-│   │   ├── Footer.jsx          # Animated footer, links & back to top
-│   │   ├── Hero.jsx            # Split-word headline, live clock & CTAs
-│   │   ├── MagneticButton.jsx  # Elastic physics-based magnetic CTA interaction
-│   │   ├── Navbar.jsx          # Glassmorphic floating navigation dock
-│   │   ├── ParticlesBackground.jsx # 60fps canvas constellation
-│   │   ├── Preloader.jsx       # Name reveal and curtain transition
-│   │   ├── Projects.jsx        # Project grid with category filtering
-│   │   └── Skills.jsx          # Infinite marquee & categorized skills
-│   ├── data/
-│   │   └── portfolioData.js    # Single central data file for all content
-│   ├── App.jsx                 # Main layout & Lenis/GSAP integration
-│   ├── index.css               # Design tokens, fonts, and animation CSS
-│   └── main.jsx                # React root mount
-├── legacy/                     # Archived previous portfolio code (backup)
-├── index.html                  # HTML entry point with SEO & Google Fonts
-├── tailwind.config.js          # Custom theme, tokens, and animations
-├── vite.config.js              # Vite build configuration
-├── vercel.json                 # Vercel deployment configuration
-└── package.json
-```
-
----
-
-## ⚙️ Easily Edit Content (Single Data File)
-
-All text, projects, links, skills, and experience items are centrally configured in:
-`src/data/portfolioData.js`
-
-To update a project, change a link, or add a skill, simply edit that single file—the entire UI updates automatically.
-
----
-
-## 🚀 Running Locally
-
-1. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-2. **Start development server:**
-   ```bash
-   npm run dev
-   ```
-   Open `http://localhost:3000` in your browser.
-
-3. **Build for production:**
-   ```bash
-   npm run build
-   ```
-   Generates optimized static assets in the `dist/` directory.
-
-4. **Preview production build:**
-   ```bash
-   npm run preview
-   ```
-
----
-
-## 🌐 Deploying to Vercel
-
-### Option 1: Automatic GitHub Integration (Recommended)
-1. Push this repository to GitHub:
-   ```bash
-   git add .
-   git commit -m "Build modern award-style developer portfolio"
-   git push origin main
-   ```
-2. Log in to [Vercel](https://vercel.com).
-3. Click **"Add New..."** &rarr; **"Project"**.
-4. Select the repository and click **Deploy**.
-   Vercel auto-detects Vite and deploys your site in under 60 seconds.
-
-### Option 2: Deploy with Vercel CLI
-```bash
-npx vercel
-```
-Follow the CLI prompts to deploy directly.

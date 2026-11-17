@@ -2,120 +2,126 @@ import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 
 export default function CustomCursor() {
-  const dotRef = useRef(null);
-  const ringRef = useRef(null);
-  const [cursorText, setCursorText] = useState('');
-  const [isHovered, setIsHovered] = useState(false);
-  const [isPointer, setIsPointer] = useState(false);
+  const cursorRef = useRef(null);
+  const [cursorType, setCursorType] = useState('arrow'); // 'arrow' | 'hand' | 'pencil'
   const [isVisible, setIsVisible] = useState(false);
+  const sparklesContainerRef = useRef(null);
 
   useEffect(() => {
-    // Only enable on desktop devices with fine pointer (no touch)
-    const hasCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+    const isMobile = window.matchMedia('(pointer: coarse)').matches;
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (hasCoarsePointer || prefersReducedMotion) return;
+    if (isMobile || prefersReducedMotion) return;
 
-    const dot = dotRef.current;
-    const ring = ringRef.current;
-    if (!dot || !ring) return;
+    const cursor = cursorRef.current;
+    if (!cursor) return;
 
-    // Center elements on cursor coordinates
-    gsap.set([dot, ring], { xPercent: -50, yPercent: -50 });
+    const xTo = gsap.quickTo(cursor, 'x', { duration: 0.08, ease: 'power3' });
+    const yTo = gsap.quickTo(cursor, 'y', { duration: 0.08, ease: 'power3' });
 
-    // Use GSAP quickTo for silky 60fps tracking
-    const xToDot = gsap.quickTo(dot, 'x', { duration: 0.08, ease: 'power3' });
-    const yToDot = gsap.quickTo(dot, 'y', { duration: 0.08, ease: 'power3' });
-    const xToRing = gsap.quickTo(ring, 'x', { duration: 0.22, ease: 'power2.out' });
-    const yToRing = gsap.quickTo(ring, 'y', { duration: 0.22, ease: 'power2.out' });
+    let lastSparkleTime = 0;
 
     const handleMouseMove = (e) => {
       if (!isVisible) setIsVisible(true);
-      xToDot(e.clientX);
-      yToDot(e.clientY);
-      xToRing(e.clientX);
-      yToRing(e.clientY);
-    };
+      xTo(e.clientX);
+      yTo(e.clientY);
 
-    const handleMouseLeave = () => {
-      setIsVisible(false);
-    };
-
-    const handleMouseEnter = () => {
-      setIsVisible(true);
-    };
-
-    // Attach listeners for interactive elements
-    const handleMouseOver = (e) => {
-      const target = e.target;
-      if (!target) return;
-
-      const projectCard = target.closest('[data-cursor-project]');
-      const interactiveEl = target.closest(
-        'a, button, [role="button"], input, textarea, select, .cursor-interactive'
-      );
-
-      if (projectCard) {
-        setIsHovered(true);
-        setIsPointer(true);
-        setCursorText('VIEW');
-      } else if (interactiveEl) {
-        setIsPointer(true);
-        setIsHovered(false);
-        setCursorText('');
-      } else {
-        setIsPointer(false);
-        setIsHovered(false);
-        setCursorText('');
+      // Create sparkle trail intermittently
+      const now = Date.now();
+      if (now - lastSparkleTime > 120 && sparklesContainerRef.current) {
+        lastSparkleTime = now;
+        spawnSparkle(e.clientX, e.clientY);
       }
     };
 
+    const spawnSparkle = (x, y) => {
+      const sparkle = document.createElement('div');
+      const icons = ['✨', '🌸', '⭐', '💖'];
+      sparkle.innerText = icons[Math.floor(Math.random() * icons.length)];
+      sparkle.className = 'sparkle-particle pointer-events-none fixed select-none text-xs z-[99998]';
+      sparkle.style.left = `${x + (Math.random() * 16 - 8)}px`;
+      sparkle.style.top = `${y + (Math.random() * 16 - 8)}px`;
+      sparklesContainerRef.current.appendChild(sparkle);
+
+      gsap.to(sparkle, {
+        y: -25,
+        opacity: 0,
+        scale: 0.5,
+        duration: 0.7,
+        ease: 'power1.out',
+        onComplete: () => sparkle.remove(),
+      });
+    };
+
+    const handleMouseOver = (e) => {
+      const target = e.target;
+      if (target.closest('a, button, [role="button"], input, textarea')) {
+        setCursorType('hand');
+      } else if (target.closest('.cursor-pencil, [data-cursor="pencil"]')) {
+        setCursorType('pencil');
+      } else {
+        setCursorType('arrow');
+      }
+    };
+
+    const handleMouseLeave = () => setIsVisible(false);
+    const handleMouseEnter = () => setIsVisible(true);
+
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    document.addEventListener('mouseover', handleMouseOver);
     document.addEventListener('mouseleave', handleMouseLeave);
     document.addEventListener('mouseenter', handleMouseEnter);
-    document.addEventListener('mouseover', handleMouseOver);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseover', handleMouseOver);
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mouseenter', handleMouseEnter);
-      document.removeEventListener('mouseover', handleMouseOver);
     };
   }, [isVisible]);
 
-  // Don't render for touch devices
   if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) {
     return null;
   }
 
   return (
     <>
-      {/* Inner Dot */}
+      <div ref={sparklesContainerRef} />
       <div
-        ref={dotRef}
-        className={`cursor-dot fixed pointer-events-none z-[9999] rounded-full transition-opacity duration-200 ${
+        ref={cursorRef}
+        className={`cursor-pixel transition-opacity duration-150 ${
           isVisible ? 'opacity-100' : 'opacity-0'
-        } ${isHovered ? 'w-0 h-0 opacity-0' : isPointer ? 'w-2 h-2 bg-[#00f5a0]' : 'w-2 h-2 bg-[#00f5a0]'}`}
-        style={{ left: 0, top: 0 }}
-      />
-
-      {/* Outer Ring / Follower */}
-      <div
-        ref={ringRef}
-        className={`cursor-ring fixed pointer-events-none z-[9998] flex items-center justify-center rounded-full transition-all duration-300 ${
-          isVisible ? 'opacity-100' : 'opacity-0'
-        } ${
-          isHovered
-            ? 'w-20 h-20 bg-[#00f5a0] text-[#07080b] border-transparent font-display font-bold text-xs tracking-wider shadow-lg shadow-[#00f5a0]/40'
-            : isPointer
-            ? 'w-12 h-12 border-[#00f5a0] bg-[#00f5a0]/10 scale-110'
-            : 'w-8 h-8 border-[#00f5a0]/40 bg-transparent'
         }`}
         style={{ left: 0, top: 0 }}
       >
-        {cursorText && (
-          <span className="font-mono text-[10px] tracking-widest font-extrabold uppercase">
-            {cursorText}
-          </span>
+        {cursorType === 'hand' ? (
+          // Cute Retro Pixel Pointer Hand
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="drop-shadow-[2px_2px_0px_#1E1B18]">
+            <path
+              d="M7 2V12M7 12V18C7 19.1 7.9 20 9 20H15C16.1 20 17 19.1 17 18V9.5C17 8.7 16.3 8 15.5 8C14.7 8 14 8.7 14 9.5V11M14 11V7.5C14 6.7 13.3 6 12.5 6C11.7 6 11 6.7 11 7.5V11M11 11V3.5C11 2.7 10.3 2 9.5 2C8.7 2 8 2.7 8 3.5V11M7 12L4 9"
+              stroke="#1E1B18"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              fill="#F06EAF"
+            />
+          </svg>
+        ) : cursorType === 'pencil' ? (
+          // Retro Pixel Pencil
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" className="drop-shadow-[2px_2px_0px_#1E1B18]">
+            <path d="M17 3L21 7L7 21H3V17L17 3Z" fill="#8A9A2B" stroke="#1E1B18" strokeWidth="2" />
+            <path d="M14 6L18 10" stroke="#1E1B18" strokeWidth="2" />
+          </svg>
+        ) : (
+          // Retro Pixel OS Arrow
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" className="drop-shadow-[2px_2px_0px_#1E1B18]">
+            <path
+              d="M3 2L3 20L8 16L12 22L15 20L11 14L18 14L3 2Z"
+              fill="#FBF8EF"
+              stroke="#1E1B18"
+              strokeWidth="2"
+              strokeLinejoin="round"
+            />
+          </svg>
         )}
       </div>
     </>

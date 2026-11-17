@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Award, Zap, Users, Gauge, ArrowUpRight, Terminal, CheckCircle2 } from 'lucide-react';
+import { Gauge, Zap, Users, Award, Heart, CheckCircle2, Sparkles, Star } from 'lucide-react';
+import RetroWindow from './RetroWindow';
 import { personalInfo, keyStats } from '../data/portfolioData';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -14,51 +15,14 @@ export default function About() {
     if (prefersReducedMotion) return;
 
     const ctx = gsap.context(() => {
-      // Heading reveal
-      gsap.from('.about-heading', {
+      gsap.from('.about-bento-card', {
         scrollTrigger: {
-          trigger: '.about-heading',
-          start: 'top 85%',
-        },
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-      });
-
-      // Bio text reveal
-      gsap.from('.about-bio', {
-        scrollTrigger: {
-          trigger: '.about-bio',
-          start: 'top 85%',
-        },
-        y: 30,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-      });
-
-      // Photo card reveal
-      gsap.from('.about-photo-wrapper', {
-        scrollTrigger: {
-          trigger: '.about-photo-wrapper',
+          trigger: '.about-bento-grid',
           start: 'top 80%',
         },
-        scale: 0.95,
-        opacity: 0,
-        duration: 0.9,
-        ease: 'power3.out',
-      });
-
-      // Key stats stagger reveal
-      gsap.from('.stat-card', {
-        scrollTrigger: {
-          trigger: '.stats-grid',
-          start: 'top 85%',
-        },
         y: 40,
         opacity: 0,
-        stagger: 0.15,
+        stagger: 0.12,
         duration: 0.8,
         ease: 'power3.out',
       });
@@ -70,15 +34,15 @@ export default function About() {
   const getStatIcon = (id) => {
     switch (id) {
       case 'stat-1':
-        return <Gauge className="w-5 h-5 text-[#00f5a0]" />;
+        return <Gauge className="w-5 h-5 text-[#8A9A2B]" />;
       case 'stat-2':
-        return <Zap className="w-5 h-5 text-[#00d8f6]" />;
+        return <Zap className="w-5 h-5 text-[#E0147E]" />;
       case 'stat-3':
-        return <Users className="w-5 h-5 text-[#00f5a0]" />;
+        return <Users className="w-5 h-5 text-[#8A9A2B]" />;
       case 'stat-4':
-        return <Award className="w-5 h-5 text-[#00d8f6]" />;
+        return <Award className="w-5 h-5 text-[#E0147E]" />;
       default:
-        return <CheckCircle2 className="w-5 h-5 text-[#00f5a0]" />;
+        return <CheckCircle2 className="w-5 h-5 text-[#8A9A2B]" />;
     }
   };
 
@@ -86,120 +50,156 @@ export default function About() {
     <section
       id="about"
       ref={sectionRef}
-      className="relative py-24 sm:py-32 px-4 sm:px-8 max-w-7xl mx-auto z-10"
+      className="relative py-16 sm:py-24 px-4 sm:px-8 max-w-7xl mx-auto z-10"
     >
-      {/* Section Header */}
-      <div className="flex flex-col items-start mb-16">
-        <div className="inline-flex items-center gap-2 font-mono text-xs text-[#00f5a0] tracking-widest uppercase mb-3">
-          <span className="w-2 h-2 rounded-full bg-[#00f5a0]" />
-          <span>01 / ABOUT ME</span>
-        </div>
-        <h2 className="about-heading font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl text-white tracking-tight">
-          Engineered for Performance. <br />
-          <span className="text-slate-400 font-semibold">Driven by Real-World Impact.</span>
-        </h2>
+      {/* Decorative Scrapbook Sticky Note */}
+      <div className="flex items-center gap-3 mb-6">
+        <span className="font-pixel text-xs text-[#E0147E] bg-[#D9C7A0] px-3 py-1 rounded-full border-2 border-[#1E1B18] shadow-retro-sm">
+          // SECTION 01
+        </span>
+        <span className="font-hand text-2xl text-[#5A0B16] font-bold">
+          get to know me a little better &hearts;
+        </span>
       </div>
 
-      {/* Main Grid: Bio + Portrait */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center mb-20">
-        {/* Left Column: Portrait & Highlights */}
-        <div className="lg:col-span-5 flex flex-col items-center">
-          <div className="about-photo-wrapper relative w-full max-w-sm group">
-            {/* Ambient neon backplate */}
-            <div className="absolute -inset-1.5 bg-gradient-to-tr from-[#00f5a0]/40 via-[#00d8f6]/30 to-purple-600/20 rounded-3xl blur-xl opacity-50 group-hover:opacity-80 transition duration-700" />
+      {/* Main Retro Window Wrapping the Section */}
+      <RetroWindow
+        title="about_himani.exe - Notepad &amp; Stats"
+        icon="🌸"
+        showToolbar={true}
+        initialRotation={-0.5}
+      >
+        <div className="about-bento-grid grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6">
+          {/* Bento Card 1: Social Profile Dashboard Header */}
+          <div className="about-bento-card md:col-span-12 p-6 sm:p-7 rounded-2xl bg-[#D9C7A0]/50 border-2 border-[#1E1B18] shadow-retro-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 relative overflow-hidden">
+            <div className="washi-tape washi-tape-gingham -top-2 right-12 w-28 rotate-2" />
 
-            {/* Inner Frame */}
-            <div className="relative rounded-2xl overflow-hidden bg-[#0d0f14] border border-white/10 shadow-2xl">
-              <img
-                src={personalInfo.avatar}
-                alt={personalInfo.name}
-                loading="lazy"
-                className="w-full h-[400px] object-cover object-top filter grayscale contrast-105 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-              />
-
-              {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#07080b] via-transparent to-transparent opacity-80" />
-
-              {/* Overlay card footer */}
-              <div className="absolute bottom-4 left-4 right-4 p-3.5 rounded-xl bg-[#0e1118]/85 backdrop-blur-md border border-white/10 flex items-center justify-between">
-                <div>
-                  <p className="font-display font-bold text-sm text-white">{personalInfo.name}</p>
-                  <p className="font-mono text-[11px] text-[#00f5a0]">Software Engineer</p>
+            <div className="flex items-center gap-4">
+              <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-[#1E1B18] overflow-hidden bg-[#FBF8EF] shadow-retro-sm shrink-0">
+                <img
+                  src={personalInfo.avatar}
+                  alt={personalInfo.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h3 className="font-serif font-black text-2xl sm:text-3xl text-[#5A0B16]">
+                    {personalInfo.name}
+                  </h3>
+                  <span className="px-2 py-0.5 rounded bg-[#8A9A2B] text-white font-pixel text-[9px] border border-[#1E1B18]">
+                    PRO
+                  </span>
                 </div>
-                <div className="px-2 py-1 rounded bg-[#00f5a0]/15 text-[#00f5a0] font-mono text-[10px] font-semibold border border-[#00f5a0]/30">
-                  HYDERABAD
-                </div>
+                <p className="font-mono text-xs sm:text-sm text-[#1E1B18] font-semibold">
+                  Software Engineer &bull; Hyderabad, India
+                </p>
+                <p className="font-hand text-base text-[#E0147E] font-bold mt-0.5">
+                  &ldquo;Building software that solves real problems with clean code&rdquo;
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 font-mono text-xs text-[#1E1B18]">
+              <div className="px-3 py-2 rounded-xl bg-[#FBF8EF] border border-[#1E1B18] shadow-retro-sm text-center">
+                <span className="font-pixel text-xs text-[#E0147E] block font-bold">4+</span>
+                <span className="text-[10px] uppercase text-[#1E1B18]/70">Key Metrics</span>
+              </div>
+              <div className="px-3 py-2 rounded-xl bg-[#FBF8EF] border border-[#1E1B18] shadow-retro-sm text-center">
+                <span className="font-pixel text-xs text-[#8A9A2B] block font-bold">100%</span>
+                <span className="text-[10px] uppercase text-[#1E1B18]/70">Full Stack</span>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Right Column: Bio Narrative */}
-        <div className="about-bio lg:col-span-7 flex flex-col gap-6">
-          <div className="space-y-5 text-base sm:text-lg text-slate-300/90 leading-relaxed font-normal">
-            {personalInfo.bio.map((paragraph, index) => (
-              <p key={index} className="leading-relaxed">
-                {paragraph}
-              </p>
-            ))}
-          </div>
-
-          {/* Quick Pillars */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-white/5">
-            <div className="p-4 rounded-xl bg-surface-1/60 border border-white/5">
-              <span className="font-mono text-xs text-[#00f5a0] font-semibold block mb-1">
-                STACK SPECIALIZATION
-              </span>
-              <p className="text-sm text-slate-300">
-                .NET Core, Node.js, React.js, SQL Server, MongoDB, EF Core, GSAP
-              </p>
+          {/* Bento Card 2: Narrative Bio (Polaroid Paper) */}
+          <div className="about-bento-card md:col-span-7 p-6 sm:p-7 rounded-2xl bg-[#FBF8EF] border-2 border-[#1E1B18] shadow-retro-sm relative">
+            <span className="font-pixel text-[10px] text-[#8A9A2B] font-bold uppercase tracking-wider block mb-3">
+              [SYSTEM_BIO.TXT]
+            </span>
+            <h4 className="font-serif font-bold text-xl sm:text-2xl text-[#5A0B16] mb-4">
+              Driven by curiosity, engineered for real impact.
+            </h4>
+            <div className="space-y-4 font-mono text-xs sm:text-sm text-[#1E1B18] leading-relaxed">
+              {personalInfo.bio.map((paragraph, index) => (
+                <p key={index} className="leading-relaxed">
+                  {paragraph}
+                </p>
+              ))}
             </div>
-            <div className="p-4 rounded-xl bg-surface-1/60 border border-white/5">
-              <span className="font-mono text-xs text-[#00d8f6] font-semibold block mb-1">
-                DOMAIN FOCUS
-              </span>
-              <p className="text-sm text-slate-300">
-                IoT Monitoring Platforms, E-Commerce Architectures, Real-Time Dashboards
-              </p>
+
+            <div className="mt-5 pt-4 border-t-2 border-dashed border-[#1E1B18]/20 flex items-center justify-between font-hand text-lg text-[#E0147E] font-bold">
+              <span>let's build together ✨</span>
+              <span className="text-sm font-mono text-[#8A9A2B]">-- Himani Patel</span>
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* Key Stats Grid */}
-      <div className="stats-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {keyStats.map((stat) => (
-          <div
-            key={stat.id}
-            className="stat-card group relative p-6 sm:p-7 rounded-2xl bg-surface-1/80 border border-white/5 hover:border-[#00f5a0]/30 transition-all duration-300 hover:-translate-y-1 shadow-lg shadow-black/40"
-          >
-            {/* Top Bar with Icon */}
-            <div className="flex items-center justify-between mb-4">
-              <div className="w-10 h-10 rounded-xl bg-[#141722] border border-white/10 flex items-center justify-center group-hover:border-[#00f5a0]/40 transition-colors">
-                {getStatIcon(stat.id)}
+          {/* Bento Card 3: Stack Specialization Card */}
+          <div className="about-bento-card md:col-span-5 p-6 rounded-2xl bg-[#D9C7A0]/60 border-2 border-[#1E1B18] shadow-retro-sm flex flex-col justify-between">
+            <div>
+              <span className="font-pixel text-[10px] text-[#5A0B16] font-bold uppercase tracking-wider block mb-2">
+                [CORE_SPECIALIZATIONS]
+              </span>
+              <h5 className="font-serif font-bold text-lg text-[#1E1B18] mb-3">
+                Full-Stack &amp; IoT Focus
+              </h5>
+              <p className="font-mono text-xs text-[#1E1B18]/80 leading-relaxed mb-4">
+                Specialized in high-throughput enterprise backends (.NET Core, Node.js, SQL Server, MongoDB) combined with responsive, animated frontends (React.js &amp; GSAP).
+              </p>
+
+              <div className="space-y-2 font-mono text-xs">
+                <div className="p-2.5 rounded-lg bg-[#FBF8EF] border border-[#1E1B18] flex items-center justify-between">
+                  <span>Backend Engineering</span>
+                  <span className="text-[#8A9A2B] font-bold">.NET &amp; Node</span>
+                </div>
+                <div className="p-2.5 rounded-lg bg-[#FBF8EF] border border-[#1E1B18] flex items-center justify-between">
+                  <span>Frontend Dynamics</span>
+                  <span className="text-[#E0147E] font-bold">React &amp; GSAP</span>
+                </div>
+                <div className="p-2.5 rounded-lg bg-[#FBF8EF] border border-[#1E1B18] flex items-center justify-between">
+                  <span>IoT Systems</span>
+                  <span className="text-[#5A0B16] font-bold">Sensor Data</span>
+                </div>
               </div>
-              <span className="font-mono text-[11px] uppercase tracking-wider text-slate-400 group-hover:text-[#00f5a0] transition-colors">
-                {stat.suffix}
-              </span>
             </div>
 
-            {/* Big Stat Value */}
-            <div className="font-display font-black text-4xl sm:text-5xl text-white tracking-tight mb-2 group-hover:text-[#00f5a0] transition-colors">
-              {stat.value}
+            <div className="mt-4 pt-3 border-t border-[#1E1B18]/20 text-[11px] font-mono text-[#8A9A2B] font-bold">
+              &bull; Agile Certified Leadership Mindset
             </div>
-
-            {/* Stat Title */}
-            <h3 className="font-display font-bold text-sm sm:text-base text-slate-200 mb-1.5">
-              {stat.label}
-            </h3>
-
-            {/* Stat Description */}
-            <p className="text-xs text-slate-400 leading-normal">
-              {stat.desc}
-            </p>
           </div>
-        ))}
-      </div>
+
+          {/* Bento Cards 4-7: 4 Key Stats in Scrapbook Style */}
+          {keyStats.map((stat, idx) => (
+            <div
+              key={stat.id}
+              className={`about-bento-card md:col-span-3 p-5 rounded-2xl border-2 border-[#1E1B18] shadow-retro-sm transition-transform duration-300 hover:-translate-y-1 ${
+                idx % 2 === 0 ? 'bg-[#FBF8EF]' : 'bg-[#D9C7A0]/80'
+              }`}
+            >
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-9 h-9 rounded-xl bg-[#E9E7CB] border border-[#1E1B18] flex items-center justify-center">
+                  {getStatIcon(stat.id)}
+                </div>
+                <span className="font-pixel text-[9px] uppercase px-2 py-0.5 rounded bg-[#E0147E] text-white border border-[#1E1B18]">
+                  {stat.suffix}
+                </span>
+              </div>
+
+              <div className="font-serif font-black text-3xl sm:text-4xl text-[#5A0B16] mb-1">
+                {stat.value}
+              </div>
+
+              <h6 className="font-pixel text-[11px] text-[#1E1B18] uppercase tracking-tight mb-1 font-bold">
+                {stat.label}
+              </h6>
+
+              <p className="font-mono text-[11px] text-[#1E1B18]/70 leading-normal">
+                {stat.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </RetroWindow>
     </section>
   );
 }
