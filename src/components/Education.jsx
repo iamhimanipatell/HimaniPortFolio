@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { GraduationCap, Award, Calendar, MapPin, X, ExternalLink, Sparkles } from 'lucide-react';
+import { GraduationCap, Award, Calendar, MapPin, X, ExternalLink } from 'lucide-react';
 import { educationData, certificatesData } from '../data/portfolioData';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -48,7 +48,6 @@ export default function Education() {
       {/* Section Header */}
       <div className="flex flex-col items-center text-center mb-12 sm:mb-16">
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E3DAA0] text-[#3E1F1B] border border-[#B08A4A]/40 font-mono text-xs font-semibold mb-3 shadow-sm">
-          <Sparkles className="w-3.5 h-3.5 text-[#B08A4A]" />
           <span>EDITORIAL MEDIA KIT &bull; ACADEMIC RIGOR</span>
         </div>
 
@@ -110,19 +109,19 @@ export default function Education() {
 
           <div className="pt-4 mt-6 border-t border-[#3E1F1B]/15 flex items-center justify-between font-hand text-base text-[#3E1F1B] font-bold">
             <span>Computer Science &bull; Engineering Rigor</span>
-            <span className="text-[#B08A4A]">✦</span>
+            <span className="text-[#B08A4A]">&bull;</span>
           </div>
         </div>
 
-        {/* Right: Verified Credentials Grid */}
+        {/* Right: Certifications Grid */}
         <div className="education-editorial-card lg:col-span-7 flex flex-col justify-between w-full">
           <div className="flex items-center justify-between mb-4">
             <h3 className="font-serif font-bold text-xl text-[#3E1F1B] flex items-center gap-2">
               <Award className="w-5 h-5 text-[#B08A4A]" />
-              <span>Verified Certifications</span>
+              <span>Certifications &amp; Credentials</span>
             </h3>
             <span className="font-hand text-sm sm:text-base text-[#B08A4A] font-bold">
-              click to inspect proof 🔍
+              click to preview credential 🔍
             </span>
           </div>
 
@@ -158,7 +157,7 @@ export default function Education() {
                 </div>
 
                 <div className="pt-2 mt-3 border-t border-[#3E1F1B]/15 flex items-center justify-between font-mono text-[10px] text-[#B08A4A] font-bold">
-                  <span>VERIFIED</span>
+                  <span>CREDENTIAL</span>
                   <ExternalLink className="w-3 h-3" />
                 </div>
               </div>

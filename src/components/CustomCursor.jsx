@@ -5,7 +5,7 @@ export default function CustomCursor() {
   const cursorRef = useRef(null);
   const [cursorType, setCursorType] = useState('arrow'); // 'arrow' | 'hand' | 'pencil'
   const [isVisible, setIsVisible] = useState(false);
-  const sparklesContainerRef = useRef(null);
+  const trailContainerRef = useRef(null);
 
   useEffect(() => {
     const isMobile = window.matchMedia('(pointer: coarse)').matches;
@@ -18,37 +18,37 @@ export default function CustomCursor() {
     const xTo = gsap.quickTo(cursor, 'x', { duration: 0.08, ease: 'power3' });
     const yTo = gsap.quickTo(cursor, 'y', { duration: 0.08, ease: 'power3' });
 
-    let lastSparkleTime = 0;
+    let lastTrailTime = 0;
 
     const handleMouseMove = (e) => {
       if (!isVisible) setIsVisible(true);
       xTo(e.clientX);
       yTo(e.clientY);
 
-      // Create sparkle trail intermittently
+      // Create subtle particle trail intermittently
       const now = Date.now();
-      if (now - lastSparkleTime > 120 && sparklesContainerRef.current) {
-        lastSparkleTime = now;
-        spawnSparkle(e.clientX, e.clientY);
+      if (now - lastTrailTime > 120 && trailContainerRef.current) {
+        lastTrailTime = now;
+        spawnParticle(e.clientX, e.clientY);
       }
     };
 
-    const spawnSparkle = (x, y) => {
-      const sparkle = document.createElement('div');
-      const icons = ['✨', '🌸', '⭐', '💖'];
-      sparkle.innerText = icons[Math.floor(Math.random() * icons.length)];
-      sparkle.className = 'sparkle-particle pointer-events-none fixed select-none text-xs z-[99998]';
-      sparkle.style.left = `${x + (Math.random() * 16 - 8)}px`;
-      sparkle.style.top = `${y + (Math.random() * 16 - 8)}px`;
-      sparklesContainerRef.current.appendChild(sparkle);
+    const spawnParticle = (x, y) => {
+      const particle = document.createElement('div');
+      const icons = ['🌸', '💖', '☕', '🌱'];
+      particle.innerText = icons[Math.floor(Math.random() * icons.length)];
+      particle.className = 'trail-particle pointer-events-none fixed select-none text-xs z-[99998]';
+      particle.style.left = `${x + (Math.random() * 16 - 8)}px`;
+      particle.style.top = `${y + (Math.random() * 16 - 8)}px`;
+      trailContainerRef.current.appendChild(particle);
 
-      gsap.to(sparkle, {
+      gsap.to(particle, {
         y: -25,
         opacity: 0,
         scale: 0.5,
         duration: 0.7,
         ease: 'power1.out',
-        onComplete: () => sparkle.remove(),
+        onComplete: () => particle.remove(),
       });
     };
 
@@ -85,7 +85,7 @@ export default function CustomCursor() {
 
   return (
     <>
-      <div ref={sparklesContainerRef} />
+      <div ref={trailContainerRef} />
       <div
         ref={cursorRef}
         className={`cursor-pixel transition-opacity duration-150 ${

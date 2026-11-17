@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Layers, Server, Activity, Radio, ArrowUpRight, Sparkles } from 'lucide-react';
+import { Layers, Server, Activity, Radio, ArrowUpRight } from 'lucide-react';
 import { servicesData } from '../data/portfolioData';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -41,7 +41,7 @@ export default function Services() {
       case 'service-4':
         return <Radio className="w-5 h-5 text-[#B08A4A]" />;
       default:
-        return <Sparkles className="w-5 h-5 text-[#B08A4A]" />;
+        return <Layers className="w-5 h-5 text-[#B08A4A]" />;
     }
   };
 
@@ -54,7 +54,6 @@ export default function Services() {
       {/* Section Header */}
       <div className="flex flex-col items-center text-center mb-12 sm:mb-16">
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E3DAA0] text-[#3E1F1B] border border-[#B08A4A]/40 font-mono text-xs font-semibold mb-3 shadow-sm">
-          <Sparkles className="w-3.5 h-3.5 text-[#B08A4A]" />
           <span>EDITORIAL MEDIA KIT &bull; ENGINEERING CAPABILITIES</span>
         </div>
 
@@ -113,7 +112,7 @@ export default function Services() {
               </span>
               {service.deliverables.map((item, dIdx) => (
                 <div key={dIdx} className="flex items-center gap-2 font-mono text-xs text-[#2B1512]/90">
-                  <span className="text-[#B08A4A] text-xs">✦</span>
+                  <span className="text-[#B08A4A] text-xs font-bold">&bull;</span>
                   <span>{item}</span>
                 </div>
               ))}

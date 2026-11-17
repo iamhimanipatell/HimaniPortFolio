@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Star, Sparkles, CheckCircle2 } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 import { whyWorkWithMe } from '../data/portfolioData';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -47,7 +47,6 @@ export default function WhyWorkWithMe() {
       {/* Section Header */}
       <div className="flex flex-col items-center text-center mb-12 sm:mb-16">
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E3DAA0] text-[#3E1F1B] border border-[#B08A4A]/40 font-mono text-xs font-semibold mb-3 shadow-sm">
-          <Sparkles className="w-3.5 h-3.5 text-[#B08A4A]" />
           <span>EDITORIAL MEDIA KIT &bull; VALUE PILLARS</span>
         </div>
 
@@ -61,7 +60,7 @@ export default function WhyWorkWithMe() {
         </div>
 
         <p className="font-mono text-xs sm:text-sm text-[#2B1512]/75 max-w-lg mt-3">
-          Verified accomplishments, full-stack competencies, and proven Agile ownership.
+          Demonstrated accomplishments, full-stack competencies, and proven Agile ownership.
         </p>
       </div>
 
@@ -100,10 +99,10 @@ export default function WhyWorkWithMe() {
               </p>
             </div>
 
-            {/* Handwritten stamp on bottom */}
-            <div className="pt-4 mt-4 border-t border-[#3E1F1B]/15 flex items-center justify-between font-hand text-base text-[#3E1F1B]/70 font-bold">
-              <span>verified proof</span>
-              <span className="text-[#B08A4A]">✦</span>
+            {/* Script Category Tag on bottom */}
+            <div className="pt-3 mt-3 border-t border-[#3E1F1B]/15 flex items-center justify-between font-mono text-[11px] text-[#3E1F1B]/70 font-semibold">
+              <span className="uppercase tracking-wider">Engineering Value</span>
+              <span className="text-[#B08A4A]">&bull;</span>
             </div>
           </div>
         ))}

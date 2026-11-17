@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { Draggable } from 'gsap/Draggable';
 import { 
-  Minus, Square, X, Paintbrush, Eraser, Type, Sparkles, 
+  Minus, Square, X, Paintbrush, Eraser, Type,
   Palette, MousePointer, ZoomIn, Scissors, Stamp
 } from 'lucide-react';
 
@@ -145,7 +145,7 @@ export default function RetroWindow({
       {/* Shake Toast notification */}
       {shakeToast && (
         <div className="absolute top-12 right-2 sm:right-4 z-50 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-[#E0147E] text-white font-mono text-[11px] sm:text-xs border-2 border-[#1E1B18] shadow-retro animate-bounce">
-          🌸 Window is locked open for viewing! ✨
+          🌸 Window is locked open for viewing!
         </div>
       )}
 

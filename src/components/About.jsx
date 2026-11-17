@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Sparkles, MapPin, CheckCircle2, GraduationCap, Briefcase } from 'lucide-react';
+import { MapPin, CheckCircle2, GraduationCap, Briefcase } from 'lucide-react';
 import { personalInfo, educationData, keyStats } from '../data/portfolioData';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -60,7 +60,6 @@ export default function About() {
       {/* Section Header */}
       <div className="flex flex-col items-center text-center mb-12 sm:mb-16">
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E3DAA0] text-[#3E1F1B] border border-[#B08A4A]/40 font-mono text-xs font-semibold mb-3 shadow-sm">
-          <Sparkles className="w-3.5 h-3.5 text-[#B08A4A]" />
           <span>EDITORIAL MEDIA KIT &bull; SPEC SHEET</span>
         </div>
 
@@ -78,13 +77,6 @@ export default function About() {
       <div className="about-editorial-grid grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 w-full items-stretch">
         {/* Left: Chocolate Brown Panel with Greeting, Bio, Polaroid & Binder Clip */}
         <div className="about-panel-left lg:col-span-5 rounded-3xl bg-brown-pinstripe text-[#F6F0DC] p-6 sm:p-8 border-2 border-[#3E1F1B] shadow-2xl relative flex flex-col justify-between overflow-hidden">
-          {/* Subtle gold star accent */}
-          <div className="absolute top-4 right-4 text-[#B08A4A]/70 select-none">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" />
-            </svg>
-          </div>
-
           <div>
             <span className="font-script text-3xl sm:text-4xl text-[#F7C8DA] block mb-2">
               Hey there, I'm Himani
@@ -127,7 +119,7 @@ export default function About() {
 
               {/* Floating Handwritten Sticker */}
               <div className="absolute -bottom-3 -right-4 bg-[#F7C8DA] text-[#3E1F1B] px-3 py-1 rounded-full font-hand text-sm font-bold border border-[#3E1F1B] shadow-sm -rotate-6 select-none">
-                building cool stuff ✨
+                building cool stuff
               </div>
             </div>
           </div>

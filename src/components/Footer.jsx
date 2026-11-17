@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowUp, Github, Linkedin, Mail, Heart, Sparkles } from 'lucide-react';
+import { ArrowUp, Github, Linkedin, Mail, Heart } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 
 export default function Footer() {

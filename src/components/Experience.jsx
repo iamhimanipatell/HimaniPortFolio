@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Calendar, MapPin, Sparkles, Star } from 'lucide-react';
+import { Calendar, MapPin } from 'lucide-react';
 import { experienceData } from '../data/portfolioData';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -62,7 +62,6 @@ export default function Experience() {
       {/* Section Header */}
       <div className="flex flex-col items-center text-center mb-12 sm:mb-16">
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E3DAA0] text-[#3E1F1B] border border-[#B08A4A]/40 font-mono text-xs font-semibold mb-3 shadow-sm">
-          <Sparkles className="w-3.5 h-3.5 text-[#B08A4A]" />
           <span>EDITORIAL MEDIA KIT &bull; CHRONOLOGY</span>
         </div>
 
@@ -93,9 +92,9 @@ export default function Experience() {
 
             return (
               <div key={item.id} className="relative w-full">
-                {/* Gold Star Marker on Timeline */}
-                <div className="absolute -left-[31px] sm:-left-[41px] top-4 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#FBF8EF] border-2 border-[#B08A4A] shadow-md flex items-center justify-center z-20 text-[#B08A4A]">
-                  <span className="text-xs">✦</span>
+                {/* Gold Pin Marker on Timeline */}
+                <div className="absolute -left-[31px] sm:-left-[41px] top-4 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#FBF8EF] border-2 border-[#B08A4A] shadow-md flex items-center justify-center z-20">
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#B08A4A]" />
                 </div>
 
                 {/* Stacked Cream Card with Binder Clip / Tape */}
@@ -151,7 +150,7 @@ export default function Experience() {
                       </span>
                       {item.responsibilities.map((resp, rIdx) => (
                         <div key={rIdx} className="flex items-start gap-2 font-mono text-xs text-[#2B1512]/90 leading-relaxed">
-                          <span className="text-[#B08A4A] text-xs mt-0.5">✦</span>
+                          <span className="text-[#B08A4A] text-xs mt-0.5 font-bold">&bull;</span>
                           <span>{resp}</span>
                         </div>
                       ))}

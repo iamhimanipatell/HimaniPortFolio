@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
-  Code2, Server, Layout, Database, Radio, Cloud, Users, Sparkles,
+  Code2, Server, Layout, Database, Radio, Cloud, Users,
   Terminal, ShieldCheck, UploadCloud, Layers, Zap, Sliders, Smartphone,
   Palette, Boxes, Search, Table, Activity, Wifi, Cpu, GitBranch,
   CloudLightning, CloudRain, Gauge, Binary, Figma, CheckCircle2, FileCode, FileCode2
@@ -13,7 +13,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const getSkillIcon = (iconName) => {
   const map = {
-    Code2, Server, Layout, Database, Radio, Cloud, Users, Sparkles,
+    Code2, Server, Layout, Database, Radio, Cloud, Users,
     Terminal, ShieldCheck, UploadCloud, Layers, Zap, Sliders, Smartphone,
     Palette, Boxes, Search, Table, Activity, Wifi, Cpu, GitBranch,
     CloudLightning, CloudRain, Gauge, Binary, Figma, CheckCircle2, FileCode, FileCode2
@@ -57,7 +57,6 @@ export default function Skills() {
       {/* Section Header */}
       <div className="flex flex-col items-center text-center mb-10 sm:mb-14">
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E3DAA0] text-[#3E1F1B] border border-[#B08A4A]/40 font-mono text-xs font-semibold mb-3 shadow-sm">
-          <Sparkles className="w-3.5 h-3.5 text-[#B08A4A]" />
           <span>EDITORIAL MEDIA KIT &bull; TOOLBOX &amp; STACK</span>
         </div>
 
@@ -83,8 +82,8 @@ export default function Skills() {
               key={index}
               className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-white border border-[#3E1F1B]/15 shadow-sm text-[#3E1F1B] font-serif text-xs font-semibold whitespace-nowrap hover:scale-105 transition-transform"
             >
-              <div className="w-6 h-6 rounded-full bg-[#F6F0DC] border border-[#B08A4A]/40 flex items-center justify-center text-[#B08A4A] text-xs font-bold">
-                ✦
+              <div className="w-5 h-5 rounded-full bg-[#F6F0DC] border border-[#B08A4A]/40 flex items-center justify-center text-[#B08A4A] text-[10px] font-bold">
+                &bull;
               </div>
               <span>{item}</span>
             </div>

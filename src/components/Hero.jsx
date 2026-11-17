@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import { ArrowUpRight, FileText, Mail, Sparkles, MapPin, Star } from 'lucide-react';
+import { ArrowUpRight, FileText, Mail, MapPin } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 
 export default function Hero() {
@@ -27,7 +27,7 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, []);
 
-  // Entrance animation for ID badge and gold stars
+  // Entrance animation for ID badge
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
@@ -51,15 +51,6 @@ export default function Hero() {
         duration: 0.6,
         ease: 'back.out(1.7)',
       }, '-=0.6');
-
-      tl.from('.hero-gold-star', {
-        scale: 0,
-        rotation: 45,
-        opacity: 0,
-        stagger: 0.1,
-        duration: 0.7,
-        ease: 'back.out(2)',
-      }, '-=0.5');
 
       tl.from('.hero-cta-buttons', {
         y: 20,
@@ -86,31 +77,6 @@ export default function Hero() {
       ref={heroRef}
       className="relative min-h-[92vh] sm:min-h-screen flex flex-col justify-center items-center pt-24 sm:pt-28 pb-14 px-3 sm:px-6 md:px-8 overflow-hidden z-10 bg-grid-paper"
     >
-      {/* Scattered Gold 4-Point Stars (Decorative) */}
-      <div className="hero-gold-star absolute top-24 left-6 sm:left-16 text-[#B08A4A] animate-twinkle select-none pointer-events-none">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" />
-        </svg>
-      </div>
-
-      <div className="hero-gold-star absolute top-36 right-8 sm:right-24 text-[#B08A4A] animate-twinkle select-none pointer-events-none">
-        <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" />
-        </svg>
-      </div>
-
-      <div className="hero-gold-star absolute bottom-24 left-10 sm:left-24 text-[#B08A4A]/80 select-none pointer-events-none">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" />
-        </svg>
-      </div>
-
-      <div className="hero-gold-star absolute bottom-32 right-12 sm:right-28 text-[#B08A4A]/80 select-none pointer-events-none">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" />
-        </svg>
-      </div>
-
       <div className="max-w-4xl mx-auto w-full flex flex-col items-center text-center">
         {/* Lanyard Strap / Metal Binder Clip at Top */}
         <div className="relative flex flex-col items-center z-30 select-none mb-[-12px]">
@@ -154,7 +120,7 @@ export default function Hero() {
 
           {/* Badge Profile Row: Photo Frame + Titles */}
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-6 mb-5">
-            {/* Profile Photo in Rounded Arch Frame with Gold Star */}
+            {/* Profile Photo in Rounded Arch Frame */}
             <div className="hero-badge-elem relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border-2 border-[#3E1F1B] bg-[#F6F0DC] shadow-sm shrink-0">
               <img
                 src={personalInfo.avatar}
@@ -179,7 +145,6 @@ export default function Hero() {
               </div>
 
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#3E1F1B] text-[#F6F0DC] font-serif text-xs tracking-wider uppercase font-semibold mt-1.5 mb-2.5 shadow-sm">
-                <Sparkles className="w-3 h-3 text-[#F7C8DA]" />
                 <span>Software Engineer</span>
               </div>
 
@@ -213,7 +178,7 @@ export default function Hero() {
                 AUTHENTIC // HP-DEV
               </span>
               <span className="font-hand text-sm text-[#B08A4A] font-bold">
-                verified engineer &hearts;
+                himani patel &hearts;
               </span>
             </div>
           </div>

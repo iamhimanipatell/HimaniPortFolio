@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ExternalLink, Github, ArrowUpRight, Sparkles, Smartphone, Monitor } from 'lucide-react';
+import { ExternalLink, Github, ArrowUpRight, Smartphone, Monitor } from 'lucide-react';
 import { projectsData } from '../data/portfolioData';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -47,7 +47,6 @@ export default function Projects() {
       {/* Section Header */}
       <div className="flex flex-col items-center text-center mb-10 sm:mb-14">
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E3DAA0] text-[#3E1F1B] border border-[#B08A4A]/40 font-mono text-xs font-semibold mb-3 shadow-sm">
-          <Sparkles className="w-3.5 h-3.5 text-[#B08A4A]" />
           <span>EDITORIAL MEDIA KIT &bull; CASE STUDIES</span>
         </div>
 
@@ -149,7 +148,6 @@ export default function Projects() {
                     <span className="font-serif text-[11px] uppercase tracking-widest text-[#B08A4A] font-bold">
                       CASE STUDY // 0{index + 1}
                     </span>
-                    <span className="text-xs text-[#B08A4A]">✦</span>
                   </div>
 
                   {/* Title & Script Tag */}
@@ -175,7 +173,7 @@ export default function Projects() {
                       </span>
                       {project.highlights.map((h, hIdx) => (
                         <div key={hIdx} className="flex items-start gap-2 font-mono text-xs text-[#2B1512]/90">
-                          <span className="text-[#B08A4A] text-xs mt-0.5">✦</span>
+                          <span className="text-[#B08A4A] text-xs mt-0.5 font-bold">&bull;</span>
                           <span>{h}</span>
                         </div>
                       ))}

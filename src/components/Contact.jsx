@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Mail, MapPin, Copy, Check, ArrowUpRight, Github, Linkedin, Send, Sparkles, Heart } from 'lucide-react';
+import { Mail, MapPin, Copy, Check, ArrowUpRight, Github, Linkedin, Send, Heart } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -62,13 +62,6 @@ export default function Contact() {
       className="relative py-20 sm:py-28 px-3 sm:px-6 md:px-8 max-w-7xl mx-auto z-10 w-full"
     >
       <div className="contact-editorial-container contact-editorial-panel rounded-3xl bg-brown-pinstripe text-[#F6F0DC] p-6 sm:p-10 lg:p-14 border-2 border-[#3E1F1B] shadow-2xl relative overflow-hidden">
-        {/* Subtle decorative gold stars */}
-        <div className="absolute top-6 right-8 text-[#B08A4A]/60 select-none">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" />
-          </svg>
-        </div>
-
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           {/* Left Column: Portrait in Rounded Arch Frame + Headlines + Socials */}
           <div className="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left">

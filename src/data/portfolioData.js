@@ -259,7 +259,7 @@ export const skillsData = {
   ],
   Frontend: [
     { name: "React.js", level: 95, icon: "Layers" },
-    { name: "GSAP & ScrollTrigger", level: 90, icon: "Sparkles" },
+    { name: "GSAP & ScrollTrigger", level: 90, icon: "Layers" },
     { name: "Tailwind CSS", level: 95, icon: "Palette" },
     { name: "Responsive UI", level: 95, icon: "Smartphone" },
     { name: "Vite", level: 90, icon: "Zap" },
