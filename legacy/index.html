@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Himani Patel | Creative Developer</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Locomotive Scroll CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+  <!-- Locomotive Scroll JS -->
+  <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+
+  <div class="cursor-follower"></div>
+
+  <div data-scroll-container>
+    <div class="parallax-element circle-1" data-scroll data-scroll-speed="-2"></div>
+    <div class="text-bg">CREATIVE</div>
+
+    <!-- 🧭 Navbar -->
+    <nav class="navbar">
+      <div class="logo">HP</div>
+      <ul class="nav-links">
+        <li><a href="#hero" data-scroll-to>Home</a></li>
+        <li><a href="#skills" data-scroll-to>Skills</a></li>
+        <li><a href="#projects" data-scroll-to>Projects</a></li>
+        <li><a href="#about" data-scroll-to>About</a></li>
+        <li><a href="#contact" data-scroll-to>Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- 🌟 Hero Section -->
+    <section id="hero" class="hero" data-scroll-section>
+      <div class="hero-content">
+        <img src="finalestphot.JPG" alt="Himani Patel" class="profile-pic">
+        <h1 class="name" data-scroll data-scroll-speed="2">Himani Patel</h1>
+        <p data-scroll data-scroll-speed="1">Creative Developer | UX Designer</p>
+      </div>
+    </section>
+
+    <!-- 🧠 Skills Section -->
+    <section id="skills" class="skills" data-scroll-section>
+      <h2 data-scroll data-scroll-speed="0.5">Skill Set</h2>
+      <div class="skill-container">
+        <div class="skill-card" data-scroll data-scroll-speed="1.2">Frontend Development</div>
+        <div class="skill-card" data-scroll data-scroll-speed="1.5">React & GSAP</div>
+        <div class="skill-card" data-scroll data-scroll-speed="1.3">UI/UX Design</div>
+        <div class="skill-card" data-scroll data-scroll-speed="1.6">C++ & Python</div>
+        <div class="skill-card" data-scroll data-scroll-speed="1.4">DSA</div>
+      </div>
+    </section>
+
+    <!-- 🚧 Projects Section -->
+    <section id="projects" class="projects" data-scroll-section>
+      <h2 data-scroll data-scroll-speed="0.5">Projects</h2>
+
+      <div class="project-card" data-scroll>
+        <img src="Stitch_Noor.png" alt="Stitch Noor">
+        <div class="project-info">
+          <h3>Stitch Noor</h3>
+          <p>A visually rich and responsive website for a fashion brand, blending earth-toned aesthetics with fluid
+            animations.</p>
+          <a href="https://welcometostitchnoor.netlify.app/" target="_blank">View Project</a>
+        </div>
+      </div>
+
+      <div class="project-card" data-scroll>
+        <img src="ReactGiftShop.png" alt="Gift Shop Image">
+        <div class="project-info">
+          <h3>Gift Shop React</h3>
+          <p>A sleek React-based e-commerce experience with modern navigation and vibrant visuals.</p>
+          <a href="https://gift-shoppp.onrender.com/" target="_blank">View Project</a>
+        </div>
+      </div>
+
+      <div class="project-card" data-scroll>
+        <img src="Uiux.png" alt="Ui/UX">
+        <div class="project-info">
+          <h3>Modern Clothing UX</h3>
+          <p>High-fidelity prototyping and user-centric design for a modern online clothing store.</p>
+          <a href="https://www.figma.com/design/1kxXBkpDkhOGNJPY4s8Zlz/ca-4-high-wireframe" target="_blank">View
+            Figma</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🧠 About Section -->
+    <section id="about" class="about" data-scroll-section>
+      <h2 data-scroll data-scroll-speed="0.5">About</h2>
+      <p data-scroll data-scroll-speed="1">Driven by curiosity and a passion for coding, I strive to create exceptional
+        digital experiences. As a B.Tech student at LPU, I’m constantly exploring the boundaries of web development and
+        design.</p>
+    </section>
+
+    <!-- 📜 Certificates Section -->
+    <section id="certificates" class="certificates" data-scroll-section>
+      <h2 data-scroll data-scroll-speed="0.5">Certificates</h2>
+      <div class="certificate-container">
+        <div class="certificate-card" data-scroll data-scroll-speed="1.1">
+          <img src="images/Frontendwebdevelopmentcertificate.png" alt="Web Dev">
+          <h3>Frontend Web Development</h3>
+          <p>Coursera</p>
+        </div>
+        <div class="certificate-card" data-scroll data-scroll-speed="1.3">
+          <img src="images/DataStructurescertificate.png" alt="DSA">
+          <h3>Data Structures & Algorithms</h3>
+          <p>Ebox</p>
+        </div>
+        <div class="certificate-card" data-scroll data-scroll-speed="1.2">
+          <img src="images/cloudcomputingcertificate.png" alt="Cloud">
+          <h3>Cloud Computing</h3>
+          <p>NPTEL</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 📬 Contact Section -->
+    <section id="contact" class="contact" data-scroll-section>
+      <h2 data-scroll data-scroll-speed="0.5">Get In Touch</h2>
+      <a href="mailto:himanipatel.riya@gmail.com">himanipatel.riya@gmail.com</a>
+      <a href="https://www.linkedin.com/in/himanipatelll" target="_blank">LinkedIn</a>
+      <a href="https://github.com/iamhimanipatell" target="_blank">GitHub</a>
+    </section>
+  </div>
+</body>
+
+</html>

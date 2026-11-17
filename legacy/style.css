@@ -1,0 +1,313 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+
+:root {
+  --bg: #050505;
+  --accent: #a89f91;
+  /* Keeping the user's subtle gold/beige but making it glow */
+  --accent-neon: #ff5e00;
+  --text-main: #ffffff;
+  --text-dim: #a0a0a0;
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --border: rgba(255, 255, 255, 0.1);
+  --glass: rgba(255, 255, 255, 0.02);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--bg);
+  color: var(--text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Custom Cursor */
+.cursor-follower {
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: transform 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+[data-scroll-container] {
+  background-color: var(--bg);
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 25px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  background: rgba(5, 5, 5, 0.5);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--text-main);
+}
+
+/* Hero Section */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+.hero-content {
+  z-index: 2;
+}
+
+.profile-pic {
+  width: 180px;
+  height: 180px;
+  border-radius: 40px;
+  object-fit: cover;
+  margin-bottom: 30px;
+  filter: grayscale(100%) contrast(110%);
+  border: 1px solid var(--border);
+  transition: filter 0.5s ease;
+}
+
+.profile-pic:hover {
+  filter: grayscale(0%);
+}
+
+.name {
+  font-size: 6rem;
+  font-weight: 800;
+  line-height: 0.9;
+  margin-bottom: 20px;
+  background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.4) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: var(--text-dim);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+/* Sections */
+section {
+  padding: 150px 10%;
+  min-height: 80vh;
+}
+
+h2 {
+  font-size: 4rem;
+  font-weight: 800;
+  margin-bottom: 80px;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+}
+
+/* Skills */
+.skill-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.skill-card {
+  padding: 40px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-10px);
+}
+
+/* Projects */
+.project-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 150px;
+  align-items: center;
+}
+
+.project-card img {
+  width: 100%;
+  aspect-ratio: 16/10;
+  object-fit: cover;
+  border-radius: 30px;
+  filter: saturate(0.8) brightness(0.9);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover img {
+  filter: saturate(1) brightness(1.1);
+  transform: scale(1.02);
+}
+
+.project-info h3 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.project-info p {
+  color: var(--text-dim);
+  margin-bottom: 30px;
+}
+
+.project-info a {
+  display: inline-block;
+  padding: 15px 35px;
+  background: #fff;
+  color: #000;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  transition: transform 0.3s;
+}
+
+.project-info a:hover {
+  transform: scale(1.05);
+}
+
+/* Certificates */
+.certificate-container {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.certificate-card {
+  flex: 1;
+  min-width: 300px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 30px;
+  border-radius: 30px;
+  transition: 0.4s;
+}
+
+.certificate-card:hover {
+  border-color: var(--accent);
+}
+
+.certificate-card img {
+  width: 100%;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+/* Contact */
+.contact {
+  text-align: center;
+  background: radial-gradient(circle at center, rgba(168, 159, 145, 0.05) 0%, transparent 70%);
+}
+
+.contact a {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+  text-decoration: none;
+  display: block;
+  margin: 20px 0;
+  transition: opacity 0.3s;
+}
+
+.contact a:hover {
+  opacity: 0.6;
+}
+
+/* Utilities */
+.parallax-element {
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.circle-1 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+  top: 20%;
+  left: -10%;
+}
+
+.text-bg {
+  position: fixed;
+  font-size: 20rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.01);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -2;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .name {
+    font-size: 3.5rem;
+  }
+
+  .project-card {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .navbar {
+    padding: 20px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+}
