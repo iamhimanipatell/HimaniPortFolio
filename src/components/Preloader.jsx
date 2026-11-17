@@ -20,23 +20,23 @@ export default function Preloader({ onComplete }) {
 
     tl.to(counter, {
       val: 100,
-      duration: 1.4,
+      duration: 0.55,
       ease: 'power2.out',
       onUpdate: () => setPercent(Math.floor(counter.val)),
     });
 
     tl.to('.preloader-card', {
       scale: 0.95,
-      y: -30,
+      y: -20,
       opacity: 0,
-      duration: 0.5,
+      duration: 0.3,
       ease: 'power2.in',
-    }, '+=0.2');
+    }, '+=0.05');
 
     tl.to('.preloader-backdrop', {
       opacity: 0,
       pointerEvents: 'none',
-      duration: 0.3,
+      duration: 0.2,
     });
 
     return () => tl.kill();
