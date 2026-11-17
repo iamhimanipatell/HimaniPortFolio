@@ -20,7 +20,8 @@ export const personalInfo = {
   email: "himanipatel.riya@gmail.com",
   linkedin: "https://linkedin.com/in/himanipatelll",
   github: "https://github.com/iamhimanipatell",
-  avatar: "/finalestphot.JPG",
+  heroImage: "/himani1.png",
+  avatar: "/himani2.png",
   resumeUrl: "#contact", // or PDF path if provided
   availability: "Available for Software Engineering Roles",
 };

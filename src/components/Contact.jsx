@@ -65,13 +65,14 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           {/* Left Column: Portrait in Rounded Arch Frame + Headlines + Socials */}
           <div className="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left">
-            {/* Rounded Arch Photo Frame */}
-            <div className="relative w-36 h-44 sm:w-44 sm:h-52 rounded-t-full rounded-b-2xl overflow-hidden border-2 border-[#B08A4A] bg-[#F6F0DC] p-1.5 shadow-xl mb-6">
-              <div className="w-full h-full rounded-t-full rounded-b-xl overflow-hidden">
+            {/* Rounded Arch Photo Frame with himani2 */}
+            <div className="relative w-36 h-48 sm:w-44 sm:h-56 rounded-t-full rounded-b-2xl overflow-visible border-2 border-[#B08A4A] bg-[#F6F0DC] p-1.5 shadow-xl mb-6 flex items-end justify-center">
+              <div className="w-full h-full rounded-t-full rounded-b-xl overflow-visible flex items-end justify-center relative">
                 <img
-                  src={personalInfo.avatar}
+                  src="/himani2.png"
                   alt={personalInfo.name}
-                  className="w-full h-full object-cover object-top"
+                  className="relative z-10 h-52 sm:h-60 w-auto max-w-none object-contain pointer-events-none filter drop-shadow-[0_8px_16px_rgba(43,21,18,0.3)]"
+                  style={{ marginBottom: '-2px' }}
                 />
               </div>
             </div>

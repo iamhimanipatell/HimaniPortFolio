@@ -22,3 +22,10 @@ Thumbs.db
 
 # Vite cache
 .vite/
+
+# Personal Photos & Local Avatar Assets (Never push to GitHub)
+himani1.png
+himani2.png
+public/himani1.png
+public/himani2.png
+
