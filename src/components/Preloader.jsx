@@ -49,15 +49,12 @@ export default function Preloader({ onComplete }) {
       aria-label="Loading portfolio"
       className="preloader-backdrop fixed inset-0 z-[99999] bg-[#F6F0DC] flex items-center justify-center p-4 bg-grid-paper select-none"
     >
-      {/* Main Preloader Media Kit Card */}
+      {/* Main Preloader Card */}
       <div className="preloader-card relative max-w-sm w-full bg-[#FBF8EF] border-2 border-[#3E1F1B] rounded-3xl p-6 sm:p-8 shadow-badge text-center">
         {/* Washi tape on top */}
         <div className="washi-tape-strip washi-pink-gingham -top-2.5 left-1/2 -translate-x-1/2 w-28 -rotate-1" />
 
-        <span className="font-serif text-[10px] uppercase tracking-widest text-[#B08A4A] font-bold block mb-1">
-          CREATOR MEDIA KIT // 2026
-        </span>
-        <h1 className="font-serif font-black text-3xl sm:text-4xl text-[#3E1F1B] mb-0.5">
+        <h1 className="font-serif font-black text-3xl sm:text-4xl text-[#3E1F1B] mt-2 mb-0.5">
           Himani Patel
         </h1>
         <p className="font-script text-2xl text-[#B08A4A] mb-6">
@@ -72,9 +69,8 @@ export default function Preloader({ onComplete }) {
           />
         </div>
 
-        <div className="flex items-center justify-between font-mono text-xs text-[#2B1512]/70">
-          <span>INITIALIZING BADGE</span>
-          <span className="font-bold text-[#3E1F1B]">{percent}%</span>
+        <div className="flex items-center justify-center font-mono text-xs text-[#2B1512]/70 tracking-widest uppercase">
+          <span>INITIALIZING</span>
         </div>
       </div>
     </div>
