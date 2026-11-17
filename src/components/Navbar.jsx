@@ -1,25 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { Home, Sparkles, Menu, X, ArrowUpRight, Heart, Compass } from 'lucide-react';
+import { Sparkles, Menu, X, ArrowUpRight, Compass } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 
 const NAV_ITEMS = [
-  { label: 'Home', subtitle: '00', href: '#hero' },
-  { label: 'About', subtitle: '01', href: '#about' },
-  { label: 'Projects', subtitle: '02', href: '#projects' },
-  { label: 'Skills', subtitle: '03', href: '#skills' },
-  { label: 'Timeline', subtitle: '04', href: '#experience' },
-  { label: 'Education', subtitle: '05', href: '#education' },
-  { label: 'Contact', subtitle: '06', href: '#contact' },
+  { label: 'Home', script: 'start', href: '#hero' },
+  { label: 'Why Me', script: 'value', href: '#why-me' },
+  { label: 'About', script: 'bio', href: '#about' },
+  { label: 'Projects', script: 'work', href: '#projects' },
+  { label: 'Services', script: 'build', href: '#services' },
+  { label: 'Skills', script: 'stack', href: '#skills' },
+  { label: 'Experience', script: 'path', href: '#experience' },
+  { label: 'Contact', script: 'hello', href: '#contact' },
 ];
 
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState('hero');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
+      setIsScrolled(window.scrollY > 40);
+
       const sections = NAV_ITEMS.map((item) => item.href.substring(1));
-      const scrollPos = window.scrollY + 200;
+      const scrollPos = window.scrollY + 220;
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i]);
@@ -46,31 +50,35 @@ export default function Navbar() {
   return (
     <header className="fixed top-3 sm:top-5 left-0 w-full z-50 px-3 sm:px-6 pointer-events-none">
       <nav
-        aria-label="Retro Scrapbook Navigation"
-        className="mx-auto max-w-5xl rounded-full bg-[#5A0B16] text-[#FBF8EF] border-2 border-[#1E1B18] shadow-retro-lg px-3 sm:px-5 py-2 sm:py-2.5 flex items-center justify-between pointer-events-auto transition-transform duration-300"
+        aria-label="Editorial Media Kit Navigation"
+        className={`mx-auto max-w-5xl rounded-full transition-all duration-300 px-3 sm:px-5 py-2 sm:py-2.5 flex items-center justify-between pointer-events-auto border ${
+          isScrolled
+            ? 'bg-[#FBF8EF]/95 backdrop-blur-md border-[#B08A4A]/40 shadow-card-soft text-[#3E1F1B]'
+            : 'bg-[#FBF8EF]/90 backdrop-blur-sm border-[#3E1F1B]/15 text-[#3E1F1B]'
+        }`}
       >
-        {/* Left: Home Icon Button */}
+        {/* Brand / Name Tag */}
         <a
           href="#hero"
           onClick={(e) => handleNavClick(e, '#hero')}
-          className="flex items-center gap-2 group cursor-pointer focus:outline-none"
-          aria-label="Home"
+          className="flex items-center gap-2.5 group cursor-pointer focus:outline-none"
+          aria-label="Himani Patel Portfolio"
         >
-          <div className="w-8 h-8 rounded-full bg-[#7A1020] border border-[#F06EAF]/40 flex items-center justify-center text-[#F06EAF] group-hover:bg-[#E0147E] group-hover:text-white transition-all shadow-sm">
-            <Home className="w-4 h-4" />
+          <div className="w-8 h-8 rounded-full bg-[#3E1F1B] text-[#F6F0DC] border border-[#B08A4A] flex items-center justify-center font-serif text-sm font-bold shadow-sm group-hover:scale-105 transition-transform">
+            HP
           </div>
-          <div className="hidden sm:flex flex-col">
-            <span className="font-serif font-bold text-sm tracking-tight text-[#FBF8EF] leading-none">
-              {personalInfo.name}
+          <div className="flex flex-col">
+            <span className="font-serif font-bold text-sm tracking-tight text-[#3E1F1B] leading-none">
+              Himani Patel
             </span>
-            <span className="font-pixel text-[9px] text-[#F06EAF] uppercase tracking-wider mt-0.5">
-              Scrapbook v2.0
+            <span className="font-script text-xs text-[#B08A4A] leading-tight">
+              Software Engineer
             </span>
           </div>
         </a>
 
-        {/* Center: Desktop Navigation Links with Subtitles */}
-        <ul className="hidden md:flex items-center gap-1 bg-[#3D070E]/80 px-2 py-1 rounded-full border border-white/10">
+        {/* Desktop Navigation Links */}
+        <ul className="hidden md:flex items-center gap-1 bg-[#F6F0DC] px-2 py-1 rounded-full border border-[#B08A4A]/30 shadow-inner">
           {NAV_ITEMS.map((item) => {
             const isActive = activeSection === item.href.substring(1);
             return (
@@ -78,37 +86,34 @@ export default function Navbar() {
                 <a
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className={`flex flex-col items-center px-3 py-1 rounded-full text-xs transition-all duration-200 cursor-pointer ${
+                  className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs transition-all duration-200 cursor-pointer ${
                     isActive
-                      ? 'bg-[#F06EAF] text-[#1E1B18] font-bold shadow-retro-sm'
-                      : 'text-[#FBF8EF]/80 hover:text-white hover:bg-white/10'
+                      ? 'bg-[#3E1F1B] text-[#FBF8EF] font-bold shadow-sm'
+                      : 'text-[#3E1F1B]/80 hover:text-[#3E1F1B] hover:bg-white/60 font-medium'
                   }`}
                 >
-                  <span className="leading-tight font-medium">{item.label}</span>
-                  <span className={`text-[9px] font-mono leading-none ${isActive ? 'text-[#5A0B16]' : 'text-[#F06EAF]'}`}>
-                    /{item.subtitle}
-                  </span>
+                  <span className="font-serif tracking-wide">{item.label}</span>
                 </a>
               </li>
             );
           })}
         </ul>
 
-        {/* Right: Quick CTA / Sparkle Action */}
+        {/* Right CTA Button */}
         <div className="flex items-center gap-2">
           <a
             href="#contact"
             onClick={(e) => handleNavClick(e, '#contact')}
-            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#8A9A2B] text-[#FBF8EF] font-pixel text-[11px] border border-[#1E1B18] shadow-[2px_2px_0px_#1E1B18] hover:bg-[#6E7B21] active:translate-x-0.5 active:translate-y-0.5 transition-all"
+            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#F7C8DA] text-[#3E1F1B] font-serif text-xs font-bold border border-[#3E1F1B]/20 shadow-sm hover:bg-[#EEB1C7] active:scale-95 transition-all"
           >
-            <span>Say Hello</span>
-            <Sparkles className="w-3 h-3 text-[#7DF3FF]" />
+            <span>Let's Talk</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
           </a>
 
-          {/* Mobile Menu Toggle */}
+          {/* Mobile Menu Hamburger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-1.5 rounded-full bg-[#7A1020] text-[#FBF8EF] border border-[#F06EAF]/40 hover:bg-[#E0147E] focus:outline-none"
+            className="md:hidden p-1.5 rounded-full bg-[#F6F0DC] text-[#3E1F1B] border border-[#3E1F1B]/20 hover:bg-[#F7C8DA] focus:outline-none"
             aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -116,16 +121,19 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Drawer Styled Like a Retro Sticky Notepad */}
+      {/* Mobile Drawer Styled Like an Editorial Notecard */}
       {mobileMenuOpen && (
-        <div className="md:hidden mt-2 mx-auto w-[calc(100vw-24px)] max-w-sm bg-[#FBF8EF] border-2 border-[#1E1B18] rounded-2xl p-4 sm:p-5 shadow-retro-sm sm:shadow-retro-lg pointer-events-auto relative">
-          <div className="washi-tape washi-tape-gingham -top-3 left-1/2 -translate-x-1/2 w-28 -rotate-1" />
-          <div className="flex items-center justify-between border-b border-[#1E1B18]/10 pb-2 mb-3">
-            <span className="font-pixel text-[10px] text-[#8A9A2B]">NAVIGATION.EXE</span>
-            <span className="font-hand text-sm text-[#E0147E]">choose a page ✨</span>
+        <div className="md:hidden mt-2 mx-auto w-[calc(100vw-24px)] max-w-sm bg-[#FBF8EF] border-2 border-[#3E1F1B] rounded-3xl p-5 shadow-polaroid pointer-events-auto relative">
+          <div className="washi-tape-strip washi-pink-gingham -top-2.5 left-1/2 -translate-x-1/2 w-28 -rotate-1" />
+
+          <div className="flex items-center justify-between border-b border-[#3E1F1B]/15 pb-2.5 mb-3">
+            <span className="font-serif font-bold text-xs uppercase tracking-wider text-[#3E1F1B]">
+              MEDIA KIT DIRECTORY
+            </span>
+            <span className="font-script text-base text-[#B08A4A]">select page &hearts;</span>
           </div>
 
-          <ul className="flex flex-col gap-1.5 mb-4">
+          <ul className="flex flex-col gap-1 mb-4">
             {NAV_ITEMS.map((item) => {
               const isActive = activeSection === item.href.substring(1);
               return (
@@ -133,14 +141,16 @@ export default function Navbar() {
                   <a
                     href={item.href}
                     onClick={(e) => handleNavClick(e, item.href)}
-                    className={`flex items-center justify-between px-3 py-2 rounded-xl text-sm font-mono transition-all ${
+                    className={`flex items-center justify-between px-3 py-2 rounded-xl text-sm transition-all ${
                       isActive
-                        ? 'bg-[#F06EAF] text-[#1E1B18] font-bold border border-[#1E1B18]'
-                        : 'text-[#1E1B18] hover:bg-[#E9E7CB]'
+                        ? 'bg-[#3E1F1B] text-[#FBF8EF] font-bold shadow-sm'
+                        : 'text-[#3E1F1B] hover:bg-[#F6F0DC]'
                     }`}
                   >
-                    <span>{item.label}</span>
-                    <span className="text-xs opacity-60">/{item.subtitle}</span>
+                    <span className="font-serif">{item.label}</span>
+                    <span className={`font-script text-sm ${isActive ? 'text-[#F7C8DA]' : 'text-[#B08A4A]'}`}>
+                      {item.script}
+                    </span>
                   </a>
                 </li>
               );
@@ -150,10 +160,10 @@ export default function Navbar() {
           <a
             href="#contact"
             onClick={(e) => handleNavClick(e, '#contact')}
-            className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-[#E0147E] text-white font-pixel text-xs border-2 border-[#1E1B18] shadow-retro"
+            className="flex items-center justify-center gap-1.5 w-full py-2.5 rounded-full bg-[#F7C8DA] text-[#3E1F1B] font-serif font-bold text-xs border border-[#3E1F1B] shadow-sm"
           >
-            <span>Let's Talk &bull; Contact</span>
-            <ArrowUpRight className="w-4 h-4" />
+            <span>Collaborate &bull; Contact</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
           </a>
         </div>
       )}

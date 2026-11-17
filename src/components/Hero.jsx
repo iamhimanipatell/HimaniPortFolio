@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import { ArrowUpRight, FileText, Mail, Sparkles } from 'lucide-react';
+import { ArrowUpRight, FileText, Mail, Sparkles, MapPin, Star } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 
 export default function Hero() {
   const heroRef = useRef(null);
+  const badgeRef = useRef(null);
   const [currentTime, setCurrentTime] = useState('');
 
   // Live Hyderabad Clock (IST)
@@ -26,7 +27,7 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, []);
 
-  // Floating stickers parallax and text reveal
+  // Entrance animation for ID badge and gold stars
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
@@ -34,60 +35,38 @@ export default function Hero() {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ delay: 0.2 });
 
-      tl.from('.hero-badge-tag', {
-        scale: 0.8,
+      // ID badge drops in on lanyard and swings to settle
+      tl.from(badgeRef.current, {
+        y: -120,
+        rotation: 6,
         opacity: 0,
-        duration: 0.6,
-        ease: 'back.out(1.7)',
+        duration: 1.2,
+        ease: 'elastic.out(1, 0.6)',
       });
 
-      tl.from('.hero-headline-name', {
-        y: 40,
+      tl.from('.hero-badge-elem', {
+        scale: 0.85,
         opacity: 0,
-        duration: 0.9,
-        ease: 'power3.out',
-      }, '-=0.3');
+        stagger: 0.08,
+        duration: 0.6,
+        ease: 'back.out(1.7)',
+      }, '-=0.6');
 
-      tl.from('.hero-script-overlay', {
-        scale: 0.7,
+      tl.from('.hero-gold-star', {
+        scale: 0,
+        rotation: 45,
         opacity: 0,
-        duration: 0.8,
+        stagger: 0.1,
+        duration: 0.7,
         ease: 'back.out(2)',
       }, '-=0.5');
 
-      tl.from('.hero-polaroid', {
-        y: 50,
+      tl.from('.hero-cta-buttons', {
+        y: 20,
         opacity: 0,
-        duration: 0.9,
-        ease: 'back.out(1.5)',
-      }, '-=0.6');
-
-      tl.from('.hero-sticker', {
-        scale: 0,
-        opacity: 0,
-        stagger: 0.08,
-        duration: 0.5,
-        ease: 'back.out(2)',
+        duration: 0.8,
+        ease: 'power3.out',
       }, '-=0.4');
-
-      // Mouse parallax only on desktop
-      if (window.innerWidth >= 768) {
-        const handleMouseMove = (e) => {
-          const { clientX, clientY } = e;
-          const x = (clientX / window.innerWidth - 0.5) * 18;
-          const y = (clientY / window.innerHeight - 0.5) * 18;
-
-          gsap.to('.hero-sticker-float', {
-            x: (i) => (i % 2 === 0 ? x * 1.2 : -x * 1.2),
-            y: (i) => (i % 2 === 0 ? y * 1.2 : -y * 1.2),
-            duration: 0.8,
-            ease: 'power1.out',
-          });
-        };
-
-        window.addEventListener('mousemove', handleMouseMove, { passive: true });
-        return () => window.removeEventListener('mousemove', handleMouseMove);
-      }
     }, heroRef);
 
     return () => ctx.revert();
@@ -105,156 +84,172 @@ export default function Hero() {
     <section
       id="hero"
       ref={heroRef}
-      className="relative min-h-[90vh] sm:min-h-screen flex flex-col justify-center items-center pt-24 sm:pt-28 pb-12 sm:pb-16 px-3 sm:px-6 md:px-8 overflow-hidden z-10 w-full max-w-full"
+      className="relative min-h-[92vh] sm:min-h-screen flex flex-col justify-center items-center pt-24 sm:pt-28 pb-14 px-3 sm:px-6 md:px-8 overflow-hidden z-10 bg-grid-paper"
     >
-      {/* Decorative Scrapbook Stickers & Doodles (Desktop) */}
-      <div className="hidden md:block hero-sticker hero-sticker-float absolute top-24 left-8 text-3xl select-none animate-float-slow">
-        🌸
-      </div>
-      <div className="hidden md:block hero-sticker hero-sticker-float absolute top-36 right-12 text-3xl select-none animate-float-gentle">
-        💖
-      </div>
-      <div className="hidden md:block hero-sticker hero-sticker-float absolute bottom-28 left-12 text-2xl select-none animate-float-gentle">
-        ✨
-      </div>
-      <div className="hidden md:block hero-sticker hero-sticker-float absolute bottom-32 right-16 text-3xl select-none animate-float-slow">
-        ⭐
+      {/* Scattered Gold 4-Point Stars (Decorative) */}
+      <div className="hero-gold-star absolute top-24 left-6 sm:left-16 text-[#B08A4A] animate-twinkle select-none pointer-events-none">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" />
+        </svg>
       </div>
 
-      <div className="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-        {/* Left Column: Scrapbook Typography & Badges */}
-        <div className="lg:col-span-7 flex flex-col items-start text-left w-full min-w-0">
-          {/* Retro OS Status Badge */}
-          <div className="hero-badge-tag inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-[#D9C7A0] border-2 border-[#1E1B18] shadow-retro-sm mb-4 sm:mb-6 max-w-full">
-            <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#8A9A2B] animate-pulse shrink-0" />
-            <span className="font-pixel text-[9px] sm:text-xs text-[#1E1B18] uppercase tracking-wider font-bold truncate">
-              SYSTEM ONLINE &bull; HYDERABAD, IN
-            </span>
-            <span className="hidden sm:inline font-mono text-[11px] text-[#5A0B16] font-semibold shrink-0">
-              [{currentTime || 'IST'}]
-            </span>
+      <div className="hero-gold-star absolute top-36 right-8 sm:right-24 text-[#B08A4A] animate-twinkle select-none pointer-events-none">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" />
+        </svg>
+      </div>
+
+      <div className="hero-gold-star absolute bottom-24 left-10 sm:left-24 text-[#B08A4A]/80 select-none pointer-events-none">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" />
+        </svg>
+      </div>
+
+      <div className="hero-gold-star absolute bottom-32 right-12 sm:right-28 text-[#B08A4A]/80 select-none pointer-events-none">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" />
+        </svg>
+      </div>
+
+      <div className="max-w-4xl mx-auto w-full flex flex-col items-center text-center">
+        {/* Lanyard Strap / Metal Binder Clip at Top */}
+        <div className="relative flex flex-col items-center z-30 select-none mb-[-12px]">
+          {/* Lanyard Strip */}
+          <div className="w-8 sm:w-10 h-10 sm:h-12 bg-[#3E1F1B] border-x border-[#B08A4A]/40 shadow-sm relative">
+            <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-0.5 bg-[#B08A4A]/40" />
           </div>
 
-          {/* Headline Container with Overlapping Script */}
-          <div className="relative mb-4 sm:mb-6 w-full min-w-0">
-            <h1 className="hero-headline-name font-serif font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-[#5A0B16] tracking-tight leading-[1.0] sm:leading-[0.95]">
-              Himani <br />
-              <span className="text-[#1E1B18]">Patel</span>
-            </h1>
-
-            {/* Overlapping Cursive Script */}
-            <span className="hero-script-overlay absolute -top-3 sm:-top-6 left-24 sm:left-40 md:left-48 font-script text-2xl sm:text-5xl lg:text-7xl text-[#E0147E] -rotate-6 select-none pointer-events-none drop-shadow-[2px_2px_0px_#FBF8EF] whitespace-nowrap">
-              Software Engineer
-            </span>
-
-            {/* Handwritten Doodle Annotation (Tablet/Desktop) */}
-            <div className="hidden lg:flex items-center gap-2 absolute -right-8 top-1/2 translate-y-2 hero-doodle-arrow">
-              <svg width="40" height="30" viewBox="0 0 45 35" fill="none" className="rotate-12">
-                <path d="M5 25C15 10 30 12 38 18M38 18L32 10M38 18L30 22" stroke="#E0147E" strokeWidth="2" strokeLinecap="round" />
-              </svg>
-              <span className="font-hand text-base text-[#E0147E] font-bold whitespace-nowrap">
-                full-stack &amp; IoT!
-              </span>
-            </div>
-          </div>
-
-          {/* One-Line Pitch */}
-          <div className="p-3.5 sm:p-5 rounded-2xl bg-[#D9C7A0]/70 border-2 border-[#1E1B18] shadow-retro-sm max-w-xl mb-6 w-full">
-            <p className="font-mono text-xs sm:text-sm md:text-base text-[#1E1B18] leading-relaxed">
-              {personalInfo.pitch}
-            </p>
-          </div>
-
-          {/* Retro CTAs: View Projects, Resume, Contact */}
-          <div className="flex flex-wrap items-center gap-2.5 sm:gap-4 mb-6 sm:mb-8 w-full">
-            {/* View Projects */}
-            <a
-              href="#projects"
-              onClick={(e) => handleScrollTo(e, '#projects')}
-              className="inline-flex items-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full bg-[#E0147E] text-white font-pixel text-[11px] sm:text-xs border-2 border-[#1E1B18] shadow-retro-sm sm:shadow-retro hover:bg-[#F06EAF] hover:text-[#1E1B18] active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer"
-            >
-              <span>VIEW PROJECTS</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </a>
-
-            {/* Download Resume / Background */}
-            <a
-              href="#contact"
-              onClick={(e) => handleScrollTo(e, '#contact')}
-              className="inline-flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full bg-[#8A9A2B] text-white font-pixel text-[11px] sm:text-xs border-2 border-[#1E1B18] shadow-retro-sm sm:shadow-retro hover:bg-[#A4B634] hover:text-[#1E1B18] active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer"
-            >
-              <FileText className="w-3.5 h-3.5" />
-              <span>RESUME &bull; CV</span>
-            </a>
-
-            {/* Contact Pill */}
-            <a
-              href="#contact"
-              onClick={(e) => handleScrollTo(e, '#contact')}
-              className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-full bg-[#FBF8EF] text-[#5A0B16] font-mono text-xs font-bold border-2 border-[#1E1B18] shadow-retro-sm hover:bg-[#E9E7CB] active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer"
-            >
-              <Mail className="w-3.5 h-3.5 text-[#E0147E]" />
-              <span>Say Hello</span>
-            </a>
-          </div>
-
-          {/* Quick Core Stack Tags */}
-          <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap font-mono text-[11px] sm:text-xs text-[#1E1B18] w-full">
-            <span className="font-pixel text-[9px] sm:text-[10px] text-[#5A0B16] font-bold">TOOLS:</span>
-            <span className="px-2 py-0.5 rounded bg-[#FBF8EF] border border-[#1E1B18] shadow-[1px_1px_0px_#1E1B18]">.NET Core</span>
-            <span className="px-2 py-0.5 rounded bg-[#FBF8EF] border border-[#1E1B18] shadow-[1px_1px_0px_#1E1B18]">React.js</span>
-            <span className="px-2 py-0.5 rounded bg-[#FBF8EF] border border-[#1E1B18] shadow-[1px_1px_0px_#1E1B18]">Node.js</span>
-            <span className="px-2 py-0.5 rounded bg-[#FBF8EF] border border-[#1E1B18] shadow-[1px_1px_0px_#1E1B18]">SQL &amp; MongoDB</span>
-            <span className="px-2 py-0.5 rounded bg-[#F06EAF] text-white font-bold border border-[#1E1B18] shadow-[1px_1px_0px_#1E1B18]">IoT Systems</span>
+          {/* Metal Binder / Lanyard Clip */}
+          <div className="w-12 sm:w-14 h-5 sm:h-6 rounded-t-sm bg-gradient-to-b from-[#C7A263] via-[#B08A4A] to-[#6E5023] border border-[#2B1512] shadow-sm flex items-center justify-center relative">
+            {/* Metal ring cut-out */}
+            <div className="w-4 h-2 rounded-full bg-[#3E1F1B]/90 border border-white/20" />
           </div>
         </div>
 
-        {/* Right Column: Retro Polaroid Portrait Collage */}
-        <div className="lg:col-span-5 flex justify-center w-full mt-4 lg:mt-0">
-          <div className="hero-polaroid relative w-full max-w-[270px] sm:max-w-xs md:max-w-sm sm:rotate-2 hover:rotate-0 transition-transform duration-300">
-            {/* Washi tape on top */}
-            <div className="washi-tape washi-tape-gingham -top-3 left-1/2 -translate-x-1/2 w-28 sm:w-36 -rotate-2" />
+        {/* =========================================================================
+            SIGNATURE ID BADGE CARD (Swings gently on hover / load)
+        ========================================================================== */}
+        <div
+          ref={badgeRef}
+          className="group relative w-full max-w-[340px] sm:max-w-md md:max-w-lg rounded-3xl bg-[#FBF8EF] border-2 border-[#3E1F1B] p-5 sm:p-7 md:p-8 shadow-badge transition-transform duration-500 hover:rotate-1 hover:shadow-2xl select-none"
+        >
+          {/* Washi Tape Corner */}
+          <div className="washi-tape-strip washi-pink-gingham -top-3 -right-3 w-24 sm:w-28 rotate-12" />
 
-            {/* Main Polaroid Frame */}
-            <div className="polaroid-card p-3 sm:p-5 rounded-2xl relative w-full">
-              {/* Photo Area */}
-              <div className="relative w-full h-64 sm:h-72 md:h-80 rounded-xl overflow-hidden border-2 border-[#1E1B18] bg-[#D9C7A0]">
-                <img
-                  src={personalInfo.avatar}
-                  alt={personalInfo.name}
-                  className="w-full h-full object-cover object-top filter contrast-105"
-                  loading="eager"
-                />
-                {/* Stamp overlay */}
-                <div className="absolute bottom-2.5 right-2.5 px-2 py-0.5 bg-[#FBF8EF]/95 border border-[#1E1B18] rounded font-pixel text-[8px] sm:text-[9px] text-[#5A0B16] rotate-3 shadow-sm">
-                  VERIFIED // HP
-                </div>
-              </div>
+          {/* Polka-Dot Sticker Tag on bottom-left */}
+          <div className="washi-tape-strip washi-gold-dotted -bottom-3 -left-3 w-20 sm:w-24 -rotate-6" />
 
-              {/* Polaroid Footer with Handwritten Note */}
-              <div className="pt-3 pb-1 text-center">
-                <p className="font-hand text-xl sm:text-2xl text-[#5A0B16] font-bold">
-                  Himani Patel &hearts;
-                </p>
-                <p className="font-mono text-[11px] sm:text-xs text-[#8A9A2B] font-semibold">
-                  Software Engineer &bull; Hyderabad
-                </p>
-              </div>
-            </div>
-
-            {/* Sticky tag contained cleanly */}
-            <div className="absolute -bottom-3 left-2 sm:-left-6 bg-[#FBF8EF] border-2 border-[#1E1B18] rounded-xl px-2.5 py-1 shadow-retro-sm -rotate-3 select-none">
-              <span className="font-hand text-sm sm:text-base text-[#E0147E] font-bold">
-                that's me! 🌸
+          {/* Badge Header Row */}
+          <div className="hero-badge-elem flex items-center justify-between border-b-2 border-[#3E1F1B]/15 pb-3 mb-5 text-xs font-mono">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#B08A4A] animate-pulse" />
+              <span className="font-serif uppercase tracking-widest text-[#3E1F1B] font-bold text-[11px] sm:text-xs">
+                DEVELOPER PORTFOLIO
               </span>
             </div>
+            <span className="font-mono text-[10px] sm:text-[11px] px-2 py-0.5 rounded-full bg-[#F6F0DC] border border-[#B08A4A]/40 text-[#3E1F1B] font-semibold">
+              ID // 2026-HP
+            </span>
+          </div>
 
-            {/* Retro Floppy Disk Sticker */}
-            <div className="absolute -top-3 right-2 sm:-right-4 bg-[#D9C7A0] border-2 border-[#1E1B18] rounded-xl px-2 py-1 shadow-retro-sm rotate-6 flex items-center gap-1">
-              <span className="text-xs">💾</span>
-              <span className="font-pixel text-[8px] text-[#1E1B18] font-bold">1.44MB</span>
+          {/* Badge Profile Row: Photo Frame + Titles */}
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-6 mb-5">
+            {/* Profile Photo in Rounded Arch Frame with Gold Star */}
+            <div className="hero-badge-elem relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border-2 border-[#3E1F1B] bg-[#F6F0DC] shadow-sm shrink-0">
+              <img
+                src={personalInfo.avatar}
+                alt={personalInfo.name}
+                className="w-full h-full object-cover object-top"
+                loading="eager"
+              />
+              <div className="absolute top-1 right-1 px-1.5 py-0.5 rounded-full bg-[#3E1F1B] text-[#F7C8DA] text-[8px] font-mono font-bold">
+                ENG
+              </div>
+            </div>
+
+            {/* Name, Script Overlay & Tag */}
+            <div className="hero-badge-elem flex flex-col items-center sm:items-start text-center sm:text-left min-w-0 flex-grow">
+              <div className="inline-block relative">
+                <h1 className="font-serif font-black text-3xl sm:text-4xl md:text-5xl text-[#3E1F1B] tracking-tight leading-tight">
+                  Himani Patel
+                </h1>
+                <span className="absolute -top-3 sm:-top-4 -right-4 sm:-right-8 font-script text-3xl sm:text-4xl text-[#B08A4A] -rotate-6 pointer-events-none select-none">
+                  Creator
+                </span>
+              </div>
+
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#3E1F1B] text-[#F6F0DC] font-serif text-xs tracking-wider uppercase font-semibold mt-1.5 mb-2.5 shadow-sm">
+                <Sparkles className="w-3 h-3 text-[#F7C8DA]" />
+                <span>Software Engineer</span>
+              </div>
+
+              <p className="font-mono text-xs text-[#2B1512]/80 leading-relaxed max-w-xs">
+                Building scalable full-stack products with .NET Core, Node.js, React, and IoT monitoring.
+              </p>
             </div>
           </div>
+
+          {/* Mini Metadata Grid inside Badge */}
+          <div className="hero-badge-elem grid grid-cols-2 gap-2 p-3 rounded-2xl bg-[#F6F0DC] border border-[#3E1F1B]/15 text-left font-mono text-[11px] mb-4">
+            <div>
+              <span className="text-[9px] uppercase tracking-wider text-[#B08A4A] font-bold block">
+                LOCATION
+              </span>
+              <span className="font-semibold text-[#3E1F1B]">{personalInfo.location}</span>
+            </div>
+            <div>
+              <span className="text-[9px] uppercase tracking-wider text-[#B08A4A] font-bold block">
+                TIMEZONE (IST)
+              </span>
+              <span className="font-semibold text-[#3E1F1B]">{currentTime || 'UTC+5:30'}</span>
+            </div>
+          </div>
+
+          {/* Barcode Strip & Decorative Details */}
+          <div className="hero-badge-elem pt-3 border-t-2 border-dashed border-[#3E1F1B]/20 flex items-center justify-between">
+            <div className="h-6 w-32 sm:w-40 barcode-strip rounded-xs opacity-75" />
+            <div className="text-right">
+              <span className="font-mono text-[9px] text-[#3E1F1B]/60 block leading-tight">
+                AUTHENTIC // HP-DEV
+              </span>
+              <span className="font-hand text-sm text-[#B08A4A] font-bold">
+                verified engineer &hearts;
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Quick Action Pill Buttons (Creator Media Kit CTAs) */}
+        <div className="hero-cta-buttons flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-8 z-20">
+          {/* View Projects */}
+          <a
+            href="#projects"
+            onClick={(e) => handleScrollTo(e, '#projects')}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#3E1F1B] text-[#F6F0DC] font-serif font-bold text-xs sm:text-sm tracking-wider uppercase border border-[#B08A4A] shadow-md hover:bg-[#4A2722] hover:scale-105 active:scale-95 transition-all cursor-pointer"
+          >
+            <span>View Featured Projects</span>
+            <ArrowUpRight className="w-4 h-4 text-[#F7C8DA]" />
+          </a>
+
+          {/* Resume & Background */}
+          <a
+            href="#about"
+            onClick={(e) => handleScrollTo(e, '#about')}
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#F7C8DA] text-[#3E1F1B] font-serif font-bold text-xs sm:text-sm tracking-wider uppercase border border-[#3E1F1B]/30 shadow-md hover:bg-[#EEB1C7] hover:scale-105 active:scale-95 transition-all cursor-pointer"
+          >
+            <FileText className="w-4 h-4 text-[#3E1F1B]" />
+            <span>Developer Profile</span>
+          </a>
+
+          {/* Contact Pill */}
+          <a
+            href="#contact"
+            onClick={(e) => handleScrollTo(e, '#contact')}
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#FBF8EF] text-[#3E1F1B] font-serif font-bold text-xs sm:text-sm tracking-wider uppercase border border-[#3E1F1B]/20 shadow-md hover:bg-white hover:scale-105 active:scale-95 transition-all cursor-pointer"
+          >
+            <Mail className="w-4 h-4 text-[#B08A4A]" />
+            <span>Let's Connect</span>
+          </a>
         </div>
       </div>
     </section>

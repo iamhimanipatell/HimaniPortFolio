@@ -1,71 +1,82 @@
-# Himani Patel — Personal Portfolio Website (Y2K Retro-Desktop Scrapbook Edition)
+# Himani Patel — Personal Portfolio Website (Creator-Style Editorial Scrapbook Edition)
 
-An aesthetic, playful, feminine-tech personal portfolio website built for **Himani Patel**, Software Engineer based in Hyderabad, India.
+A warm, aesthetic, editorial developer portfolio website built for **Himani Patel**, Software Engineer based in Hyderabad, India.
 
-Designed with a **Y2K retro-desktop scrapbook** aesthetic—blending the nostalgia of a retro operating system (Windows 98 / MS Paint windows, draggable title bars, beveled buttons) with an aesthetic collage scrapbook (polaroids, washi tape strips, doodle arrows, handwritten notes, and floating stickers)—while maintaining clean typography and WCAG AA contrast for recruiters.
+Designed with a **creator-style editorial media kit** aesthetic—blending the elegance of high-contrast display typography (DM Serif Display & Playfair Display), romantic overlapping script (Pinyon Script), tactile scrapbook elements (ID badge with lanyard clip, butter yellow sticky notes, washi tape strips, polaroids, phone mockups with white bezels, spec sheet tables, gold 4-point stars, and grid-paper textures)—while maintaining crisp readability and strict WCAG AA contrast for technical recruiters.
 
 ---
 
-## 🎨 Theme & Design System
+## 🎨 Theme & Color System
 
-- **Color Palette**:
-  - Background cream/sand: `#E9E7CB` (main canvas with subtle paper noise)
-  - Warm beige: `#D9C7A0` (cards & toolbars)
-  - Taupe: `#A08C6E` (accents & gradients)
-  - Olive green: `#8A9A2B` (window titlebars & badges)
-  - Bubblegum pink: `#F06EAF` & Hot magenta: `#E0147E` (CTAs & washi tape)
-  - Deep burgundy: `#5A0B16` & `#7A1020` (floating nav pill & headlines)
-  - Off-white: `#FBF8EF` (polaroids & paper notes)
-  - Ink: `#1E1B18` (high-contrast text passing WCAG AA)
-  - Cyan glow: `#7DF3FF` (subtle glass HUD highlights)
-- **Typography**:
-  - `Silkscreen`: Retro pixel font for window titlebars, tabs, and tags
-  - `Playfair Display`: High-contrast elegant serif for main headlines
-  - `Pinyon Script`: Romantic cursive script for overlapping headline accents
-  - `Caveat`: Handwritten doodle annotations and arrows
-  - `DM Mono`: Clean monospace for technical descriptions and stats
+- **Chocolate Brown**: `#3E1F1B` (main dark sections, badge background, buttons)
+- **Deeper Brown**: `#2B1512` (high-contrast text on cream)
+- **Cream**: `#F6F0DC` (main light canvas with subtle paper noise)
+- **Paper White**: `#FBF8EF` (cards & polaroid frames)
+- **Soft Butter Yellow**: `#E3DAA0` (sticky notes & highlights)
+- **Blush Pink**: `#F7C8DA` & **Light Pink**: `#FCE7EF` (pill buttons, badges & stickers)
+- **Gold-Brown Accent**: `#B08A4A` (4-point stars, thin borders, badges)
+- **Grid-Paper Lines**: `#D9D2B8` at low opacity on cream and yellow sections
+- **Dark Pinstripes**: Subtle pinstripe pattern on brown sections
+
+---
+
+## ✒️ Typography Pairing
+
+- **Display Serif**: `DM Serif Display` & `Playfair Display` for bold headlines and section titles
+- **Flowing Script**: `Pinyon Script` for overlapping titles and accents
+- **Handwritten**: `Caveat` for sticky notes and captions
+- **Clean Body & Mono**: `Plus Jakarta Sans` & `DM Mono` for technical descriptions
 
 ---
 
 ## ⚡ Tech Stack
 
 - **Framework**: React 18 + Vite 5
-- **Styling**: Tailwind CSS with custom retro design tokens
-- **Animation**: GSAP 3.12 (ScrollTrigger + Draggable)
+- **Styling**: Tailwind CSS with custom editorial design tokens
+- **Animation**: GSAP 3.12 (ScrollTrigger)
 - **Smooth Scroll**: Lenis
 - **Icons**: Lucide React
 - **Deployment**: Vercel CI/CD via GitHub
 
 ---
 
-## ✨ Scrapbook Components & Features
+## ✨ Signature Components
 
-1. **Retro Boot Preloader**: Retro dialog (`Himani_OS_v2.0.exe`) with a segmented progress bar and floating bouncy stickers.
-2. **Draggable Windows (`RetroWindow.jsx`)**:
-   - Olive-to-tan gradient titlebars with pixel titles (`about_himani.exe`, `projects_showcase.exe - Paint`, etc.).
-   - Playful close button `✕` that does a cartoon shake instead of closing.
-   - Desktop drag-and-drop powered by **GSAP Draggable** (automatically disabled on mobile).
-3. **Hero Collage**:
-   - Grand serif headline *Himani Patel* with overlapping script *Software Engineer*.
-   - Profile photo framed as a Polaroid with washi tape and verified stamp.
-   - Hand-drawn SVG doodle arrows and handwritten notes (`"hi, that's me! ✨"`, `"full-stack & IoT"`).
-   - Floating stickers (🌸, 💖, ✨, ⭐) with mouse parallax.
-4. **Social Dashboard Bento Grid (About)**:
-   - Profile header card with key metric counters.
-   - Stat cards: **25% faster page loads**, **40% faster content uploads**, **15+ agents supported**, **Agile team leadership**.
-5. **Projects Showcase**:
-   - 8-color theme swatch palette divider.
-   - Polaroid cards with washi tape, hand-drawn demo arrows, and hot pink pill buttons.
-   - Frosted glass HUD variant with thin cyan corner brackets and "now playing" header.
-   - Preserves all projects: **Pet-Boarding**, **Stitch Noor**, **Blossom Planner**, **Gift Shop React**, and **Clothing UX 1 & 2** (Figma).
-6. **Skills & Toolbox**:
-   - Infinite marquee ticker of technologies with retro pixel stars.
-   - Categorized MS Paint toolbar tabs with segmented volume equalizer bars.
-7. **Experience File Explorer**:
-   - File explorer log layout with an animated SVG timeline path drawing on scroll.
-8. **Contact & Footer**:
-   - Retro Outlook Express '98 email composer (`compose_message.exe`) with direct mailto transmitter and copyable email.
-   - Monospace scrapbook footer: `/// @himanipatel — software engineer scrapbook ver 2.0`.
+1. **Hero ID Badge (`Hero.jsx`)**:
+   - Cream card suspended on a lanyard with metal binder clip.
+   - Serif "DEVELOPER PORTFOLIO", flowing script "Himani Patel", pill badge "Software Engineer", rounded photo frame, decorative barcode strip, and washi-tape corner.
+   - Gently swings on load and on hover.
+2. **"Why Work With Me?" Sticky Notes (`WhyWorkWithMe.jsx`)**:
+   - 4 butter-yellow sticky notes with patterned washi tape (gingham, dotted, floral).
+   - Real claims: Full-stack builder, Performance-minded (25% faster load, 40% faster upload), Team player (Agile team lead), Quick learner.
+   - Lift and straighten on hover with gold 4-point star dividers.
+3. **About / "Hey, I'm Himani" (`About.jsx`)**:
+   - Split layout:
+     - Left chocolate brown panel with script greeting, bio narrative, polaroid with binder clip, and "building cool stuff ✨" sticker.
+     - Right cream "DEVELOPER PROFILE" spec sheet table card with structured rows: Location, Core stack, Backend, Frontend, Databases, Practices, Education, and Cognizant status.
+4. **"What I Can Build" Capabilities (`Services.jsx`)**:
+   - 4 cream cards with thin rounded borders (rate-card style with NO prices):
+     1. Full-Stack Web Applications
+     2. REST APIs & Backend Systems
+     3. Dashboards & Real-Time UIs
+     4. IoT Monitoring Systems
+5. **Featured Projects (`Projects.jsx`)**:
+   - Displayed inside rounded phone and browser mockups with white bezels on grid paper.
+   - Case-study block in serif & script (Project, Concept, Built with, Highlights).
+   - Preserves all projects: **Pet-Boarding**, **Stitch Noor**, **Blossom Planner**, **Gift Shop React**, and **Figma UI/UX 1 & 2**.
+6. **Technical Repertoire (`Skills.jsx`)**:
+   - Brown pill buttons grouped by category.
+   - Infinite marquee strip of white circular tech-logo badges.
+7. **Career Timeline (`Experience.jsx`)**:
+   - Stacked cream cards with gold star markers and an animated vertical line that draws itself on scroll.
+8. **Education & Credentials (`Education.jsx`)**:
+   - Lovely Professional University B.Tech CSE degree diploma card.
+   - 3 verified certification cards with modal lightbox proof.
+9. **Contact & Editorial Dispatch (`Contact.jsx`)**:
+   - Chocolate brown section with large serif "LET'S CONNECT &" and script "Collaborate!".
+   - Rounded arch photo frame, round icon buttons, blush pink pill mailto button, and direct message composer.
+10. **Footer (`Footer.jsx`)**:
+    - Monospace scrapbook footer: `/// @himanipatel — software engineer editorial media kit`.
 
 ---
 
@@ -80,6 +91,6 @@ npm run build
 
 # Push changes (Vercel will auto-deploy)
 git add .
-git commit -m "Redesign portfolio to Y2K retro-desktop scrapbook theme"
+git commit -m "Redesign portfolio to creator-style editorial scrapbook theme"
 git push origin main
 ```

@@ -3,13 +3,14 @@ import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-// Scrapbook Components
+// Editorial Scrapbook Components
 import Preloader from './components/Preloader';
-import CustomCursor from './components/CustomCursor';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import WhyWorkWithMe from './components/WhyWorkWithMe';
 import About from './components/About';
 import Projects from './components/Projects';
+import Services from './components/Services';
 import Skills from './components/Skills';
 import Experience from './components/Experience';
 import Education from './components/Education';
@@ -52,21 +53,20 @@ export default function App() {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-[#E9E7CB] text-[#1E1B18] selection:bg-[#F06EAF] selection:text-[#FBF8EF] antialiased overflow-x-hidden paper-grain">
-      {/* Retro OS Boot Preloader */}
+    <div className="relative min-h-screen bg-[#F6F0DC] text-[#2B1512] selection:bg-[#F7C8DA] selection:text-[#3E1F1B] antialiased overflow-x-hidden paper-grain">
+      {/* Intro Preloader */}
       {loading && <Preloader onComplete={() => setLoading(false)} />}
 
-      {/* Retro Pixel Cursor on Desktop */}
-      <CustomCursor />
-
-      {/* Floating Burgundy Scrapbook Navbar */}
+      {/* Slim Pill Navbar */}
       <Navbar />
 
-      {/* Main Content Sections */}
+      {/* Main Editorial Scrapbook Sections */}
       <main className="relative z-10 flex flex-col gap-6 sm:gap-10">
         <Hero />
+        <WhyWorkWithMe />
         <About />
         <Projects />
+        <Services />
         <Skills />
         <Experience />
         <Education />

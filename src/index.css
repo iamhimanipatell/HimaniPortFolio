@@ -3,31 +3,27 @@
 @tailwind utilities;
 
 :root {
-  /* Y2K Retro-Desktop Scrapbook Color System */
-  --bg-sand: #E9E7CB;
-  --bg-warm-beige: #D9C7A0;
-  --bg-taupe: #A08C6E;
-  --color-olive: #8A9A2B;
-  --color-pink-bubblegum: #F06EAF;
-  --color-pink-hot: #E0147E;
-  --color-burgundy: #5A0B16;
-  --color-burgundy-light: #7A1020;
-  --color-offwhite: #FBF8EF;
-  --color-ink: #1E1B18;
-  --color-cyan-glow: #7DF3FF;
+  /* Creator-Style Editorial Scrapbook Color Palette */
+  --color-brown: #3E1F1B;
+  --color-brown-deep: #2B1512;
+  --color-cream: #F6F0DC;
+  --color-paper: #FBF8EF;
+  --color-butter: #E3DAA0;
+  --color-blush: #F7C8DA;
+  --color-blush-light: #FCE7EF;
+  --color-gold: #B08A4A;
+  --color-gridline: #D9D2B8;
 
-  --font-pixel: 'Silkscreen', monospace;
-  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-serif: 'DM Serif Display', 'Playfair Display', Georgia, serif;
   --font-script: 'Pinyon Script', cursive;
   --font-hand: 'Caveat', cursive;
   --font-mono: 'DM Mono', monospace;
   --font-sans: 'Plus Jakarta Sans', sans-serif;
 }
 
-/* Global resets & typography */
 html {
-  background-color: var(--bg-sand);
-  color: var(--color-ink);
+  background-color: var(--color-cream);
+  color: var(--color-brown-deep);
   font-family: var(--font-sans);
   scroll-behavior: smooth;
   text-rendering: optimizeLegibility;
@@ -37,8 +33,8 @@ html {
 }
 
 body {
-  background-color: var(--bg-sand);
-  color: var(--color-ink);
+  background-color: var(--color-cream);
+  color: var(--color-brown-deep);
   max-width: 100%;
   overflow-x: hidden;
   position: relative;
@@ -49,151 +45,159 @@ body {
   overflow-x: hidden;
 }
 
-img, svg, video, canvas, audio, iframe, embed, object {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Lenis Recommended CSS */
+/* Lenis Recommended Rules */
 html.lenis, html.lenis body {
   height: auto;
 }
-
 .lenis.lenis-smooth {
   scroll-behavior: auto !important;
 }
-
 .lenis.lenis-smooth [data-lenis-prevent] {
   overscroll-behavior: contain;
 }
-
 .lenis.lenis-stopped {
   overflow: hidden;
 }
 
-/* Custom Scrollbar in Retro Olive / Burgundy */
+/* Custom Scrollbar in Chocolate Brown & Gold */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #E9E7CB;
-  border-left: 2px solid #1E1B18;
+  background: #F6F0DC;
 }
 ::-webkit-scrollbar-thumb {
-  background: #8A9A2B;
-  border: 2px solid #1E1B18;
-  border-radius: 4px;
+  background: #B08A4A;
+  border-radius: 9999px;
+  border: 2px solid #F6F0DC;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #E0147E;
+  background: #3E1F1B;
 }
 
-/* Text Selection in Bubblegum Pink */
+/* Selection in Blush Pink */
 ::selection {
-  background: #F06EAF;
-  color: #FBF8EF;
+  background: #F7C8DA;
+  color: #3E1F1B;
 }
 
-/* Paper Grain / Noise Overlay */
+/* Subtle Paper Grain / Noise */
 .paper-grain {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.045'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
 }
 
-/* Washi Tape Strip */
-.washi-tape {
-  position: absolute;
-  height: 24px;
-  background: rgba(240, 110, 175, 0.45);
-  backdrop-filter: blur(2px);
-  border-left: 3px dashed rgba(255, 255, 255, 0.6);
-  border-right: 3px dashed rgba(255, 255, 255, 0.6);
-  box-shadow: 0 2px 6px rgba(30, 27, 24, 0.12);
-  z-index: 20;
-}
-
-.washi-tape-olive {
-  background: rgba(138, 154, 43, 0.45);
-}
-
-.washi-tape-taupe {
-  background: rgba(160, 140, 110, 0.4);
-}
-
-.washi-tape-gingham {
-  background-color: rgba(240, 110, 175, 0.35);
+/* Grid-Paper Pattern (low opacity) */
+.bg-grid-paper {
+  background-size: 24px 24px;
   background-image: 
-    linear-gradient(90deg, rgba(255, 255, 255, 0.5) 50%, transparent 50%),
-    linear-gradient(rgba(255, 255, 255, 0.5) 50%, transparent 50%);
-  background-size: 8px 8px;
+    linear-gradient(to right, rgba(217, 210, 184, 0.45) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(217, 210, 184, 0.45) 1px, transparent 1px);
 }
 
-/* Polaroid Photo Card */
+/* Dark Brown Pinstripe Pattern */
+.bg-brown-pinstripe {
+  background-color: #3E1F1B;
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.02) 0px,
+    rgba(255, 255, 255, 0.02) 2px,
+    transparent 2px,
+    transparent 12px
+  );
+}
+
+/* Butter Yellow Sticky Note */
+.sticky-note {
+  background-color: #E3DAA0;
+  box-shadow: 4px 6px 16px rgba(43, 21, 18, 0.12), 0 1px 3px rgba(43, 21, 18, 0.08);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
+}
+
+.sticky-note:hover {
+  transform: translateY(-6px) rotate(0deg) scale(1.02);
+  box-shadow: 6px 12px 24px rgba(43, 21, 18, 0.18);
+}
+
+/* Polaroid Card */
 .polaroid-card {
   background: #FBF8EF;
-  border: 2px solid #1E1B18;
-  box-shadow: 6px 8px 0px rgba(30, 27, 24, 0.9);
+  box-shadow: 0 12px 28px -6px rgba(43, 21, 18, 0.15), 0 4px 10px rgba(43, 21, 18, 0.06);
+  border: 1px solid rgba(62, 31, 27, 0.08);
   transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
 }
 
 .polaroid-card:hover {
-  transform: translateY(-6px) rotate(0deg) scale(1.02);
-  box-shadow: 8px 12px 0px rgba(224, 20, 126, 0.9);
+  transform: translateY(-5px) rotate(0deg) scale(1.01);
+  box-shadow: 0 18px 36px -8px rgba(62, 31, 27, 0.22);
 }
 
-/* Retro Glass HUD Card with Cyan Glow */
-.retro-glass-card {
-  background: rgba(251, 248, 239, 0.65);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 2px solid #1E1B18;
-  box-shadow: 5px 5px 0px #1E1B18, 0 0 15px rgba(125, 243, 255, 0.3);
+/* Washi Tape Strips */
+.washi-tape-strip {
+  position: absolute;
+  height: 22px;
+  backdrop-filter: blur(2px);
+  box-shadow: 0 2px 5px rgba(43, 21, 18, 0.1);
+  z-index: 20;
 }
 
-/* Retro Beveled Windows 98 Button */
-.retro-btn {
-  background: #E9E7CB;
-  border-top: 2px solid #FFFFFF;
-  border-left: 2px solid #FFFFFF;
-  border-right: 2px solid #1E1B18;
-  border-bottom: 2px solid #1E1B18;
-  color: #1E1B18;
-  box-shadow: 2px 2px 0px #1E1B18;
-  transition: all 0.1s ease;
+.washi-pink-gingham {
+  background-color: rgba(247, 200, 218, 0.7);
+  background-image: 
+    linear-gradient(90deg, rgba(255, 255, 255, 0.6) 50%, transparent 50%),
+    linear-gradient(rgba(255, 255, 255, 0.6) 50%, transparent 50%);
+  background-size: 8px 8px;
+  border-left: 2px dashed rgba(255, 255, 255, 0.7);
+  border-right: 2px dashed rgba(255, 255, 255, 0.7);
 }
 
-.retro-btn:active {
-  border-top: 2px solid #1E1B18;
-  border-left: 2px solid #1E1B18;
-  border-right: 2px solid #FFFFFF;
-  border-bottom: 2px solid #FFFFFF;
-  transform: translate(2px, 2px);
-  box-shadow: none;
+.washi-gold-dotted {
+  background-color: rgba(176, 138, 74, 0.45);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.7) 1px, transparent 1px);
+  background-size: 6px 6px;
+  border-left: 2px dashed rgba(255, 255, 255, 0.6);
+  border-right: 2px dashed rgba(255, 255, 255, 0.6);
 }
 
-/* Retro Window Title Bar */
-.window-titlebar {
-  background: linear-gradient(90deg, #8A9A2B 0%, #A08C6E 100%);
-  border-bottom: 2px solid #1E1B18;
+.washi-cream-floral {
+  background-color: rgba(246, 240, 220, 0.75);
+  border-left: 2px dashed rgba(176, 138, 74, 0.5);
+  border-right: 2px dashed rgba(176, 138, 74, 0.5);
 }
 
-/* Pixel cursor styling */
-.cursor-pixel {
-  pointer-events: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 99999;
-  transform: translate(-2px, -2px);
+/* Phone Mockup Frame (White Bezel) */
+.phone-mockup {
+  background: #FBF8EF;
+  border: 8px solid #FFFFFF;
+  border-radius: 36px;
+  box-shadow: 0 20px 45px -10px rgba(43, 21, 18, 0.25), 0 0 0 1px rgba(62, 31, 27, 0.1);
+  overflow: hidden;
 }
 
-/* Hand-drawn SVG doodle animations */
-.doodle-path {
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
-  transition: stroke-dashoffset 1.4s ease-out;
+/* Browser Mockup Frame */
+.browser-mockup {
+  background: #FFFFFF;
+  border-radius: 20px;
+  box-shadow: 0 20px 45px -12px rgba(43, 21, 18, 0.2), 0 0 0 1px rgba(62, 31, 27, 0.08);
+  overflow: hidden;
 }
-.doodle-path.drawn {
-  stroke-dashoffset: 0;
+
+/* Barcode Graphic */
+.barcode-strip {
+  background-image: repeating-linear-gradient(
+    90deg,
+    #3E1F1B 0px,
+    #3E1F1B 2px,
+    transparent 2px,
+    transparent 4px,
+    #3E1F1B 4px,
+    #3E1F1B 7px,
+    transparent 7px,
+    transparent 9px,
+    #3E1F1B 9px,
+    #3E1F1B 10px,
+    transparent 10px,
+    transparent 13px
+  );
 }
 
 /* Reduced Motion Override */
@@ -205,9 +209,5 @@ html.lenis, html.lenis body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-  
-  .cursor-pixel, .sparkle-particle {
-    display: none !important;
   }
 }

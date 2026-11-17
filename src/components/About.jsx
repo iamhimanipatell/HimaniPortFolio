@@ -1,9 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Gauge, Zap, Users, Award, CheckCircle2 } from 'lucide-react';
-import RetroWindow from './RetroWindow';
-import { personalInfo, keyStats } from '../data/portfolioData';
+import { Sparkles, MapPin, CheckCircle2, GraduationCap, Briefcase } from 'lucide-react';
+import { personalInfo, educationData, keyStats } from '../data/portfolioData';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,15 +14,25 @@ export default function About() {
     if (prefersReducedMotion) return;
 
     const ctx = gsap.context(() => {
-      gsap.from('.about-bento-card', {
+      gsap.from('.about-panel-left', {
         scrollTrigger: {
-          trigger: '.about-bento-grid',
+          trigger: '.about-editorial-grid',
           start: 'top 80%',
         },
-        y: 30,
+        x: -40,
         opacity: 0,
-        stagger: 0.1,
-        duration: 0.7,
+        duration: 0.9,
+        ease: 'power3.out',
+      });
+
+      gsap.from('.about-spec-right', {
+        scrollTrigger: {
+          trigger: '.about-editorial-grid',
+          start: 'top 80%',
+        },
+        x: 40,
+        opacity: 0,
+        duration: 0.9,
         ease: 'power3.out',
       });
     }, sectionRef);
@@ -31,175 +40,158 @@ export default function About() {
     return () => ctx.revert();
   }, []);
 
-  const getStatIcon = (id) => {
-    switch (id) {
-      case 'stat-1':
-        return <Gauge className="w-4 h-4 sm:w-5 sm:h-5 text-[#8A9A2B]" />;
-      case 'stat-2':
-        return <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-[#E0147E]" />;
-      case 'stat-3':
-        return <Users className="w-4 h-4 sm:w-5 sm:h-5 text-[#8A9A2B]" />;
-      case 'stat-4':
-        return <Award className="w-4 h-4 sm:w-5 sm:h-5 text-[#E0147E]" />;
-      default:
-        return <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#8A9A2B]" />;
-    }
-  };
+  const specRows = [
+    { label: "LOCATION", value: personalInfo.location },
+    { label: "CORE STACK", value: ".NET Core, Node.js, React.js, SQL Server, MongoDB" },
+    { label: "BACKEND", value: "ASP.NET Core Web API, EF Core, Express.js, JWT, RESTful APIs" },
+    { label: "FRONTEND", value: "React.js, GSAP & ScrollTrigger, Tailwind CSS, Vite" },
+    { label: "DATABASES", value: "SQL Server (SSMS), MongoDB, Mongoose ODM, LINQ" },
+    { label: "PRACTICES", value: "Agile / Scrum Leadership, Performance Tuning, Clean Architecture" },
+    { label: "EDUCATION", value: `${educationData.degree} — Lovely Professional University (${educationData.period}, CGPA ${educationData.cgpa})` },
+    { label: "CURRENTLY", value: "Programmer Analyst Trainee (PAT) at Cognizant (Hyderabad)" },
+  ];
 
   return (
     <section
       id="about"
       ref={sectionRef}
-      className="relative py-12 sm:py-20 px-3 sm:px-6 md:px-8 max-w-7xl mx-auto z-10 w-full"
+      className="relative py-16 sm:py-24 px-3 sm:px-6 md:px-8 max-w-7xl mx-auto z-10 w-full"
     >
-      {/* Decorative Scrapbook Sticky Note */}
-      <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-        <span className="font-pixel text-[10px] sm:text-xs text-[#E0147E] bg-[#D9C7A0] px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full border-2 border-[#1E1B18] shadow-retro-sm">
-          // SECTION 01
-        </span>
-        <span className="font-hand text-lg sm:text-2xl text-[#5A0B16] font-bold truncate">
-          get to know me a little better &hearts;
-        </span>
+      {/* Section Header */}
+      <div className="flex flex-col items-center text-center mb-12 sm:mb-16">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E3DAA0] text-[#3E1F1B] border border-[#B08A4A]/40 font-mono text-xs font-semibold mb-3 shadow-sm">
+          <Sparkles className="w-3.5 h-3.5 text-[#B08A4A]" />
+          <span>EDITORIAL MEDIA KIT &bull; SPEC SHEET</span>
+        </div>
+
+        <div className="relative inline-block">
+          <h2 className="font-serif font-black text-3xl sm:text-5xl lg:text-6xl text-[#3E1F1B] tracking-tight">
+            Developer Profile &amp; Bio
+          </h2>
+          <span className="absolute -top-3 sm:-top-5 -right-8 sm:-right-14 font-script text-3xl sm:text-5xl text-[#B08A4A] -rotate-6 pointer-events-none select-none">
+            about me
+          </span>
+        </div>
       </div>
 
-      {/* Main Retro Window Wrapping the Section */}
-      <RetroWindow
-        title="about_himani.exe - Notepad &amp; Stats"
-        icon="🌸"
-        showToolbar={true}
-        initialRotation={-0.3}
-      >
-        <div className="about-bento-grid grid grid-cols-1 md:grid-cols-12 gap-3.5 sm:gap-6 w-full">
-          {/* Bento Card 1: Social Profile Dashboard Header */}
-          <div className="about-bento-card md:col-span-12 p-4 sm:p-6 lg:p-7 rounded-2xl bg-[#D9C7A0]/50 border-2 border-[#1E1B18] shadow-retro-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative overflow-hidden w-full">
-            <div className="washi-tape washi-tape-gingham -top-2 right-6 sm:right-12 w-24 sm:w-28 rotate-2" />
-
-            <div className="flex items-center gap-3 sm:gap-4 w-full sm:w-auto">
-              <div className="relative w-14 h-14 sm:w-20 sm:h-20 rounded-full border-2 border-[#1E1B18] overflow-hidden bg-[#FBF8EF] shadow-retro-sm shrink-0">
-                <img
-                  src={personalInfo.avatar}
-                  alt={personalInfo.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="min-w-0 flex-grow">
-                <div className="flex items-center gap-1.5 flex-wrap">
-                  <h3 className="font-serif font-black text-xl sm:text-3xl text-[#5A0B16] truncate">
-                    {personalInfo.name}
-                  </h3>
-                  <span className="px-1.5 py-0.5 rounded bg-[#8A9A2B] text-white font-pixel text-[8px] sm:text-[9px] border border-[#1E1B18]">
-                    PRO
-                  </span>
-                </div>
-                <p className="font-mono text-[11px] sm:text-sm text-[#1E1B18] font-semibold truncate">
-                  Software Engineer &bull; Hyderabad, India
-                </p>
-                <p className="font-hand text-sm sm:text-base text-[#E0147E] font-bold truncate">
-                  &ldquo;Building software with clean architecture&rdquo;
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2 font-mono text-xs text-[#1E1B18] w-full sm:w-auto justify-end">
-              <div className="flex-1 sm:flex-initial px-2.5 py-1.5 rounded-xl bg-[#FBF8EF] border border-[#1E1B18] shadow-retro-sm text-center">
-                <span className="font-pixel text-[11px] sm:text-xs text-[#E0147E] block font-bold">4+</span>
-                <span className="text-[9px] uppercase text-[#1E1B18]/70">Key Metrics</span>
-              </div>
-              <div className="flex-1 sm:flex-initial px-2.5 py-1.5 rounded-xl bg-[#FBF8EF] border border-[#1E1B18] shadow-retro-sm text-center">
-                <span className="font-pixel text-[11px] sm:text-xs text-[#8A9A2B] block font-bold">100%</span>
-                <span className="text-[9px] uppercase text-[#1E1B18]/70">Full Stack</span>
-              </div>
-            </div>
+      {/* Split Layout: Left Brown Panel + Right Spec Sheet Card */}
+      <div className="about-editorial-grid grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 w-full items-stretch">
+        {/* Left: Chocolate Brown Panel with Greeting, Bio, Polaroid & Binder Clip */}
+        <div className="about-panel-left lg:col-span-5 rounded-3xl bg-brown-pinstripe text-[#F6F0DC] p-6 sm:p-8 border-2 border-[#3E1F1B] shadow-2xl relative flex flex-col justify-between overflow-hidden">
+          {/* Subtle gold star accent */}
+          <div className="absolute top-4 right-4 text-[#B08A4A]/70 select-none">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" />
+            </svg>
           </div>
 
-          {/* Bento Card 2: Narrative Bio */}
-          <div className="about-bento-card md:col-span-7 p-4 sm:p-6 lg:p-7 rounded-2xl bg-[#FBF8EF] border-2 border-[#1E1B18] shadow-retro-sm relative w-full">
-            <span className="font-pixel text-[9px] sm:text-[10px] text-[#8A9A2B] font-bold uppercase tracking-wider block mb-2 sm:mb-3">
-              [SYSTEM_BIO.TXT]
+          <div>
+            <span className="font-script text-3xl sm:text-4xl text-[#F7C8DA] block mb-2">
+              Hey there, I'm Himani
             </span>
-            <h4 className="font-serif font-bold text-lg sm:text-2xl text-[#5A0B16] mb-3 sm:mb-4 leading-snug">
-              Driven by curiosity, engineered for real impact.
-            </h4>
-            <div className="space-y-3 font-mono text-xs sm:text-sm text-[#1E1B18] leading-relaxed">
-              {personalInfo.bio.map((paragraph, index) => (
-                <p key={index} className="leading-relaxed">
-                  {paragraph}
-                </p>
+            <h3 className="font-serif font-black text-2xl sm:text-3xl text-white mb-4 tracking-tight leading-snug">
+              Software Engineer with an eye for speed &amp; design.
+            </h3>
+
+            <div className="space-y-3 font-mono text-xs sm:text-sm text-[#F6F0DC]/85 leading-relaxed mb-6">
+              {personalInfo.bio.map((para, i) => (
+                <p key={i}>{para}</p>
               ))}
             </div>
 
-            <div className="mt-4 pt-3 border-t-2 border-dashed border-[#1E1B18]/20 flex items-center justify-between font-hand text-base sm:text-lg text-[#E0147E] font-bold">
-              <span>let's build together ✨</span>
-              <span className="text-xs font-mono text-[#8A9A2B]">-- Himani Patel</span>
+            {/* Polaroid with Binder Clip */}
+            <div className="relative w-full max-w-[240px] sm:max-w-[260px] mx-auto mt-6 mb-4">
+              {/* Binder Clip */}
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-10 h-6 rounded-t-sm bg-gradient-to-b from-[#C7A263] to-[#B08A4A] border border-[#2B1512] z-30 shadow-md flex items-center justify-center">
+                <div className="w-3 h-1.5 rounded-full bg-[#3E1F1B]" />
+              </div>
+
+              {/* Polaroid Card */}
+              <div className="polaroid-card p-3 rounded-2xl bg-[#FBF8EF] border border-[#3E1F1B]/20 text-[#3E1F1B] rotate-2 hover:rotate-0 transition-transform duration-300">
+                <div className="w-full h-44 sm:h-48 rounded-xl overflow-hidden bg-[#E3DAA0] mb-2.5">
+                  <img
+                    src={personalInfo.avatar}
+                    alt={personalInfo.name}
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+                <div className="text-center pb-1">
+                  <p className="font-hand text-lg text-[#3E1F1B] font-bold">
+                    Himani Patel &hearts;
+                  </p>
+                  <p className="font-mono text-[10px] text-[#B08A4A] uppercase tracking-wider">
+                    Software Engineer
+                  </p>
+                </div>
+              </div>
+
+              {/* Floating Handwritten Sticker */}
+              <div className="absolute -bottom-3 -right-4 bg-[#F7C8DA] text-[#3E1F1B] px-3 py-1 rounded-full font-hand text-sm font-bold border border-[#3E1F1B] shadow-sm -rotate-6 select-none">
+                building cool stuff ✨
+              </div>
             </div>
           </div>
 
-          {/* Bento Card 3: Stack Specialization Card */}
-          <div className="about-bento-card md:col-span-5 p-4 sm:p-6 rounded-2xl bg-[#D9C7A0]/60 border-2 border-[#1E1B18] shadow-retro-sm flex flex-col justify-between w-full">
-            <div>
-              <span className="font-pixel text-[9px] sm:text-[10px] text-[#5A0B16] font-bold uppercase tracking-wider block mb-2">
-                [CORE_SPECIALIZATIONS]
-              </span>
-              <h5 className="font-serif font-bold text-base sm:text-lg text-[#1E1B18] mb-2">
-                Full-Stack &amp; IoT Focus
-              </h5>
-              <p className="font-mono text-xs text-[#1E1B18]/80 leading-relaxed mb-4">
-                High-throughput backends (.NET Core, Node.js, SQL Server, MongoDB) combined with responsive, animated frontends (React.js &amp; GSAP).
-              </p>
+          {/* Torn Lined-Notebook Note */}
+          <div className="mt-6 p-4 rounded-xl bg-[#FBF8EF] text-[#2B1512] border border-[#3E1F1B]/20 shadow-sm relative">
+            <div className="washi-tape-strip washi-pink-gingham -top-2 left-6 w-20 rotate-1" />
+            <span className="font-serif text-[10px] uppercase tracking-wider text-[#B08A4A] font-bold block mb-1">
+              PHILOSOPHY
+            </span>
+            <p className="font-hand text-base text-[#3E1F1B] leading-snug">
+              &ldquo;Engineering shouldn't just be functional—it should feel seamless, responsive, and thoughtfully designed.&rdquo;
+            </p>
+          </div>
+        </div>
 
-              <div className="space-y-2 font-mono text-xs">
-                <div className="p-2 sm:p-2.5 rounded-lg bg-[#FBF8EF] border border-[#1E1B18] flex items-center justify-between">
-                  <span>Backend Engineering</span>
-                  <span className="text-[#8A9A2B] font-bold">.NET &amp; Node</span>
-                </div>
-                <div className="p-2 sm:p-2.5 rounded-lg bg-[#FBF8EF] border border-[#1E1B18] flex items-center justify-between">
-                  <span>Frontend Dynamics</span>
-                  <span className="text-[#E0147E] font-bold">React &amp; GSAP</span>
-                </div>
-                <div className="p-2 sm:p-2.5 rounded-lg bg-[#FBF8EF] border border-[#1E1B18] flex items-center justify-between">
-                  <span>IoT Systems</span>
-                  <span className="text-[#5A0B16] font-bold">Sensor Data</span>
-                </div>
+        {/* Right: Cream Spec Sheet Table Card */}
+        <div className="about-spec-right lg:col-span-7 rounded-3xl bg-[#FBF8EF] border-2 border-[#3E1F1B] p-6 sm:p-8 shadow-badge flex flex-col justify-between">
+          <div>
+            {/* Spec Sheet Header */}
+            <div className="flex items-center justify-between border-b-2 border-[#3E1F1B] pb-4 mb-6">
+              <div>
+                <span className="font-serif text-[11px] uppercase tracking-widest text-[#B08A4A] font-bold block">
+                  TECHNICAL SPECIFICATION
+                </span>
+                <h3 className="font-serif font-black text-2xl sm:text-3xl text-[#3E1F1B]">
+                  DEVELOPER PROFILE
+                </h3>
+              </div>
+              <div className="px-3 py-1 rounded-full bg-[#E3DAA0] text-[#3E1F1B] font-mono text-xs font-bold border border-[#3E1F1B]/20">
+                ACTIVE CANDIDATE
               </div>
             </div>
 
-            <div className="mt-4 pt-3 border-t border-[#1E1B18]/20 text-[10px] sm:text-[11px] font-mono text-[#8A9A2B] font-bold">
-              &bull; Agile Certified Leadership Mindset
+            {/* Spec Rows */}
+            <div className="divide-y divide-[#3E1F1B]/15 font-mono text-xs">
+              {specRows.map((row) => (
+                <div key={row.label} className="py-3 flex flex-col sm:flex-row sm:items-start justify-between gap-1 sm:gap-4">
+                  <span className="font-serif text-[11px] font-bold text-[#B08A4A] tracking-wider shrink-0 w-28">
+                    {row.label}
+                  </span>
+                  <span className="text-[#2B1512] font-medium sm:text-right leading-relaxed flex-grow">
+                    {row.value}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Bento Cards 4-7: 4 Key Stats */}
-          {keyStats.map((stat, idx) => (
-            <div
-              key={stat.id}
-              className={`about-bento-card md:col-span-3 p-4 sm:p-5 rounded-2xl border-2 border-[#1E1B18] shadow-retro-sm transition-transform duration-200 hover:-translate-y-0.5 w-full ${
-                idx % 2 === 0 ? 'bg-[#FBF8EF]' : 'bg-[#D9C7A0]/80'
-              }`}
-            >
-              <div className="flex items-center justify-between mb-2 sm:mb-3">
-                <div className="w-8 h-8 rounded-lg bg-[#E9E7CB] border border-[#1E1B18] flex items-center justify-center">
-                  {getStatIcon(stat.id)}
-                </div>
-                <span className="font-pixel text-[8px] sm:text-[9px] uppercase px-2 py-0.5 rounded bg-[#E0147E] text-white border border-[#1E1B18]">
-                  {stat.suffix}
+          {/* Proven Stats Summary Row */}
+          <div className="mt-8 pt-5 border-t-2 border-[#3E1F1B] grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {keyStats.map((stat) => (
+              <div key={stat.id} className="p-3 rounded-2xl bg-[#F6F0DC] border border-[#3E1F1B]/15 text-center">
+                <span className="font-serif font-black text-2xl text-[#3E1F1B] block">
+                  {stat.value}
+                </span>
+                <span className="font-serif text-[10px] uppercase tracking-wider text-[#B08A4A] font-bold block mt-0.5">
+                  {stat.label}
                 </span>
               </div>
-
-              <div className="font-serif font-black text-2xl sm:text-4xl text-[#5A0B16] mb-1">
-                {stat.value}
-              </div>
-
-              <h6 className="font-pixel text-[10px] sm:text-[11px] text-[#1E1B18] uppercase tracking-tight mb-1 font-bold">
-                {stat.label}
-              </h6>
-
-              <p className="font-mono text-[10px] sm:text-[11px] text-[#1E1B18]/70 leading-normal">
-                {stat.desc}
-              </p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </RetroWindow>
+      </div>
     </section>
   );
 }

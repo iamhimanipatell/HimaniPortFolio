@@ -333,20 +333,73 @@ export const certificatesData = [
   },
 ];
 
-export const socialLinks = [
+export const whyWorkWithMe = [
   {
-    name: "GitHub",
-    url: "https://github.com/iamhimanipatell",
-    handle: "@iamhimanipatell",
+    id: "why-1",
+    scriptTitle: "Full-Stack Builder",
+    heading: "End-to-End Delivery",
+    description: "Hands-on engineering across React.js, ASP.NET Core, Node.js, SQL Server, and MongoDB.",
+    rotation: "-2deg",
+    tape: "washi-pink-gingham",
   },
   {
-    name: "LinkedIn",
-    url: "https://linkedin.com/in/himanipatelll",
-    handle: "in/himanipatelll",
+    id: "why-2",
+    scriptTitle: "Performance-Minded",
+    heading: "Speed & Optimization",
+    description: "Proven track record cutting page load time by 25% and content upload time by 40%.",
+    rotation: "1.5deg",
+    tape: "washi-gold-dotted",
   },
   {
-    name: "Email",
-    url: "mailto:himanipatel.riya@gmail.com",
-    handle: "himanipatel.riya@gmail.com",
+    id: "why-3",
+    scriptTitle: "Team Player & Leader",
+    heading: "Agile Ownership",
+    description: "Served as Team Leader in an Agile environment to build and ship an IoT monitoring system.",
+    rotation: "-1deg",
+    tape: "washi-cream-floral",
+  },
+  {
+    id: "why-4",
+    scriptTitle: "Quick Learner",
+    heading: "Adaptive Engineering",
+    description: "Rapid mastery of IoT telemetry, cloud edge deployments, enterprise APIs, and modern UI systems.",
+    rotation: "2deg",
+    tape: "washi-pink-gingham",
   },
 ];
+
+export const servicesData = [
+  {
+    id: "service-1",
+    index: "01",
+    title: "Full-Stack Web Applications",
+    scriptTag: "Modern Architectures",
+    description: "Building responsive, resilient web platforms with React frontends, robust state management, and enterprise-grade backend infrastructure.",
+    deliverables: ["Component-Driven React UIs", "Scalable Database Schemas", "Auth & State Workflows"],
+  },
+  {
+    id: "service-2",
+    index: "02",
+    title: "REST APIs & Backend Systems",
+    scriptTag: "High-Throughput Services",
+    description: "Architecting modular, secure backend services using C#, ASP.NET Core Web API, Node.js, EF Core, and JWT authentication.",
+    deliverables: ["Role-Based Access Control", "Entity Framework Core", "Clean Architecture & Indexing"],
+  },
+  {
+    id: "service-3",
+    index: "03",
+    title: "Dashboards & Real-Time UIs",
+    scriptTag: "Live Telemetry & Visuals",
+    description: "Designing live data dashboards and operational interfaces that empower active teams and agents with fluid animations.",
+    deliverables: ["Real-Time Call Tracking", "GSAP & ScrollTrigger Animations", "Responsive Mobile-First UX"],
+  },
+  {
+    id: "service-4",
+    index: "04",
+    title: "IoT Monitoring Systems",
+    scriptTag: "Hardware to Cloud",
+    description: "Engineering connected IoT solutions (like inventory bin monitoring) tracking live sensor telemetry, alert thresholds, and automated rules.",
+    deliverables: ["Sensor Data Ingestion", "Automated Business Rules", "Agile Team Sprint Delivery"],
+  },
+];
+
