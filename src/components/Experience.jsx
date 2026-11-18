@@ -99,7 +99,7 @@ export default function Experience() {
 
                 {/* Stacked Cream Card with Binder Clip / Tape */}
                 <div
-                  className="experience-stacked-card p-5 sm:p-7 lg:p-8 rounded-3xl bg-[#FBF8EF] border-2 border-[#3E1F1B] shadow-badge relative w-full"
+                  className="experience-stacked-card hover-tilt p-5 sm:p-7 lg:p-8 rounded-3xl bg-[#FBF8EF] border-2 border-[#3E1F1B] shadow-badge relative w-full transition-transform duration-300"
                   style={{
                     transform: isDesktop ? `rotate(${rotation})` : 'none',
                   }}

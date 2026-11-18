@@ -11,11 +11,15 @@ export const personalInfo = {
   role: "Software Engineer",
   location: "Hyderabad, India",
   timezone: "Asia/Kolkata",
-  pitch: "I build full-stack products with .NET Core, Node.js, React, SQL Server and MongoDB, plus IoT monitoring systems.",
+  pitch: "Software Engineer based in Hyderabad building full stack web apps with React and .NET Core.",
   bio: [
-    "Software Engineer based in Hyderabad with hands-on experience delivering scalable full-stack web applications and connected IoT solutions.",
-    "Specialized in architecting high-performance backends (.NET Core, Node.js, SQL Server, MongoDB) and fluid, modern frontends with React and GSAP.",
-    "Proven track record of optimizing page load times by 25%, slashing content upload times by 40%, and spearheading Agile sprints to deliver enterprise-grade systems."
+    "Software Engineer based in Hyderabad with a B.Tech in Computer Science Engineering (CSE). Builds full stack web apps with React and .NET Core, delivering clean, scalable, and intuitive digital solutions."
+  ],
+  openToRoles: [
+    "SDE",
+    "Full Stack Developer",
+    "Backend Developer",
+    "UI/UX & Figma"
   ],
   email: "himanipatel.riya@gmail.com",
   linkedin: "https://linkedin.com/in/himanipatelll",
@@ -239,60 +243,54 @@ export const projectsData = [
 ];
 
 export const skillsData = {
-  Languages: [
-    { name: "C#", level: 90, icon: "Code2" },
-    { name: "JavaScript (ES6+)", level: 95, icon: "FileCode" },
-    { name: "TypeScript", level: 80, icon: "FileCode2" },
-    { name: "C++", level: 80, icon: "Cpu" },
-    { name: "Python", level: 75, icon: "Terminal" },
-    { name: "SQL", level: 88, icon: "Database" },
-    { name: "HTML5 & CSS3", level: 95, icon: "Layout" },
+  "Languages & Code": [
+    "C#",
+    "JavaScript",
+    "SQL",
+    "Python"
   ],
-  Backend: [
-    { name: ".NET Core", level: 90, icon: "Server" },
-    { name: "ASP.NET Core Web API", level: 92, icon: "Server" },
-    { name: "Node.js", level: 88, icon: "Terminal" },
-    { name: "Express.js", level: 85, icon: "Layers" },
-    { name: "Entity Framework Core", level: 88, icon: "Database" },
-    { name: "RESTful API Design", level: 92, icon: "Globe" },
-    { name: "JWT Authentication", level: 90, icon: "ShieldCheck" },
-    { name: "Multer File Uploads", level: 85, icon: "UploadCloud" },
+  "Frontend": [
+    "React.js",
+    "HTML",
+    "CSS"
   ],
-  Frontend: [
-    { name: "React.js", level: 95, icon: "Layers" },
-    { name: "GSAP & ScrollTrigger", level: 90, icon: "Layers" },
-    { name: "Tailwind CSS", level: 95, icon: "Palette" },
-    { name: "Responsive UI", level: 95, icon: "Smartphone" },
-    { name: "Vite", level: 90, icon: "Zap" },
-    { name: "State Management", level: 85, icon: "Sliders" },
+  "Backend & Integration": [
+    "Node.js",
+    ".NET Core",
+    "ASP.NET Web API",
+    "Entity Framework Core",
+    "API integration"
   ],
-  Databases: [
-    { name: "SQL Server (SSMS)", level: 90, icon: "Database" },
-    { name: "MongoDB", level: 85, icon: "Database" },
-    { name: "Mongoose ODM", level: 85, icon: "Boxes" },
-    { name: "LINQ Queries", level: 88, icon: "Search" },
-    { name: "Schema Design & Indexing", level: 84, icon: "Table" },
+  "Database": [
+    "SQL Server",
+    "MongoDB"
   ],
-  IoT: [
-    { name: "IoT Bin Monitoring", level: 90, icon: "Radio" },
-    { name: "Sensor Telemetry", level: 85, icon: "Activity" },
-    { name: "Real-time Data Streams", level: 85, icon: "Wifi" },
-    { name: "Hardware-to-Cloud Integration", level: 82, icon: "Cpu" },
+  "DevOps & Cloud": [
+    "Azure",
+    "Docker",
+    "Git/GitHub"
   ],
-  "Cloud & DevOps": [
-    { name: "Vercel", level: 92, icon: "Cloud" },
-    { name: "Netlify", level: 90, icon: "CloudRain" },
-    { name: "Render", level: 85, icon: "Server" },
-    { name: "Git & GitHub", level: 92, icon: "GitBranch" },
-    { name: "Cloud Computing Basics", level: 80, icon: "CloudLightning" },
+  "Design": [
+    "UI/UX",
+    "Figma",
+    "user research",
+    "user experience"
   ],
-  Practices: [
-    { name: "Agile / Scrum Leadership", level: 92, icon: "Users" },
-    { name: "Performance Optimization", level: 90, icon: "Gauge" },
-    { name: "Data Structures & Algorithms", level: 85, icon: "Binary" },
-    { name: "UI/UX Prototyping (Figma)", level: 88, icon: "Figma" },
-    { name: "Clean Architecture", level: 88, icon: "CheckCircle2" },
+  "Tools": [
+    "Postman"
   ],
+  "AI (familiar)": [
+    "AI tools",
+    "Generative AI",
+    "LLMs",
+    "RAG",
+    "Agentic AI"
+  ],
+  "Practices": [
+    "Agile / Scrum Leadership",
+    "Performance Tuning",
+    "Clean Architecture"
+  ]
 };
 
 export const marqueeSkills = [

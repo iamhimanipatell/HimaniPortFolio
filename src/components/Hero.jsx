@@ -251,23 +251,23 @@ export default function Hero() {
               </svg>
             </div>
 
-            {/* 2. THE HERO HIMANI1 CUTOUT — GUARANTEED VISIBLE & PLAYFUL ON HOVER */}
+            {/* 2. THE HERO HIMANI1 CUTOUT — GUARANTEED VISIBLE, GENTLE FLOATING & PLAYFUL ON HOVER */}
             <img
               src="/himani1.png"
               alt={personalInfo.name}
               loading="eager"
               decoding="sync"
-              className="hero-central-person relative z-20 h-full w-auto max-w-none object-contain pointer-events-auto cursor-pointer filter drop-shadow-[0_18px_25px_rgba(43,21,18,0.4)] transition-transform duration-300 ease-out hover:scale-[1.04] hover:-translate-y-2 hover:rotate-1"
+              className="hero-central-person animate-float-gentle relative z-20 h-full w-auto max-w-none object-contain pointer-events-auto cursor-pointer filter drop-shadow-[0_18px_25px_rgba(43,21,18,0.4)] transition-transform duration-300 ease-out hover:scale-[1.04] hover:-translate-y-2 hover:rotate-1"
               style={{
                 maxHeight: '100%',
                 opacity: 1,
               }}
             />
 
-            {/* 3. LEFT ANNOTATION WITH CURLY DOODLE ARROW: "Full-Stack & IoT" */}
-            <div className="hero-annotation-item absolute left-0 sm:-left-3 top-16 sm:top-24 z-20 flex flex-col items-start max-w-[110px] sm:max-w-[130px]">
+            {/* 3. LEFT ANNOTATION WITH CURLY DOODLE ARROW: "Full-Stack Software Engineer" */}
+            <div className="hero-annotation-item absolute left-0 sm:-left-3 top-16 sm:top-24 z-20 flex flex-col items-start max-w-[110px] sm:max-w-[130px] animate-float-gentle" style={{ animationDelay: '1s' }}>
               <span className="font-sans font-bold text-xs sm:text-sm md:text-base text-[#3E1F1B] leading-tight select-none">
-                Full-Stack &amp; IoT Engineer
+                Full-Stack Software Engineer
               </span>
               {/* Curly Doodle Arrow pointing to Himani */}
               <svg width="40" height="38" viewBox="0 0 40 38" fill="none" xmlns="http://www.w3.org/2000/svg" className="mt-1 ml-2 text-[#3E1F1B] transition-transform duration-300 hover:rotate-6">

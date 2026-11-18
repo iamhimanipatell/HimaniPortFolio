@@ -67,7 +67,7 @@ export default function Education() {
 
       <div className="education-section-grid grid grid-cols-1 lg:grid-cols-12 gap-8 w-full">
         {/* Left: Main Degree Diploma Card */}
-        <div className="education-editorial-card lg:col-span-5 p-6 sm:p-8 rounded-3xl bg-[#FBF8EF] border-2 border-[#3E1F1B] shadow-badge relative flex flex-col justify-between w-full">
+        <div className="education-editorial-card hover-tilt lg:col-span-5 p-6 sm:p-8 rounded-3xl bg-[#FBF8EF] border-2 border-[#3E1F1B] shadow-badge relative flex flex-col justify-between w-full transition-transform duration-300">
           <div className="washi-tape-strip washi-pink-gingham -top-2.5 left-8 w-28 -rotate-2" />
 
           <div>
@@ -130,7 +130,7 @@ export default function Education() {
               <div
                 key={cert.id}
                 onClick={() => setSelectedCert(cert)}
-                className="p-4 rounded-3xl bg-[#FBF8EF] border-2 border-[#3E1F1B] shadow-sm hover:shadow-badge hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col justify-between w-full"
+                className="hover-tilt p-4 rounded-3xl bg-[#FBF8EF] border-2 border-[#3E1F1B] shadow-sm hover:shadow-badge transition-all duration-300 cursor-pointer flex flex-col justify-between w-full"
               >
                 <div>
                   {/* Polaroid Frame */}

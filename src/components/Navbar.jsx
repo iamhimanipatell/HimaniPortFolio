@@ -4,12 +4,10 @@ import { personalInfo } from '../data/portfolioData';
 
 const NAV_ITEMS = [
   { label: 'Home', script: 'start', href: '#hero' },
-  { label: 'Why Me', script: 'value', href: '#why-me' },
   { label: 'About', script: 'bio', href: '#about' },
-  { label: 'Projects', script: 'work', href: '#projects' },
-  { label: 'Services', script: 'build', href: '#services' },
-  { label: 'Skills', script: 'stack', href: '#skills' },
   { label: 'Experience', script: 'path', href: '#experience' },
+  { label: 'Projects', script: 'work', href: '#projects' },
+  { label: 'Skills', script: 'stack', href: '#skills' },
   { label: 'Contact', script: 'hello', href: '#contact' },
 ];
 

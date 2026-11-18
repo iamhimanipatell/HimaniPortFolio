@@ -200,6 +200,52 @@ html.lenis, html.lenis body {
   );
 }
 
+/* Playful Wiggle Animation for Skill Chips on Hover */
+@keyframes chipWiggle {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    transform: rotate(-3deg) scale(1.04);
+  }
+  75% {
+    transform: rotate(3deg) scale(1.04);
+  }
+}
+
+.hover-wiggle {
+  transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.hover-wiggle:hover {
+  animation: chipWiggle 0.35s ease-in-out;
+}
+
+/* Subtle Tactile Card Tilt on Hover */
+.hover-tilt {
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+.hover-tilt:hover {
+  transform: translateY(-4px) rotate(0.6deg);
+  box-shadow: 0 14px 28px -6px rgba(43, 21, 18, 0.16);
+}
+
+/* Gentle Floating Animation */
+@keyframes floatGentle {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-float-gentle {
+  animation: floatGentle 4s ease-in-out infinite;
+}
+
 /* Reduced Motion Override */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -209,5 +255,6 @@ html.lenis, html.lenis body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+    transform: none !important;
   }
 }

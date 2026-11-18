@@ -62,31 +62,18 @@ export default function About() {
 
   const specRows = [
     { label: "LOCATION", value: personalInfo.location },
-    { label: "CORE STACK", value: ".NET Core, Node.js, React.js, SQL Server, MongoDB" },
-    { label: "BACKEND", value: "ASP.NET Core Web API, EF Core, Express.js, JWT, RESTful APIs" },
-    { label: "FRONTEND", value: "React.js, GSAP & ScrollTrigger, Tailwind CSS, Vite" },
-    { label: "DATABASES", value: "SQL Server (SSMS), MongoDB, Mongoose ODM, LINQ" },
-    { label: "PRACTICES", value: "Agile / Scrum Leadership, Performance Tuning, Clean Architecture" },
     { label: "EDUCATION", value: `${educationData.degree} — Lovely Professional University (${educationData.period}, CGPA ${educationData.cgpa})` },
     { label: "CURRENTLY", value: "Programmer Analyst Trainee (PAT) at Cognizant (Hyderabad)" },
-  ];
-
-  const statHighlights = [
-    { value: "25%", label: "PAGE LOAD REDUCTION" },
-    { value: "40%", label: "CONTENT UPLOAD SPEEDUP" },
-    { value: "15+", label: "AGENTS SUPPORTED" },
-    { value: "Agile", label: "TEAM LEADERSHIP" },
   ];
 
   return (
     <section
       id="about"
       ref={sectionRef}
-      className="relative py-16 sm:py-24 px-3 sm:px-6 md:px-8 max-w-7xl mx-auto z-10 w-full overflow-visible"
+      className="relative py-14 sm:py-20 px-3 sm:px-6 md:px-8 max-w-7xl mx-auto z-10 w-full overflow-visible"
     >
       {/* =========================================================================
           SECTION HEADING: "Developer Profile & Bio"
-          The lanyard thread starts right beside this heading as in the reference!
       ========================================================================== */}
       <div className="flex flex-col items-center sm:items-start max-w-5xl mx-auto mb-6 sm:mb-8 px-2">
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E3DAA0] text-[#3E1F1B] border border-[#B08A4A]/40 font-mono text-xs font-semibold mb-3 shadow-xs">
@@ -105,14 +92,12 @@ export default function About() {
 
       {/* =========================================================================
           COMPOSITION GRID:
-          Left: Hanging ID Card (no enclosing box, gently swinging, wavy lanyard thread)
-          Right: Technical Specification Sheet Card
+          Left: Hanging ID Card (gently swinging, wavy lanyard thread)
+          Right: Technical Specification Sheet Card (clean, summary, location, education, currently)
       ========================================================================== */}
       <div className="about-composition-container max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-start relative">
         {/* =====================================================================
-            LEFT COLUMN: THE HANGING LANYARD ID BADGE (NO ENCLOSING BOX!)
-            Starts from near heading, wavy S-curve ribbon with daisy flowers,
-            metallic clip, and freely swinging ID card with himani2.
+            LEFT COLUMN: THE HANGING LANYARD ID BADGE
         ====================================================================== */}
         <div className="about-lanyard-hero-col lg:col-span-4 flex flex-col items-center relative select-none">
           {/* 1. WAVY LANYARD THREAD (SVG ribbon starting from heading with soft S-curve) */}
@@ -149,31 +134,26 @@ export default function About() {
               />
 
               {/* Printed White Daisy Floral Stars along the Ribbon (✿ ✦ ✿) */}
-              {/* Flower 1 (Near top origin) */}
               <g transform="translate(230, 6) scale(0.95)">
                 <circle cx="0" cy="0" r="2.5" fill="#B08A4A" />
                 <path d="M-6,0 C-6,-3 -3,-6 0,-6 C3,-6 6,-3 6,0 C6,3 3,6 0,6 C-3,6 -6,3 -6,0 Z" fill="#F6F0DC" opacity="0.95" />
               </g>
 
-              {/* Flower 2 (Upper curve crest) */}
               <g transform="translate(160, 8) scale(0.95)">
                 <circle cx="0" cy="0" r="2.5" fill="#B08A4A" />
                 <path d="M-6,0 C-6,-3 -3,-6 0,-6 C3,-6 6,-3 6,0 C6,3 3,6 0,6 C-3,6 -6,3 -6,0 Z" fill="#F6F0DC" opacity="0.95" />
               </g>
 
-              {/* Flower 3 (Middle loop) */}
               <g transform="translate(105, 48) scale(0.95)">
                 <circle cx="0" cy="0" r="2.5" fill="#B08A4A" />
                 <path d="M-6,0 C-6,-3 -3,-6 0,-6 C3,-6 6,-3 6,0 C6,3 3,6 0,6 C-3,6 -6,3 -6,0 Z" fill="#F6F0DC" opacity="0.95" />
               </g>
 
-              {/* Flower 4 (Lower bend) */}
               <g transform="translate(74, 105) scale(0.95)">
                 <circle cx="0" cy="0" r="2.5" fill="#B08A4A" />
                 <path d="M-6,0 C-6,-3 -3,-6 0,-6 C3,-6 6,-3 6,0 C6,3 3,6 0,6 C-3,6 -6,3 -6,0 Z" fill="#F6F0DC" opacity="0.95" />
               </g>
 
-              {/* Flower 5 (Near clip) */}
               <g transform="translate(112, 155) scale(0.95)">
                 <circle cx="0" cy="0" r="2.5" fill="#B08A4A" />
                 <path d="M-6,0 C-6,-3 -3,-6 0,-6 C3,-6 6,-3 6,0 C6,3 3,6 0,6 C-3,6 -6,3 -6,0 Z" fill="#F6F0DC" opacity="0.95" />
@@ -187,12 +167,12 @@ export default function About() {
             </svg>
           </div>
 
-          {/* 2. THE SWINGING ID CARD (Gently swinging left-to-right with transform-origin: top center) */}
+          {/* 2. THE SWINGING ID CARD */}
           <div className="about-swinging-id-card relative w-[255px] sm:w-[275px] origin-top select-none z-10 -mt-2">
-            {/* Carabiner Clasp Hook over the Eyelet */}
+            {/* Carabiner Clasp Hook */}
             <div className="w-4 h-6 mx-auto -mb-1 bg-gradient-to-b from-[#C7A263] via-[#B08A4A] to-[#8C682D] rounded-b-sm border border-[#2B1512] shadow-sm relative z-30" />
 
-            {/* A. Starburst Sticker Accent (Bottom Right, peaking out behind) */}
+            {/* Starburst Sticker Accent */}
             <div className="absolute -bottom-5 -right-5 z-0 pointer-events-none transform rotate-12 hover:rotate-45 transition-transform duration-700">
               <svg width="60" height="60" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -202,66 +182,40 @@ export default function About() {
               </svg>
             </div>
 
-            {/* B. The Scalloped Badge Card Body */}
+            {/* The Badge Card Body */}
             <div className="relative rounded-2xl bg-[#FBF8EF] border-2 border-[#3E1F1B] shadow-[0_22px_45px_-10px_rgba(43,21,18,0.35)] overflow-visible z-10 transition-transform duration-300">
-              {/* Authentic Left Scalloped Border (SVG continuous semicircular arcs) */}
+              {/* Left Scalloped Border */}
               <svg
                 className="absolute -left-3 top-10 bottom-10 w-3.5 h-[calc(100%-80px)] pointer-events-none z-20"
                 viewBox="0 0 14 260"
                 preserveAspectRatio="none"
               >
                 <path
-                  d="M 14,0 
-                     A 13,13 0 0,0 14,26 
-                     A 13,13 0 0,0 14,52 
-                     A 13,13 0 0,0 14,78 
-                     A 13,13 0 0,0 14,104 
-                     A 13,13 0 0,0 14,130 
-                     A 13,13 0 0,0 14,156 
-                     A 13,13 0 0,0 14,182 
-                     A 13,13 0 0,0 14,208 
-                     A 13,13 0 0,0 14,234 
-                     A 13,13 0 0,0 14,260 
-                     L 14,0 Z"
+                  d="M 14,0 A 13,13 0 0,0 14,26 A 13,13 0 0,0 14,52 A 13,13 0 0,0 14,78 A 13,13 0 0,0 14,104 A 13,13 0 0,0 14,130 A 13,13 0 0,0 14,156 A 13,13 0 0,0 14,182 A 13,13 0 0,0 14,208 A 13,13 0 0,0 14,234 A 13,13 0 0,0 14,260 L 14,0 Z"
                   fill="#3E1F1B"
                 />
               </svg>
 
-              {/* Authentic Right Scalloped Border (SVG continuous semicircular arcs) */}
+              {/* Right Scalloped Border */}
               <svg
                 className="absolute -right-3 top-10 bottom-10 w-3.5 h-[calc(100%-80px)] pointer-events-none z-20"
                 viewBox="0 0 14 260"
                 preserveAspectRatio="none"
               >
                 <path
-                  d="M 0,0 
-                     A 13,13 0 0,1 0,26 
-                     A 13,13 0 0,1 0,52 
-                     A 13,13 0 0,1 0,78 
-                     A 13,13 0 0,1 0,104 
-                     A 13,13 0 0,1 0,130 
-                     A 13,13 0 0,1 0,156 
-                     A 13,13 0 0,1 0,182 
-                     A 13,13 0 0,1 0,208 
-                     A 13,13 0 0,1 0,234 
-                     A 13,13 0 0,1 0,260 
-                     L 0,0 Z"
+                  d="M 0,0 A 13,13 0 0,1 0,26 A 13,13 0 0,1 0,52 A 13,13 0 0,1 0,78 A 13,13 0 0,1 0,104 A 13,13 0 0,1 0,130 A 13,13 0 0,1 0,156 A 13,13 0 0,1 0,182 A 13,13 0 0,1 0,208 A 13,13 0 0,1 0,234 A 13,13 0 0,1 0,260 L 0,0 Z"
                   fill="#3E1F1B"
                 />
               </svg>
 
               {/* Top Stitched Chevron Banner Tab with Eyelet Hole */}
               <div className="relative pt-3 pb-3.5 px-4 bg-[#3E1F1B] text-[#F6F0DC] rounded-t-[14px]">
-                {/* Decorative dashed stitching following the chevron */}
                 <div className="absolute inset-x-3 bottom-1 border-b border-dashed border-[#F6F0DC]/70" />
-
-                {/* Centered eyelet hole for carabiner clip */}
                 <div className="w-6 h-2.5 mx-auto rounded-full bg-[#F6F0DC] border border-[#2B1512] shadow-inner" />
               </div>
 
-              {/* Card Interior: Centered Square Photo Frame with himani2 */}
+              {/* Centered Photo Frame with himani2 */}
               <div className="p-4 sm:p-5 pt-3 pb-3 flex flex-col items-center">
-                {/* Square Photo Frame with Neutral Studio Framing */}
                 <div className="relative w-36 sm:w-40 h-36 sm:h-40 rounded-sm border border-[#3E1F1B]/25 shadow-inner overflow-hidden bg-[#D8D2C2] flex items-center justify-center">
                   <img
                     src="/himani2.png"
@@ -270,7 +224,6 @@ export default function About() {
                   />
                 </div>
 
-                {/* Typography below photo: Bold Name + Italic Title */}
                 <div className="text-center mt-3 mb-1">
                   <h4 className="font-sans font-black text-2xl sm:text-[25px] text-[#3E1F1B] uppercase tracking-wider leading-none">
                     HIMANI
@@ -280,11 +233,10 @@ export default function About() {
                   </p>
                 </div>
 
-                {/* Barcode Strip */}
                 <div className="w-36 sm:w-40 h-6 barcode-strip opacity-90 mt-2 mb-1" />
               </div>
 
-              {/* Bottom Stitched Chevron Banner */}
+              {/* Bottom Chevron Banner */}
               <div className="relative py-2 bg-[#3E1F1B] rounded-b-[14px] text-center overflow-hidden">
                 <div className="absolute inset-x-3 top-0.5 border-t border-dashed border-[#F6F0DC]/70" />
               </div>
@@ -294,9 +246,9 @@ export default function About() {
 
         {/* =====================================================================
             RIGHT COLUMN: TECHNICAL SPECIFICATION SHEET CARD
-            Clean, professional, containing all verified candidate specs and stats!
+            Only keeps: Summary, Location, Education, Currently. That's all!
         ====================================================================== */}
-        <div className="about-spec-card lg:col-span-8 rounded-3xl bg-[#FBF8EF] border-2 border-[#3E1F1B] p-6 sm:p-8 shadow-badge flex flex-col justify-between">
+        <div className="about-spec-card hover-tilt lg:col-span-8 rounded-3xl bg-[#FBF8EF] border-2 border-[#3E1F1B] p-6 sm:p-8 shadow-badge flex flex-col justify-between">
           <div>
             {/* Spec Sheet Header */}
             <div className="flex items-center justify-between border-b-2 border-[#3E1F1B] pb-4 mb-5">
@@ -313,17 +265,17 @@ export default function About() {
               </div>
             </div>
 
-            {/* Candidate Bio Paragraphs */}
-            <div className="mb-5 space-y-2 font-mono text-xs sm:text-[13px] text-[#2B1512]/85 leading-relaxed bg-[#F6F0DC]/70 p-3.5 rounded-2xl border border-[#3E1F1B]/15">
-              {personalInfo.bio.map((para, i) => (
-                <p key={i}>{para}</p>
-              ))}
+            {/* Candidate Bio Paragraph (Max 50 words, simple & short) */}
+            <div className="mb-6 font-mono text-xs sm:text-[13px] text-[#2B1512]/85 leading-relaxed bg-[#F6F0DC]/70 p-4 rounded-2xl border border-[#3E1F1B]/15">
+              <p>
+                Software Engineer based in Hyderabad with a B.Tech in Computer Science Engineering (CSE). Builds robust, modern full stack web applications with React and .NET Core, delivering clean, scalable, and intuitive digital solutions.
+              </p>
             </div>
 
-            {/* Spec Rows Table */}
+            {/* Spec Rows Table: ONLY Location, Education, Currently */}
             <div className="divide-y divide-[#3E1F1B]/15 font-mono text-xs">
               {specRows.map((row) => (
-                <div key={row.label} className="py-2.5 flex flex-col sm:flex-row sm:items-start justify-between gap-1 sm:gap-4">
+                <div key={row.label} className="py-3 flex flex-col sm:flex-row sm:items-start justify-between gap-1 sm:gap-4">
                   <span className="font-serif text-[11px] font-bold text-[#B08A4A] tracking-wider shrink-0 w-28">
                     {row.label}
                   </span>
@@ -335,18 +287,10 @@ export default function About() {
             </div>
           </div>
 
-          {/* Bottom 4 Key Stat Cards (Exact match to reference image 3) */}
-          <div className="mt-6 pt-5 border-t-2 border-[#3E1F1B] grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {statHighlights.map((stat, i) => (
-              <div key={i} className="p-3 sm:p-4 rounded-2xl bg-[#F6F0DC] border border-[#3E1F1B]/15 text-center shadow-xs">
-                <span className="font-serif font-black text-2xl sm:text-3xl text-[#3E1F1B] block leading-none">
-                  {stat.value}
-                </span>
-                <span className="font-serif text-[9px] sm:text-[10px] uppercase tracking-wider text-[#B08A4A] font-bold block mt-1.5 leading-tight">
-                  {stat.label}
-                </span>
-              </div>
-            ))}
+          {/* Clean minimal bottom badge strip */}
+          <div className="pt-4 mt-6 border-t border-[#3E1F1B]/15 flex items-center justify-between font-mono text-[11px] text-[#3E1F1B]/60">
+            <span>Verified Candidate Dossier &bull; Full-Stack &amp; Systems</span>
+            <span className="font-script text-sm text-[#B08A4A]">Himani Patel &hearts;</span>
           </div>
         </div>
       </div>

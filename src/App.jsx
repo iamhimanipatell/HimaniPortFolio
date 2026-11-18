@@ -7,12 +7,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Preloader from './components/Preloader';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import WhyWorkWithMe from './components/WhyWorkWithMe';
 import About from './components/About';
-import Projects from './components/Projects';
-import Services from './components/Services';
-import Skills from './components/Skills';
 import Experience from './components/Experience';
+import Projects from './components/Projects';
+import Skills from './components/Skills';
 import Education from './components/Education';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -46,9 +44,28 @@ export default function App() {
     gsap.ticker.add(rafTicker);
     gsap.ticker.lagSmoothing(0);
 
+    // Section fade & slide up on scroll
+    const ctx = gsap.context(() => {
+      const sections = document.querySelectorAll('main > section:not(#hero)');
+      sections.forEach((sec) => {
+        gsap.from(sec, {
+          scrollTrigger: {
+            trigger: sec,
+            start: 'top 85%',
+          },
+          y: 28,
+          opacity: 0,
+          duration: 0.7,
+          ease: 'power2.out',
+          clearProps: 'opacity,transform',
+        });
+      });
+    });
+
     return () => {
       lenis.destroy();
       gsap.ticker.remove(rafTicker);
+      ctx.revert();
     };
   }, []);
 
@@ -62,14 +79,25 @@ export default function App() {
 
       {/* Main Editorial Scrapbook Sections */}
       <main className="relative z-10 flex flex-col gap-6 sm:gap-10">
+        {/* 1. Hero / First Page */}
         <Hero />
-        <WhyWorkWithMe />
+
+        {/* 2. Developer Profile & Bio (About Me) */}
         <About />
-        <Projects />
-        <Services />
-        <Skills />
+
+        {/* 3. Career Experience Timeline */}
         <Experience />
+
+        {/* 4. Featured Projects & Case Studies */}
+        <Projects />
+
+        {/* 5. Technical Repertoire (Skills) */}
+        <Skills />
+
+        {/* 6. Academic Rigor (Education) */}
         <Education />
+
+        {/* 7. Communication Dispatch (Contact) */}
         <Contact />
       </main>
 
